@@ -1,0 +1,24 @@
+<div class="list">
+	<ol ng-class="" scroll-fix>
+		<li class="clearfix" ng-show="hasSelection == false">
+			<div ng-repeat="column in columns" ng-click="setSort(column)" style="width: {{column.width}}" ng-class="{sortcol: orderProp == column.label, column: true}">{{column.displayLabel}}</div>
+		</li>
+		<li class="clearfix" ng-show="hasSelection == true">
+			<div class="span12 align-right">
+				<span ng-repeat="button in buttons"></span>
+				<span><i class="aristo icon-pencil"></i> Edit</span>
+				<span><i class="aristo icon-envelope"></i> Delete</span>
+				<span><i class="aristo icon-download"></i> Enable</span>
+
+			</div>
+		</li>
+	</ol>
+
+	<ol class="faketable">
+		<li ng-class="{selected: item.selected == true, clearfix:true}" ng-repeat="item in dataProvider| orderBy:orderProp:reverse=reversed" ng-click="selectItem()">
+			<div ng-repeat="column in columns" columnrenderer data-column="{{column.label}}" data-width="{{column.width}}"></div>
+		</li>
+	</ol>
+
+	
+</div>

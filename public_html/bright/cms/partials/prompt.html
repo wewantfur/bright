@@ -1,0 +1,14 @@
+
+<div class="modal ui-widget">
+	<div class="ui-dialog-titlebar">
+		<h2>{{ title }}</h2>
+	</div>
+	<div class="ui-dialog-content">
+		<div ng-bind-html-unsafe="message"></div>
+		<input ng-model="value" type="text" autofocus />
+	</div>
+	<div class="ui-dialog-footer">
+		<button ng-click="close('OK')" class="btn btn-primary right">OK</button>
+		<button ng-click="close('CANCEL')" class="btn right">Annuleren</button>
+	</div>
+</div>
