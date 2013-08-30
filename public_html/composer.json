@@ -1,0 +1,15 @@
+{
+	"require": {
+		"tecnick.com/tcpdf": "6.*",
+		"swiftmailer/swiftmailer": "5.*",
+		"smarty/smarty": "3.*",
+		"behat/behat": "2.4.*@stable",
+		"behat/mink": "*",
+        "behat/mink-browserkit-driver": "*",
+        "behat/mink-selenium2-driver": "*",
+        "phpunit/phpunit": "3.7.24"
+	},
+	"config": {
+		"bin-dir": "bin/"
+	}
+}
