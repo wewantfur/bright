@@ -69,43 +69,6 @@ class Model {
 		return $this -> db -> getRow($query, $args, $type);
 	}
 	
-// 	public function insertRow($query, $args) {
-// 		return $this -> db -> insertRow($query, $args);
-// 	}
-	
-	/**
-	 * Inserts a row as prepared statement
-	 * @param string $sql The query to prepare
-	 * @param string $paramtypes A string of parameter types (length must match the number of params)
-	 * @param mixed... $params One or more parameters
-	 * @return int The id of the inserted row, null on failure
-	 * @throws Exception::DB_ERROR
-	 * @throws Exception::INCORRECT_PARAM_LENGTH
-	 */
-	public function insertPrepared() {
-		
-		$args = func_get_args();
-		if(func_num_args() < 3)
-			throw new Exception('This method requires at least 3 arguments', Exception::INCORRECT_PARAM_LENGTH);
-		
-		$stmt = $this -> _doPrepared($args);
-		$id = $this -> db -> insert_id;
-		$stmt->close();
-		return $id;
-	}
-	
-	public function insertRowNamed($sql, $obj) {
-		$stmt = $this -> db -> prepare($sql);
-		if($stmt === false) {
-			$this -> _handleError($sql);
-		}
-		$stmt -> execute($obj);
-		if($stmt -> errno != 0) {
-			$this -> _handleError($sql);
-		}
-		return $stmt;
-	}
-	
 	/**
 	 * Insert, update or delete a row
 	 */
@@ -114,40 +77,60 @@ class Model {
 	}
 	
 	/**
-	 * Performs a prepared statement
-	 * @param array $args An array of arguments containing:
-	 * 				string $sql The query to prepare
-	 * 				string $paramtypes A string of parameter types (length must match the number of params)
-	 * 				array... $params One or more parameters
-	 * @return \mysqli_stmt The statement
+	 * Inserts or updates an object
+	 * @param string $table The table to insert to
+	 * @param mixed $object The object to insert
+	 * @param string $identifier The identifier of the object
 	 */
-	private function _doPrepared($args) {
-		$sql = array_shift($args);
-		$types = array_shift($args);
-		$params = array_shift($args);
-		$params = array_merge(array($types), $params);
-		$stmt = $this -> db -> prepare($sql);
-		if($stmt === false) {
-			$this -> _handleError($sql);
+	public function updateObject($table, $object) {
+		// Whitelist of tables
+		$allowedtables = array('templates' => 'templateId', 'templatefields' => 'fieldId');
+		if(!array_key_exists($table, $allowedtables))
+			throw new \bright\core\exceptions\Exception('Exception::DB_INVALID_TABLE', \bright\core\exceptions\Exception::DB_INVALID_TABLE);
+		
+		$identifier = $allowedtables[$table];
+		
+		$objects = null;
+		if(is_array($object)) {
+			$objects = $object;
+			$object = $object[0];
+		} else {
+			$objects = array($object);
+		}
+		$oprops = get_class_vars(get_class($object));
+		$fields = array_keys($oprops);
+		$qmarks = '(' . str_repeat('?,', count($fields)-1) . '?)';
+		
+		for($i = 0; $i < count($objects); $i++) {
+			$values[] = $qmarks;
+		}
+		$values = implode(',', $values);
+		$jfields = join('`, `', $fields);
+		$sql = "INSERT INTO $table 
+				(`$jfields`)
+				VALUES $values
+				ON DUPLICATE KEY UPDATE ";
+		$varr = array();
+		foreach($objects as $i => $insobject) {
+			foreach($oprops as $key => $type) {
+				$varr[] = $insobject -> $key;
+				if($i == 0 && $key != $identifier) {
+					$sql .= "`$key` = VALUES(`$key`),\r\n";
+				}
+			}
+		}
+		$sql .= "`$identifier` = LAST_INSERT_ID(`$identifier`)";
+		
+		$id = 0;
+		try {
+			$id = Model::getInstance() -> updateRow($sql, $varr);
+		} catch(\Exception $e) {
+			Utils::log($e-> getCode(), $e -> getMessage(), $sql);
+			throw new \bright\core\exceptions\Exception('Exception::DB_ERROR', \bright\core\exceptions\Exception::DB_ERROR);
 		}
 		
-		call_user_func_array(array($stmt, 'bind_param'), Utils::makeValuesReferenced($params));
-		$stmt -> execute();
-		if($stmt -> errno != 0) {
-			$this -> _handleError($sql);
-		}
-		return $stmt;
+		return $id;
 	}
-	
-	private function _handleError($query) {
-		if(!LIVESERVER) {
-			$msg = "An error occured:\r\n";
-			$msg .= $this -> db -> error;
-			$msg .= "\r\n\r\nQuery responsible:\r\n$query"; 
-			throw new Exception($msg, Exception::DB_ERROR);
-		}
-	}
-	
 
 	/**
 	 * Destructor

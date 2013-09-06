@@ -3,8 +3,8 @@ namespace bright\core\exceptions;
 
 class Exception extends \Exception {
 	const NO_BEUSER_AUTH = 1001;
+	const NOT_IMPLEMENTED = 1002;
 
-	const DB_ERROR = 2001;
 	const INCORRECT_PARAM_INT = 	2002;
 	const INCORRECT_PARAM_STRING = 	2003;
 	const INCORRECT_PARAM_DOUBLE = 	2004;
@@ -14,6 +14,9 @@ class Exception extends \Exception {
 	const INCORRECT_PARAM_OBJECT = 	2008;
 	const INCORRECT_PARAM_ARRAYVAL =2009;
 	const INCORRECT_PARAM_LENGTH = 2010;
+	
+	const DB_ERROR = 2101;
+	const DB_INVALID_TABLE = 2102;
 
 	const FOLDER_NOT_FOUND = 4001;
 	const FILE_NOT_FOUND = 4002;

@@ -6,6 +6,14 @@ namespace bright\core\content;
  * @author Ids
  *
  */
+use bright\core\utils\StringUtils;
+
+use bright\core\model\vo\Template;
+
+use bright\core\auth\Authorization;
+
+use bright\core\exceptions\Exception;
+
 use bright\core\exceptions\TemplateException;
 
 use bright\core\exceptions\TypeException;
@@ -30,7 +38,7 @@ class Templates {
 	 * @param unknown_type $templateId
 	 */
 	public static function deleteTemplate($templateId) {
-	
+		throw new Exception('Exception::NOT_IMPLEMENTED',Exception::NOT_IMPLEMENTED);
 	}
 	
 	/**
@@ -69,8 +77,51 @@ class Templates {
 		return self::_getTemplate($label, 'label');
 	}
 	
-	public static function setTemplate($template) {
+	public static function setTemplate(Template $template) {
+		$au = Authorization::getBEUser();
 		
+// 		$tprops = get_class_vars('\bright\core\model\vo\Template');
+// 		$template -> label = StringUtils::sanitizeLabel($template -> label);
+		
+// 		$sql = "INSERT INTO templates ";
+// 		$fields = array_keys($tprops);
+// 		$sql .= '(`' . join('`, `', $fields) . '`) 
+// 				VALUES (' . str_repeat('?,', count($fields)-1) . '?)
+// 				ON DUPLICATE KEY UPDATE ';
+// 		$varr = array();
+// 		foreach($tprops as $key => $type) {
+// 			$varr[] = $template -> $key;
+// 			if($key != 'templateId') {
+// 				$sql .= "`$key` = VALUES(`$key`),\r\n";
+// 			}
+// 		}
+// 		$sql .= 'templateId = LAST_INSERT_ID(templateId)';
+		
+// 		try {
+// 			$id = Model::getInstance() -> updateRow($sql, $varr);
+// 		} catch(\Exception $e) {
+// 			Utils::log($e-> getCode(), $e -> getMessage());//$e -> getTraceAsString());
+// 		}
+
+		try {
+			$id = Model::getInstance() -> updateObject('templates', $template, 'templateId');
+		} catch(Exception $e) {
+			throw new TemplateException('TemplateException::CANNOT_SAVE_TEMPLATE', TemplateException::CANNOT_SAVE_TEMPLATE);
+		}
+		
+		if($id > 0) {
+			if(isset($template -> fields)) {
+				$i=0;
+				foreach($template -> fields as &$tfield) {
+					$tfield -> templateId = $id;
+					$tfield -> index = $i++;
+				}
+				Utils::log($template);
+				Model::getInstance() -> updateObject('templatefields', $template -> fields, 'fieldId');
+			}
+		}
+		
+// 		throw new Exception('Exception::NOT_IMPLEMENTED',Exception::NOT_IMPLEMENTED);
 	}
 	
 	private static function _createTemplate($fields) {

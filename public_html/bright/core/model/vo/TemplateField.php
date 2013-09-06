@@ -8,6 +8,8 @@ namespace bright\core\model\vo;
  */
 class TemplateField {
 	public $label;
+	public $templateId;
+	public $index;
 	public $displaylabel;
 	public $fieldtype;
 	public $data;

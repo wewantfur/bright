@@ -5,9 +5,9 @@ class Template {
 	public $templateId;
 	public $icon;
 	public $type;
-	public $parser;
-	public $enabled;
-	public $maxchildren;
+	public $parser = 1;
+	public $enabled = 0;
+	public $maxchildren = -1;
 	public $allowedparents;
 	public $allowedchildren;
 	public $groups;
