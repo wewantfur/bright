@@ -35,4 +35,8 @@ class BEUser {
 		$this -> users_GID = (int) $this -> users_GID;
 		$this -> elements_GID = (int) $this -> elements_GID;
 	}
+	
+	public function __toString() {
+		return $this -> email;
+	}
 }

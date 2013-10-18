@@ -4,17 +4,17 @@
  * @author ids - Fur
  */
 var bright = angular.module('bright');
-bright.controller('ContentCtrl', 
-	['$scope', '$http', '$state', 'configService', 'contentService', 'templateService', 'pageService',
-	 function($scope, $http, $state, configService, contentService, templateService, pageService) {
+bright.controller('contentCtrl', 
+	['$scope', '$http', '$state', 'ConfigService', 'ContentService', 'TemplateService', 'PageService',
+	 function($scope, $http, $state, ConfigService, ContentService, TemplateService, PageService) {
 		
 		$scope.content = null;
 		$scope.templates = null;
 		$scope.settings = null;
 
 		// Fetch data
-		templateService.getTemplates().then(function(data) {	$scope.templates = data; });
-		configService.getSettings().then(function(data) {		$scope.settings = data; });
+		TemplateService.getTemplates().then(function(data) {	$scope.templates = data; });
+		ConfigService.getSettings().then(function(data) {		$scope.settings = data; });
 		
 		switch($state.params.type) {
 			case 'page':
@@ -23,7 +23,6 @@ bright.controller('ContentCtrl',
 				 */ 
 				$http.post('/bright/json/core/content/Pages/getPage', {arguments:[$state.params.pageId]}).success(function(data) {
 					if(data.status == 'OK') {
-						console.log(data.result);
 						$scope.content = data.result;
 					} else {
 						console.log(":'(",data);
@@ -40,16 +39,24 @@ bright.controller('ContentCtrl',
 		};
 		
 		$scope.getLanguage = function(lang) {
-			return configService.getLanguageName(lang);
+			return ConfigService.getLanguageName(lang);
 		};
 		
 		$scope.save = function() {
 			console.log($scope.content);
 			switch($state.params.type) {
 				case 'page':
-					pageService.setPage($scope.content).then(function(d) {
+					PageService.setPage($scope.content).then(function(d) {
 						console.log(d);
 					});
+			}
+		};
+		$scope.cancel = function() {
+
+			switch($state.params.type) {
+				case 'page':
+					$state.transitionTo('pages.list');
+					break;
 			}
 		};
 		
@@ -89,7 +96,7 @@ bright.controller('ContentCtrl',
 				
 				if(Number($scope.content.templateId) > 0) {
 					// Get the full template
-					templateService.getTemplate($scope.content.templateId).then(function(data) {
+					TemplateService.getTemplate($scope.content.templateId).then(function(data) {
 						$scope.template = data;
 					});
 				}

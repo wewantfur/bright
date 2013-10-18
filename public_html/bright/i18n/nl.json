@@ -1,0 +1,106 @@
+{
+	"general": 
+		{
+			"ok": 				"OK",
+			"save": 			"Opslaan",
+			"saveas": 			"Opslaan als",
+			"saveresultok":		"Je wijzigingen zijn opgeslagen",
+			"cancel":			"Annuleren",
+			"browse":			"Bladeren",
+			"loggedinas":		"Ingelogd als %1",
+			"errors": 
+				{
+					"general": "Er is iets fout gegaan, probeer het opnieuw",
+					"invalidemail": "U heeft een ongeldig e-mail adres ingevuld",
+					"loggedout": "Om veiligheidsredenen bent u automatisch uitgelogd. Log opnieuw in",
+					"getproducts": "Er is iets fout gegaan bij het ophalen van de producten, probeer het opnieuw",
+					"invaliddownload": "Kan het bestand niet downloaden, probeer het opnieuw",
+					"noreceipt": "Upload eerst je kassabon"
+				}
+		},
+	
+	"modules": {
+		"pages": "Pagina's",
+		"events": "Kalender",
+		"map": "Kaart",
+		"files": "Media beheer",
+		"users": "Gebruikers",
+		"administrators": "Administrators",
+		"groups": "Groepen",
+		"templates": "Sjablonen",
+		"settings": "Instellingen"
+	},	
+	
+	"content": {
+		"UID": "UID",
+		"GID": "GID",
+		"icon": "Pictogram",
+		"pageId": "Pagina ID",
+		"templateId": "Template ID",
+		"type": "Type",
+		"displaylabel": "Weergave naam",
+		"label": "Label",
+		"email": "E-mail",
+		"title": "Titel",
+		"publicationdate" : "Publicatie datum",
+		"expirationdate" : "Verval datum",
+		"alwayspublished" : "Altijd gepubliceerd",
+		"showinnavigation" : "Toon in navigatie",
+		"modificationdate" : "Laatst gewijzigd",
+		"modifiedby" : "Gewijzigd door",
+		"creationdate" : "Aanmaakdatum",
+		"createdby" : "Gemaakt door",
+		"advancedsettings" : "Geadvanceerde instellingen",
+		"settings" : "Instellingen",
+		"enabled" : "Ingeschakeld",
+		"owner": "Eigenaar",
+		"name": "Naam",
+		"group": "Groep",
+		"public": "Iedereen",
+		"template": "Sjabloon",
+		"felogin": "Inloggen verplicht",
+		
+		"groups": {
+			"edit": "Groep bewerken"
+		}
+	},
+		
+	"lists": {
+		"headers": 
+			{
+				
+				"UID": "@content.UID",
+				"GID": "@content.GID",
+				"icon": "",
+				"pageId": "@content.pageId",
+				"templateId": "@content.templateId",
+				"type": "@content.type",
+				"displaylabel": "@content.displaylabel",
+				"label": "@content.label",
+				"email": "@content.email",
+				"title": "@content.title",
+				"publicationdate": "@content.publicationdate",
+				"expirationdate": "@content.expirationdate",
+				"alwayspublished": "@content.alwayspublished",
+				"showinnavigation": "@content.showinnavigation",
+				"modificationdate": "@content.modificationdate",
+				"modifiedby": "@content.modifiedby",
+				"creationdate": "@content.creationdate",
+				"createdby": "@content.createdby",
+				"name": "@content.name",
+				"lastlogin": "Laatst ingelogd"
+				
+			}
+			
+	},
+	
+	"exceptions": {
+		"Exception": {
+			"1002": "This method is not implemented yet (%1)"
+		},
+		"FilesException": {
+			"4001": "Kan de opgegeven map niet vinden (%1)",
+			"4002": "Kan het opgegeven bestand niet vinden (%1)"
+		}
+	}
+}

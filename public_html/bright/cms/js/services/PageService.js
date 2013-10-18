@@ -1,5 +1,5 @@
 bright = angular.module('bright');
-bright.service('pageService', function($http, $q) {
+bright.service('PageService', function($http, $q) {
 	var pages, selectedPage;
 	var isLoading = false;
 	

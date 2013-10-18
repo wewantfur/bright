@@ -1,6 +1,8 @@
 <?php
 namespace bright\core\connections;
 
+use bright\core\exceptions\DatabaseException;
+
 use bright\core\exceptions\Exception;
 
 use bright\core\interfaces\IDB;
@@ -24,10 +26,10 @@ class DBPDO implements IDB {
 			$this -> db -> setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			$this -> db -> setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 		} catch (\PDOException $e) {
-			echo 'Connection failed: ' . $e->getMessage();
+			throw new DatabaseException($e->getMessage(), DatabaseException::DB_ERROR);
 		}
 		
-		set_exception_handler('\bright\core\exceptions\Exception::ehandler');
+// 		set_exception_handler('\bright\core\exceptions\Exception::ehandler');
 
 	}
 	
@@ -68,11 +70,19 @@ class DBPDO implements IDB {
 	
 	private function fetch($query, $args = null, $type = '\StdClass', $mode) {
 		$stmt = null;
-		if(!$args) {
-			$stmt = $this -> db -> query($query);
-		} else {
-			$stmt = $this -> db -> prepare($query);
+
+		try {
+			if(!$args) {
+				
+				$stmt = $this -> db -> query($query);
+			} else {
+				$stmt = $this -> db -> prepare($query);
+			}
+		
+		} catch (\PDOException $e) {
+			throw new DatabaseException($e->getMessage(), DatabaseException::DB_ERROR);
 		}
+		
 		if($type == '\StdClass') {
 			$stmt -> setFetchMode(\PDO::FETCH_OBJ);
 		} else if($mode == self::MODE_ROW || $mode == self::MODE_ROW_ALL) {

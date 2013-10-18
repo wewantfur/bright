@@ -1,5 +1,5 @@
 bright = angular.module('bright');
-bright.controller("DialogCtrl", [ '$scope', 'dialog',
+bright.controller("dialogCtrl", [ '$scope', 'dialog',
 		function($scope, dialog) {
 
 		} ]);

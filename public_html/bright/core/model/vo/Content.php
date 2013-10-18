@@ -1,7 +1,7 @@
 <?php
 namespace bright\core\model\vo;
 
-class Content {
+class Content extends VO{
 	
 	function __construct() {
 		$this -> contentId = (int) $this -> contentId;

@@ -1,16 +1,16 @@
 bright = angular.module('bright');
-bright.controller("PagesCtrl", 
-	['$scope', '$http', '$state', 'pageService',
-	function($scope, $http, $state, pageService) {
+bright.controller("pagesCtrl", 
+	['$scope', '$http', '$state', 'PageService',
+	function($scope, $http, $state, PageService) {
 		
-		$scope.columns = [{label:'icon', displayLabel:'', width: '20px'},
-		                  {label:'pageId', displayLabel:'#', width: '20px'},
-		                  {label:'label', displayLabel:'Label', width: '20%'},
-		                  {label:'modificationdate', displayLabel:'Last modified', width: '20%'},
-		                  {label:'modifiedby', displayLabel:'Modified by', width: '20%'}
+		$scope.columns = [{value:'icon', label:' ', headerTemplate:$scope.hTemplate, width: '20px', template: '<i class="tpl-icon tpl-{{row.icon}}" />'},
+		                  {value:'pageId', label:'#', headerTemplate:$scope.hTemplate, width: '20px'},
+		                  {value:'label', label:'Label', headerTemplate:$scope.hTemplate, width: '20%'},
+		                  {value:'modificationdate', headerTemplate:$scope.hTemplate, label:'Last modified', width: '20%', template: '<span>{{row.modificationdate | date:\'short\'}}</span>'},
+		                  {value:'modifiedby', headerTemplate:$scope.hTemplate, label:'Modified by', width: '20%', template: '<span>{{row.modifiedby|adminname}}</span>'}
 		                  ];
 		
-		pageService.getPages().then(function(pages) {
+		PageService.getPages().then(function(pages) {
 			$scope.pages = pages.list;
 		});
 		$scope.gridOptions = {data: 'pages', height: '100%',
@@ -25,17 +25,16 @@ bright.controller("PagesCtrl",
 		$scope.orderProp = "pageId";
 		$scope.reversed = false;
 		
-		$scope.$on('tableColumnTextClick', function( event, arg) {
-			switch(arg.column) {
-				case 'label':
-					$state.transitionTo('pages.edit', {pageId:arg.item.pageId, type:'page'});
-					break;
-					
-			}
+		$scope.$on('rowDoubleClick', function( event, row) {
+			$state.transitionTo('pages.edit', {pageId:row.pageId, type:'page'});
 		});
 		
 		$scope.editPage = function(pageId) {
 			$state.transitionTo('pages.edit', {pageId:pageId, type:'page'});
+		};
+
+		$scope.getDate = function(date) {
+			return 'Datum!';
 		};
 		
 		$scope.getLabel = function() {
@@ -71,7 +70,6 @@ bright.controller("PagesCtrl",
 		
 		$scope.inSelection = function() {
 			angular.forEach($scope.selection, function(item) {
-				console.log(item.pageId, this.page.pageId,item.pageId == this.page.pageId)
 				if(item.pageId == this.page.pageId)
 					return true;
 			});
@@ -80,10 +78,10 @@ bright.controller("PagesCtrl",
 	}])
 	
 //.controller("TreeCtrl", 
-//	['$scope', '$http', '$state', 'pageService',
-//	function($scope, $http, $state, pageService) {
+//	['$scope', '$http', '$state', 'PageService',
+//	function($scope, $http, $state, PageService) {
 //		
-////		$scope.$watch( function () { return pageService.getTree(); }, function ( result ) {
+////		$scope.$watch( function () { return PageService.getTree(); }, function ( result ) {
 ////			if (result) {
 ////				$scope.pagetree = result;
 ////			}
@@ -109,9 +107,9 @@ bright.controller("PagesCtrl",
 //	}])
 	
 .controller("PageCtrl", 
-		['$scope', '$http', '$state', 'pageService', 'templateService',
-		 function($scope, $http, $state, pageService, templateService) {
-			$scope.$watch( function () { return templateService.getTemplates(); }, function ( templates ) {
+		['$scope', '$http', '$state', 'PageService', 'TemplateService',
+		 function($scope, $http, $state, PageService, TemplateService) {
+			$scope.$watch( function () { return TemplateService.getTemplates(); }, function ( templates ) {
 				  $scope.templates = templates;
 			});
 			

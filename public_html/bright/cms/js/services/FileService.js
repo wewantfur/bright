@@ -1,5 +1,5 @@
 bright = angular.module('bright');
-bright.service('fileService', function($http, $q) {
+bright.service('FileService', function($http, $q) {
 	var folders, files, selectedFolder, selectedFile;
 	return {
 		setFolders : function(data) {

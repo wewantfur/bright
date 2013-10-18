@@ -1,0 +1,60 @@
+@CHARSET "UTF-8";
+
+grid {
+	border: 1px solid gray;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	display: block;
+}
+			
+			
+.fur-header {
+	border-bottom: 1px solid gray;
+	font-weight: bold;
+	font-size: 14pt;
+	color: white;
+	background-color: #0087CA;
+}
+
+.fur-cell,
+.fur-headercell {
+	float: left;
+	width: 200px;
+	padding: 0 2px;
+	overflow: hidden;
+	min-height: 1px;
+}
+.fur-rows,
+.fur-rows > li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.fur-rows > li:hover {
+	background: #87B6CE;
+}
+
+.fur-selected {
+	background:#99CFEA;
+}
+
+.fur-row {
+	overflow: hidden;
+	width: 100%;
+}
+
+.fur-col-icon {
+	width: 20px;
+}
+
+.fur-col-id {
+	width: 50px;
+	text-align: right;
+}

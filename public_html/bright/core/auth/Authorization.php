@@ -1,6 +1,8 @@
 <?php
 namespace bright\core\auth;
 
+use bright\core\exceptions\Exception;
+
 use bright\core\content\Pages;
 use bright\core\utils\PasswordUtils;
 use bright\core\model\vo\BEUser;
@@ -16,7 +18,17 @@ class Authorization {
 	 * The group Id of SuperUsers
 	 * @var int
 	 */
-	const SU_GROUP = 1;
+	const GR_SU = 1;
+	const GR_WEBMASTER = 2;
+	const GR_SITEMANAGER = 3;
+	const GR_FILEMANAGER = 4;
+	const GR_EVENTMANAGER = 5;
+	const GR_MAPSMANAGER = 6;
+	const GR_MAILINGMANAGER = 7;
+	const GR_USERMANAGER = 8;
+	const GR_ELEMENTMANAGER = 9;
+	
+	private static $_beuser = null;
 
 	/**
 	 * Authenticates a backend user
@@ -24,11 +36,11 @@ class Authorization {
 	 * @param string $pass
 	 * @throws AuthException
 	 */
-	public function authBE($email, $pass) {
+	public static function authBE($email, $pass) {
 		try {
 			// Log out current user
 			self::getBEUser();
-			$this -> logoutBE();
+			self::logoutBE();
 		} catch(AuthException $e) {/*Swallow it*/
 		}
 
@@ -66,6 +78,9 @@ class Authorization {
 			throw new AuthException('WRONG_CREDENTIALS', AuthException::WRONG_CREDENTIALS);
 
 		$beuser = Utils::stripVO($result[0]);
+		
+		Model::getInstance() -> updateRow("UPDATE be_users SET lastlogin=NOW() WHERE UID=?", array($beuser -> UID));
+		$beuser -> lastlogin = date(\DateTime::W3C);
 
 		foreach ($result as $row) {
 			if($row -> settings != null) {
@@ -77,7 +92,7 @@ class Authorization {
 				$g -> name = $row -> groupname;
 				$beuser -> groups[] = $g;
 
-				if($row -> GID == Authorization::SU_GROUP) {
+				if($row -> GID == Authorization::GR_SU) {
 					$beuser -> page_mountpoints[] = Pages::getBERoot();
 				}
 			}
@@ -97,11 +112,12 @@ class Authorization {
 	/**
 	 * Logs out the currently logged in backend user
 	 */
-	public function logoutBE() {
+	public static function logoutBE() {
+		self::$_beuser = null;
 		unset($_SESSION['bright']['be_user']);
 	}
 
-	public function setBEUser(BEUser $user) {
+	public static function setBEUser(BEUser $user) {
 		$hash = PasswordUtils::create_hash($user -> password);
 
 	}
@@ -120,9 +136,38 @@ class Authorization {
 		if(!isset($_SESSION['bright']['be_user'])) {
 			throw new AuthException('NO BE USER AUTH', AuthException::NO_USER);
 		}
-		return unserialize($_SESSION['bright']['be_user']);
+		if(!self::$_beuser)
+			self::$_beuser = unserialize($_SESSION['bright']['be_user']); 
+
+		return self::$_beuser;
+	}
+	
+	/**
+	 * Checks if the current logged in user belongs to the given group
+	 * @param int $group
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public static function inGroup($group) {
+		$group = filter_var($group, FILTER_VALIDATE_INT);
+		if($group === false || $group === null)
+			throw new Exception('', Exception::INCORRECT_PARAM_INT);
+		
+		$bu = self::getBEUser();
+		
+		foreach($bu -> groups as $bugroup) {
+			if($bugroup -> GID == Authorization::GR_SU) 
+				return true;
+			if($bugroup -> GID == $group) 
+				return true;
+		}
+		return false;
 	}
 
+	/**
+	 * Checks if there is a backend user authenticated
+	 * @return boolean
+	 */
 	public static function isBEAuth() {
 		return isset($_SESSION['bright']['be_user']);
 	}

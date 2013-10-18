@@ -1,6 +1,16 @@
 bright = angular.module('bright');
-bright.service('authService', function($q, $http) {
+bright.service('AuthService', function($q, $http) {
 	var user;
+	var users;
+	
+	var findUser = function (id) {
+		var nu = users.length;
+		while(--nu > -1) {
+			if(users[nu].UID == id)
+				return users[nu].name;
+		}
+	};
+	
 	return {
 		getBEUser : function() {
 			var def = $q.defer();
@@ -19,6 +29,19 @@ bright.service('authService', function($q, $http) {
 			}
 			
 			return def.promise;
+		},
+		getBEUserNames: function() {
+			$http.get('/bright/json/core/auth/Administrators/getAdministratorNames').success(function(data) {
+				if(data.status == 'OK') {
+					users = data.result;
+				}
+			});
+		},
+		
+		getBEUserName: function(id) {
+			return findUser(id);
 		}
+	
+	
 	};
 });

@@ -1,7 +1,7 @@
 <?php
 namespace bright\core\model\vo;
 
-class Folder {
+class Folder extends VO {
 	public $label;
 	public $path;
 	

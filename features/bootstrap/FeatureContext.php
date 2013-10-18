@@ -46,6 +46,7 @@ class FeatureContext extends BehatContext
         unset($_SESSION['bright']);
         $this -> result = null;
         $this->useContext('templatecontext', new TemplateContext($parameters));
+        $this->useContext('filescontext', new FilesContext($parameters));
     }
     
     
@@ -134,6 +135,15 @@ class FeatureContext extends BehatContext
     	$num = (int)$num;
     	assertCount($num, $this->result);
     	assertContainsOnlyInstancesOf($type,$this->result);
+    	$res = array();
+    	foreach($this -> result as $item) {
+    		if(!is_scalar($item)) {
+    			$res[] = (string) $item;
+    		} else {
+    			$res[] = $item;
+    		}
+    	}
+    	error_log(var_export($res, true));
     }
     
     

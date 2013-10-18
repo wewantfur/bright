@@ -1,5 +1,5 @@
 bright = angular.module('bright');
-bright.service('templateService', function($q, $http) {
+bright.service('TemplateService', function($q, $http) {
 	var templates; 
 	var isLoading = false;
 	return {

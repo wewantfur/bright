@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/bright/json(.*)$
+RewriteRule ^(.*)$ /bright/controllers/JSONController.php?v=$1 [NC,L]

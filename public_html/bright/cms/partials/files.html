@@ -19,7 +19,7 @@
 			</div>
 			<ul class="files">
 			
-				<li ng-repeat="file in files" ng-click="setFile($event)" ng-class="{active: file.selected == true}"><i class="aristo icon-file"></i> {{file.label}}</li>
+				<li ng-repeat="file in files" ng-click="setFile($event)" ng-class="{active: file.selected == true}"><i class="tpl-icon" data-filename="{{file.label}}"></i> {{file.label}}</li>
 				
 				<li ng-repeat="ufile in uploads" class="upload" ng-hide="ufile.complete"><span class="progress" ng-class="{error: ufile.error}" style="{{ufile.cssprogress}}"></span><span class="label"><i class="aristo icon-refresh-1"></i> {{ufile.name}}</span></li>
 				

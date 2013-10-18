@@ -1,0 +1,13 @@
+<h1 l10n-text="content.groups.edit"></h1>
+<label for="groupname" l10n-text="content.groups.name"></label>
+<input type="text" name="name" ng-model="group.name" />
+
+<label for="pagemountpoints" l10n-text="content.groups.pagemountpoints"></label>
+<ul>
+	<li ng-repeat="mp in group.page_mountpoints">{{mp}}</li>
+</ul>
+
+<label for="filemountpoints" l10n-text="content.groups.filemountpoints"></label>
+<ul>
+	<li ng-repeat="mp in group.file_mountpoints">{{mp}}</li>
+</ul>

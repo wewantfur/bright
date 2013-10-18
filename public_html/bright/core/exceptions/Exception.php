@@ -17,9 +17,6 @@ class Exception extends \Exception {
 	
 	const DB_ERROR = 2101;
 	const DB_INVALID_TABLE = 2102;
-
-	const FOLDER_NOT_FOUND = 4001;
-	const FILE_NOT_FOUND = 4002;
 	
 	const DELETE_PAGE_NOT_ALLOWED = 5001;
 	const REMOVE_PAGE_NOT_ALLOWED = 5002;
@@ -32,11 +29,29 @@ class Exception extends \Exception {
 	const USER_DUPLICATE_EMAIL = 8002;
 
 	public function __construct($msg, $code = 0) {
-
-		parent::__construct($msg, $code);
+		parent::__construct($this::getL10nMsg($code, $msg), $code);
 	}
 	
-	public static function ehandler($e) {
-		echo '<pre>';print_r($e);echo'</pre>';
+	protected function getL10nMsg($code, $msg) {
+		$f = file_get_contents(BASEPATH . 'bright/i18n/nl.json');
+		$js = json_decode($f);
+		$cname = get_class($this);
+		$cname = substr($cname,strrpos($cname, '\\')+1);
+		$path = array('exceptions', $cname, $code);
+		foreach($path as $p) {
+			if(isset($js -> {$p})) {
+				$js = $js -> {$p};
+			} else {
+				return " $code: $cname($code)";
+			}
+		}
+		if(!is_array($msg))
+			$msg = array($msg);
+		
+		foreach($msg as $key => $val) {
+			$search = '%' . ($key+1);
+			$js = str_replace($search, $val, $js);
+		}
+		return $code . ': ' . $js;
 	}
 }
