@@ -45,7 +45,9 @@ class Content {
 		}
 		$sfields = implode(',', $select);
 		$jfields = implode("\r\n", $joins);
-		$sql = "SELECT ttype.*, c.*, $sfields, f.lang as `field.lang`, f.field as `field.field` FROM content c
+		$sql = "SELECT ttype.*, 
+						c.*,
+						$sfields, f.lang as `field.lang`, f.field as `field.field` FROM content c
 				LEFT JOIN fields f ON c.contentId = f.contentId $jfields
 				WHERE c.contentId=?";
 		$result = Model::getInstance() -> getRows($sql, $contentId, $ctype);

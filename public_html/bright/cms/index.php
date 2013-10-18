@@ -15,11 +15,11 @@
 	<meta name='copyright' content='copyright Fur' /> 
 	<meta name="author" content="www.wewantfur.com" />
 	<link href="http://cdn.wewantfur.com/basicfur/css/basicfur-v1-min.css" rel="stylesheet" />
-	<link href="css/screen.css" rel="stylesheet"  media="screen" />
-	<link href="css/template-icons.css" rel="stylesheet"  media="screen" />
-	<link href="css/jquery.divider.css" rel="stylesheet"  media="screen" />
+<!-- 	<link href="css/screen.css" rel="stylesheet"  media="screen" /> -->
+<!-- 	<link href="css/template-icons.css" rel="stylesheet"  media="screen" /> -->
+<!-- 	<link href="css/jquery.divider.css" rel="stylesheet"  media="screen" /> -->
 	<?php
-		// Load all js files in /js folder
+		// Load all js files in /css folder
 		
 		$folder = dirname(__FILE__) . '/css';
 		$objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($folder,FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
@@ -34,21 +34,21 @@
 	?>
 	<title>Bright</title>
 </head>
-<body ng-cloak>
+<body ng-cloak ng-controller="brightCtrl">
 	<nav>
 		<ul>
-			<li ng-class="{ active: $state.includes('pages') }"><a href="#/pages">Pages</a></li>
-<!-- 			<li ng-class="{ active: $state.includes('events') }"><a href="#/events">Events</a></li> -->
-<!-- 			<li ng-class="{ active: $state.includes('maps') }"><a href="#/maps">Maps</a></li> -->
-<!-- 			<li ng-class="{ active: $state.includes('users') }"><a href="#/users">Users</a></li> -->
-			<li ng-class="{ active: $state.includes('files') }"><a href="#/files">Files</a></li>
-			<li ng-class="{ active: $state.includes('templates') }"><a href="#/templates">Templates</a></li>
-<!-- 			<li ng-class="{ active: $state.includes('administrators') }"><a href="#/administrators">Administrators</a></li> -->
-<!-- 			<li ng-class="{ active: $state.includes('settings') }"><a href="#/settings">Settings</a></li> -->
-			<li class="right">Logged in as {{administrator.name}}
+			<li ng-class="{ active: $state.includes('pages') }"><a href="#/pages" l10n-text="modules.pages">Pages</a></li>
+<!-- 			<li ng-class="{ active: $state.includes('events') }"><a href="#/events" l10n-text="modules.events">Events</a></li> -->
+<!-- 			<li ng-class="{ active: $state.includes('maps') }"><a href="#/maps" l10n-text="modules.maps">Maps</a></li> -->
+<!-- 			<li ng-class="{ active: $state.includes('users') }"><a href="#/users" l10n-text="modules.w">Users</a></li> -->
+			<li ng-class="{ active: $state.includes('files') }"><a href="#/files" l10n-text="modules.files">Files</a></li>
+			<li ng-class="{ active: $state.includes('templates') }"><a href="#/templates" l10n-text="modules.templates">Templates</a></li>
+			<li ng-class="{ active: $state.includes('administrators') }"><a href="#/administrators" l10n-text="modules.administrators">Administrators</a></li>
+<!-- 			<li ng-class="{ active: $state.includes('settings') }"><a href="#/settings" l10n-text="modules.settings">Settings</a></li> -->
+			<li class="right"><span l10n-text="general.loggedinas:administrator.name">Logged in as {{administrator.name}}</span>
 				<ul>
-					<li>My profile</li>
-					<li>Logout</li>
+					<li l10n-text="general.myprofile">My profile</li>
+					<li l10n-text="general.logout">Logout</li>
 				</ul>
 			</li>
 		</ul>
@@ -66,8 +66,9 @@
 	<footer>&copy; 2013 Fur VOF</footer>
 	
 	<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
 	<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+	<script src="../i18n/l10n-module.js.php"></script>
 
 	<?php
 		// Load all js files in /js folder

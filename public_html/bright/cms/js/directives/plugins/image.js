@@ -19,9 +19,9 @@ bright.directive('image', ['$dialog', function($dialog) {
 			$scope.browse = function() {
 				
 				var d = $dialog.dialog({templateUrl: 'partials/dialog.html', 
-										controller: 'DialogCtrl', 
+										controller: 'dialogCtrl', 
 										tpl: 'partials/Files.html',
-										ctrl: 'FilesCtrl',
+										ctrl: 'filesCtrl',
 										backdrop: true,
 									    keyboard: true,
 									    backdropClick: true});

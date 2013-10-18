@@ -66,6 +66,9 @@ class Authorization {
 			throw new AuthException('WRONG_CREDENTIALS', AuthException::WRONG_CREDENTIALS);
 
 		$beuser = Utils::stripVO($result[0]);
+		
+		Model::getInstance() -> updateRow("UPDATE be_users SET lastlogin=NOW() WHERE UID=?", array($beuser -> UID));
+		$beuser -> lastlogin = date(\DateTime::W3C);
 
 		foreach ($result as $row) {
 			if($row -> settings != null) {

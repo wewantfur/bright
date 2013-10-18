@@ -193,6 +193,7 @@ ul.tree, .tree ul {
 	right: 0;
 	bottom: 0;
 	position: fixed;
+	background: rgba(230,230,230, .8);
 }
 
 .selected {

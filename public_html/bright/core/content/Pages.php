@@ -87,7 +87,11 @@ class Pages extends Content {
 		
 		$where = implode(' OR ', $wheres);
 		
-		$sql = "SELECT p.*, c.*, t.icon, (SELECT count(pageId) FROM pages pc WHERE parentId=p.pageId) AS numchildren
+		$sql = "SELECT p.*, 
+					c.*, 
+					t.icon, 
+					(SELECT count(pageId) 
+				FROM pages pc WHERE parentId=p.pageId) AS numchildren
 				FROM pages p
 				INNER JOIN content c ON c.contentId = p.contentId
 				LEFT JOIN templates t ON c.templateId = t.templateId

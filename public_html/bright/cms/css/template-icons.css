@@ -3,7 +3,9 @@
     display: inline-block;
     padding: 0 2px;
 }
+
 .ext,
+.tpl-type-1,
 .tpl-page_white{ background-position: -216px -612px; width: 16px; height: 16px; }
 .tpl-accept{ background-position: 0 0; width: 16px; height: 16px; } 
 .tpl-add{ background-position: 0 -36px; width: 16px; height: 16px; } 
@@ -82,7 +84,9 @@
 .tpl-book_next{ background-position: -36px -684px; width: 16px; height: 16px; } 
 .tpl-book_open{ background-position: -36px -720px; width: 16px; height: 16px; } 
 .tpl-book_previous{ background-position: -36px -756px; width: 16px; height: 16px; } 
-.tpl-box{ background-position: -36px -792px; width: 16px; height: 16px; } 
+.tpl-box{ background-position: -36px -792px; width: 16px; height: 16px; }
+
+.tpl-type-4,				
 .tpl-brick{ background-position: -36px -828px; width: 16px; height: 16px; } 
 .tpl-bricks{ background-position: -36px -864px; width: 16px; height: 16px; } 
 .tpl-briefcase{ background-position: -36px -900px; width: 16px; height: 16px; } 
@@ -188,7 +192,8 @@
 .tpl-database_lightning{ background-position: -108px -540px; width: 16px; height: 16px; } 
 .tpl-database_refresh{ background-position: -108px -576px; width: 16px; height: 16px; } 
 .tpl-database_save{ background-position: -108px -612px; width: 16px; height: 16px; } 
-.tpl-database_table{ background-position: -108px -648px; width: 16px; height: 16px; } 
+.tpl-database_table{ background-position: -108px -648px; width: 16px; height: 16px; }
+.tpl-type-3,
 .tpl-date{ background-position: -108px -684px; width: 16px; height: 16px; } 
 .tpl-date_magnify{ background-position: -108px -720px; width: 16px; height: 16px; } 
 .tpl-date_next{ background-position: -108px -756px; width: 16px; height: 16px; } 
@@ -312,7 +317,9 @@
 .tpl-magifier_zoom_out{ background-position: -180px -972px; width: 16px; height: 16px; } 
 .tpl-magnifier{ background-position: -180px -1008px; width: 16px; height: 16px; } 
 .tpl-magnifier_zoom_in{ background-position: -180px -1044px; width: 16px; height: 16px; } 
-.tpl-male{ background-position: -180px -1080px; width: 16px; height: 16px; } 
+.tpl-male{ background-position: -180px -1080px; width: 16px; height: 16px; }
+
+.tpl-type-5,
 .tpl-map{ background-position: -180px -1116px; width: 16px; height: 16px; } 
 .tpl-map_magnify{ background-position: -180px -1152px; width: 16px; height: 16px; } 
 .tpl-medal_bronze_1{ background-position: -180px -1188px; width: 16px; height: 16px; } 
@@ -332,6 +339,8 @@
 .tpl-monitor{ background-position: -180px -1692px; width: 16px; height: 16px; } 
 .tpl-monitor_lightning{ background-position: -180px -1728px; width: 16px; height: 16px; } 
 .tpl-mouse{ background-position: -180px -1764px; width: 16px; height: 16px; }
+[data-filename$=mp3],
+[data-filename$=m3u],
 .ext-mp3, .ext-m3u, .ext-wav,
 .tpl-music{ background-position: -180px -1800px; width: 16px; height: 16px; } 
 .tpl-new{ background-position: -180px -1836px; width: 16px; height: 16px; } 
@@ -340,6 +349,7 @@
 .tpl-overlays{ background-position: -180px -1944px; width: 16px; height: 16px; } 
 .tpl-package{ background-position: -216px 0; width: 16px; height: 16px; } 
 .tpl-package_green{ background-position: -216px -36px; width: 16px; height: 16px; } 
+[data-filename],
 .tpl-page{ background-position: -216px -72px; width: 16px; height: 16px; } 
 .tpl-page_attach{ background-position: -216px -108px; width: 16px; height: 16px; } 
 .tpl-page_code{ background-position: -216px -144px; width: 16px; height: 16px; } 
@@ -356,6 +366,7 @@
 .tpl-page_refresh{ background-position: -216px -540px; width: 16px; height: 16px; } 
 .tpl-page_save{ background-position: -216px -576px; width: 16px; height: 16px; }
 
+[data-filename$="pdf"],
 .ext-pdf,
 .tpl-page_white_acrobat{ background-position: -216px -648px; width: 16px; height: 16px; } 
 .tpl-page_white_actionscript{ background-position: -216px -684px; width: 16px; height: 16px; } 
@@ -365,6 +376,10 @@
 .tpl-page_white_code{ background-position: -216px -828px; width: 16px; height: 16px; } 
 .tpl-page_white_code_red{ background-position: -216px -864px; width: 16px; height: 16px; } 
 .tpl-page_white_coldfusion{ background-position: -216px -900px; width: 16px; height: 16px; }
+[data-filename$='zip'],
+[data-filename$='7z'],
+[data-filename$='rar'],
+[data-filename$='gz'],
 .ext-zip,
 .ext-7z,
 .ext-rar,
@@ -375,11 +390,14 @@
 .tpl-page_white_cup{ background-position: -216px -1080px; width: 16px; height: 16px; } 
 .tpl-page_white_database{ background-position: -216px -1116px; width: 16px; height: 16px; } 
 .tpl-page_white_dvd{ background-position: -216px -1152px; width: 16px; height: 16px; }
+[data-filename$="xls"],
+[data-filename$="xlsx"],
 .ext-xls,
 .ext-xlsx,
 .ext-csv,
 .tpl-page_white_excel{ background-position: -216px -1188px; width: 16px; height: 16px; } 
 .tpl-page_white_find{ background-position: -216px -1224px; width: 16px; height: 16px; }
+[data-filename$="swf"],
 .ext-swf
 .tpl-page_white_flash{ background-position: -216px -1260px; width: 16px; height: 16px; } 
 .tpl-page_white_freehand{ background-position: -216px -1296px; width: 16px; height: 16px; } 
@@ -397,14 +415,20 @@
 .tpl-page_white_paste{ background-position: -216px -1728px; width: 16px; height: 16px; } 
 .tpl-page_white_php{ background-position: -216px -1764px; width: 16px; height: 16px; } 
 .tpl-page_white_picture{ background-position: -216px -1800px; width: 16px; height: 16px; }
+[data-filename$="ppt"],
+[data-filename$="pptx"],
 .ext-ppt,
 .ext-pptx,
 .tpl-page_white_powerpoint{ background-position: -216px -1836px; width: 16px; height: 16px; } 
 .tpl-page_white_put{ background-position: -216px -1872px; width: 16px; height: 16px; } 
-.tpl-page_white_ruby{ background-position: -216px -1908px; width: 16px; height: 16px; } 
+.tpl-page_white_ruby{ background-position: -216px -1908px; width: 16px; height: 16px; }
+
+.tpl-type-2,
 .tpl-page_white_stack{ background-position: -216px -1944px; width: 16px; height: 16px; } 
 .tpl-page_white_star{ background-position: -252px 0; width: 16px; height: 16px; } 
 .tpl-page_white_swoosh{ background-position: -252px -36px; width: 16px; height: 16px; }
+
+[data-filename$="txt"],
 .ext-txt,
 .tpl-page_white_text{ background-position: -252px -72px; width: 16px; height: 16px; } 
 .tpl-page_white_text_width{ background-position: -252px -108px; width: 16px; height: 16px; } 
@@ -412,6 +436,9 @@
 .tpl-page_white_vector{ background-position: -252px -180px; width: 16px; height: 16px; } 
 .tpl-page_white_visualstudio{ background-position: -252px -216px; width: 16px; height: 16px; } 
 .tpl-page_white_width{ background-position: -252px -252px; width: 16px; height: 16px; }
+
+[data-filename$="doc"],
+[data-filename$="docx"],
 .ext-doc,
 .ext-docx,
 .tpl-page_white_word{ background-position: -252px -288px; width: 16px; height: 16px; } 
@@ -428,6 +455,12 @@
 .tpl-pencil{ background-position: -252px -684px; width: 16px; height: 16px; } 
 .tpl-phone{ background-position: -252px -720px; width: 16px; height: 16px; } 
 .tpl-phone_sound{ background-position: -252px -756px; width: 16px; height: 16px; }
+
+[data-filename$="jpg"],
+[data-filename$="jpeg"],
+[data-filename$="png"],
+[data-filename$="gif"],
+[data-filename$="tiff"],
 .tpl-photo{ background-position: -252px -792px; width: 16px; height: 16px; } 
 .tpl-photos{ background-position: -252px -828px; width: 16px; height: 16px; } 
 .tpl-picture{ background-position: -252px -864px; width: 16px; height: 16px; } 
@@ -591,6 +624,7 @@
 .tpl-transmit{ background-position: -360px -612px; width: 16px; height: 16px; } 
 .tpl-transmit_blue{ background-position: -360px -648px; width: 16px; height: 16px; } 
 .tpl-tux{ background-position: -360px -684px; width: 16px; height: 16px; } 
+.tpl-type-6,
 .tpl-user{ background-position: -360px -720px; width: 16px; height: 16px; } 
 .tpl-user_comment{ background-position: -360px -756px; width: 16px; height: 16px; } 
 .tpl-user_delete{ background-position: -360px -792px; width: 16px; height: 16px; } 

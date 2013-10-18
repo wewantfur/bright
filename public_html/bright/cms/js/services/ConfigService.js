@@ -1,5 +1,5 @@
 bright = angular.module('bright');
-bright.service('configService', function($q, $http) {
+bright.service('ConfigService', function($q, $http) {
 	var settings;
 	var loading = false;
 	return {

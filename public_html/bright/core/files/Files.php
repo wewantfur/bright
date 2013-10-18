@@ -6,6 +6,8 @@ namespace bright\core\files;
  * @author Ids
  *
  */
+use bright\core\utils\StringUtils;
+
 use bright\core\model\vo\File;
 
 use bright\core\model\vo\Folder;
@@ -36,8 +38,8 @@ class Files {
 			$parent = '';
 		
 		$path = BASEPATH . UPLOADFOLDER . $parent;
-		if(!Utils::endsWith($path, '/'))	$path .= '/';
-		if(!Utils::endsWith($parent, '/'))	$parent .= '/';
+		if(!StringUtils::endsWith($path, '/'))	$path .= '/';
+		if(!StringUtils::endsWith($parent, '/'))	$parent .= '/';
 		
 		if(is_dir($path)) {
 			$contents = scandir($path);
@@ -73,8 +75,8 @@ class Files {
 		
 		$path = BASEPATH . UPLOADFOLDER . $parent;
 		
-		if(!Utils::endsWith($path, '/'))	$path .= '/';
-		if(!Utils::endsWith($parent, '/'))	$parent .= '/';
+		if(!StringUtils::endsWith($path, '/'))	$path .= '/';
+		if(!StringUtils::endsWith($parent, '/'))	$parent .= '/';
 		
 		if(is_dir($path)) {
 			$contents = scandir($path);
@@ -113,7 +115,7 @@ class Files {
 		$f = new Folder();
 		$f -> label = 'Files';
 		$f -> path = '/';
-		$f -> hasChildren = true;
+		$f -> haschildren = true;
 		$f -> isroot = true;
 		return array($f);
 	}

@@ -1,13 +1,14 @@
 bright = angular.module('bright');
-bright.controller("PageTreeCtrl", [ '$scope', '$state', 'pageService',
-	function($scope, $state, pageService) {
-		pageService.getPages().then(function(pages) {
+bright.controller("pageTreeCtrl", [ '$scope', '$state', 'PageService',
+	function($scope, $state, PageService) {
+		PageService.getPages().then(function(pages) {
 			
 			if(typeof pages.tree != 'array') {
 				$scope.pagetree = [pages.tree];
 			} else {
 				$scope.pagetree = pages.tree;
 			}
+			console.log($scope.pagetree);
 		});
 		
 		$scope.pageOpenClose = function() {

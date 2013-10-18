@@ -1,12 +1,18 @@
 bright = angular.module('bright');
-bright.controller("FilesCtrl", 
-	['$scope', '$http', '$state', 'fileService',
-	function($scope, $http, $state, fileService) {
+bright.controller("filesCtrl", 
+	['$scope', '$http', '$state', 'FileService',
+	function($scope, $http, $state, FileService) {
 		
-		$('.divider').divider({widths: [25,75]});
+//		$('.divider').divider({widths: [25,75]});
 		
-		fileService.getFolders().then(function(folders) {
-			$scope.folders = folders;
+		FileService.getFolders().then(function(folders) {
+//			if(typeof folders != 'array') {
+//				$scope.folders = [folders];
+//			} else {
+				$scope.folders = folders;
+//			}
+//			$scope.folders = folders;
+			console.log($scope.folders);
 			
 		});
 		
@@ -17,7 +23,7 @@ bright.controller("FilesCtrl",
 				$http.post('/bright/json/core/files/Files/getFolders', {arguments:[item.path]}).success(function(data) {
 					if(data.status == 'OK') {
 						item.children = data.result;
-						fileService.setFolders($scope.folders);
+						FileService.setFolders($scope.folders);
 					}
 				});
 			}
@@ -32,4 +38,8 @@ bright.controller("FilesCtrl",
 				}
 			});
 		};
+		setTimeout(function() {
+			$('.divider').divider({widths: [25,75]});
+			
+		}, 100);
 	}]);
