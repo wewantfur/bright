@@ -56,6 +56,7 @@ class Files {
 		
 		if(!is_dir($fp)) {
 			throw new FilesException($folder, FilesException::FOLDER_NOT_FOUND);
+
 		}
 		
 		$result = @rmdir($fp);
