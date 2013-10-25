@@ -1,4 +1,6 @@
 <?php
+use bright\core\Cache;
+
 use bright\core\model\Model;
 
 session_start();
@@ -84,9 +86,15 @@ function _exceptionHandler(Exception $e) {
 
 function __construct() {
 	set_exception_handler('_exceptionHandler');
+	set_error_handler(function ($code, $message, $file, $line) {
+		throw new ErrorException($message, $code, 0, $file, $line);
+	});
 	register_shutdown_function('_fatal_handler');
 
 }
+
+
+$c = new Cache();
 
 if(ROUTES != null) {
 	$routes = json_decode(ROUTES);

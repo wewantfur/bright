@@ -72,8 +72,8 @@
 
 	<?php
 		// Load all js files in /js folder
-		$preload = array('js/bright.js');
-		//, 'js/components/jquery.ui.widget.js', 'js/components/jquery.fileupload.js', 'js/components/scroll.js', 'l10n/getModule/nl.js'
+		$preload = array('js/bright.js', 'js/libs/jquery.ui.widget.js', 'js/libs/jquery.fileupload.js');
+		//, 'js/components/scroll.js', 'l10n/getModule/nl.js'
 		foreach($preload as $js) {
 			echo "<script type='text/javascript' src='$js'></script>\r\n\t";
 		}

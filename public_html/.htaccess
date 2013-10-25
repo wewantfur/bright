@@ -1,0 +1,55 @@
+RewriteEngine On
+
+Options -Indexes
+
+#Gzip
+<ifmodule mod_deflate.c>
+	AddOutputFilterByType DEFLATE text/text text/html text/javascript text/plain text/xml text/css application/x-javascript application/javascript
+</ifmodule>
+#End Gzip
+
+<ifModule !mod_deflate.c>
+	php_value output_handler ob_gzhandler
+</ifModule>
+
+<ifModule mod_headers.c>
+	# 3 Month
+	<FilesMatch "\.(flv|gif|jpg|jpeg|png|ico|swf)$">
+		Header set Cache-Control "max-age=7257600"
+	</FilesMatch>
+	
+	# 1 Week
+	<FilesMatch "\.(js|css|pdf|txt)$">
+		Header set Cache-Control "max-age=604800"
+	</FilesMatch>
+	
+	# 10 Minutes
+	<FilesMatch "\.(html|htm)$">
+		Header set Cache-Control "max-age=600"
+	</FilesMatch>
+	
+	# NONE
+	<FilesMatch "\.(pl|php|cgi|spl)$">
+		Header unset Cache-Control
+		Header unset Expires
+		Header unset Last-Modified
+		FileETag None
+		Header unset Pragma
+	</FilesMatch>
+</ifModule>
+ErrorDocument 404 /404/
+
+RewriteCond %{REQUEST_URI} ^/bright/ajax(.*)$
+RewriteRule ^(.*)$ /bright/controllers/AjaxController.php?v=$1 [NC,L]
+
+
+RewriteCond  %{REQUEST_URI} ^/images(.*)$
+RewriteRule ^([^/]*)/([^/]*)/(.*)$ /bright/controllers/ImageController.php?mode=$2&src=/$3 [NC,L]
+
+# Redirect everything that's not a file except everything in /bright to index.php
+RewriteCond %{REQUEST_URI} !^/bright(.*)$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /index.php?path=$1 [NC,QSA]
+
+
+AddType text/cache-manifest .manifest

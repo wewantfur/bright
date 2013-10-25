@@ -1,4 +1,6 @@
 <div class="files">
+	<form id="fileupload" action="/bright/controllers/JSONController/core/files/Upload" method="POST" enctype="multipart/form-data" data-file-upload="uploadoptions" data-ng-class="{'fileupload-processing': processing() || loadingFiles}">
+	<input type="hidden" name="folder" value="{{selectedFolder.path}}" />
 	<div class="divider">
 		<div class="panel"> 
 			
@@ -14,21 +16,36 @@
 		
 		</div>
 		<div class="panel">
-			<div class="panel-top">
-				<button>Upload from url</button>
-			</div>
-			<ul class="files">
-			
-				<li ng-repeat="file in files" ng-click="setFile($event)" ng-class="{active: file.selected == true}"><i class="tpl-icon" data-filename="{{file.label}}"></i> {{file.label}}</li>
+				<div class="panel-top">
+					<button>Upload from url</button>
+					<button ng-class="{disabled: disabled}">
+	                    <i class="glyphicon glyphicon-plus"></i>
+	                    <span>Add files...</span>
+	                    <input type="file" name="files[]" multiple ng-disabled="disabled">
+	                </button>
+					<div class="right">
+						<div class="toggle-btn-group">
+							<button class="btn-list" ng-click="setDisplayMode('list')" ng-disabled="displayMode=='list'">l</button>
+							<button class="btn-grid" ng-click="setDisplayMode('grid')" ng-disabled="displayMode=='grid'">g</button>
+						</div>
+					</div>
+				</div>
+				<ul ng-class="{'files': true, 'list-mode': displayMode == 'list', 'grid-mode': displayMode == 'grid'}">
 				
-				<li ng-repeat="ufile in uploads" class="upload" ng-hide="ufile.complete"><span class="progress" ng-class="{error: ufile.error}" style="{{ufile.cssprogress}}"></span><span class="label"><i class="aristo icon-refresh-1"></i> {{ufile.name}}</span></li>
+					<li ng-repeat="file in files" ng-click="setFile($event)" ng-class="{active: file.selected == true}" title="{{file.label}}">
+						<div data-filename="/images/brightthumb/files/{{file.path}}" data-ext="{{file.extension}}" data-display-mode="{{displayMode}}" file-renderer><i class="tpl-icon" ></i></div> 
+						<span>{{file.label}}</span>
+					</li>
+					
+				</ul>
+				<ul ng-class="{'files': true, 'list-mode': displayMode == 'list', 'grid-mode': displayMode == 'grid'}">
 				
-			</ul>
-			<uploadbox>{{droptext}}
-				<input type="file" ng-model-instant id="fileToUpload" multiple />
-			</uploadbox>
-			<div class="panel-bottom">
-			
-			</div>
+					<li ng-repeat="file in queue">
+						<i class="tpl-icon" data-filename="/images/brightthumb/files/{{file.path}}" data-display-mode="{{displayMode}}" file-renderer ></i> 
+						<span>{{file.name}}</span>
+					</li>
+					
+				</ul>
 		</div>
+	</form>
 </div>

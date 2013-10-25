@@ -263,10 +263,50 @@ div.dialog {
 	position: absolute;
 }
 
-/* .list .gridStyle { */
-/* 	height: 100%; */
-/* 	} */
+/**************************************************************/
+/***						LIST							***/
+/**************************************************************/
+.files li {
+	list-style-type: none;
+}
+.files li div {
+	display: inline;
+}
+.files .grid-mode li div {
+	display: block;
+	border: 1px solid #eee;
+	width: 100px;
+	height: 100px;
+}
+.files .grid-mode li div i {
+	margin-top: 42px;
+	margin-left: 42px;
+}
+.files .grid-mode li div[data-ext="jpg"] i,
+.files .grid-mode li div[data-ext="jpeg"] i,
+.files .grid-mode li div[data-ext="png"] i,
+.files .grid-mode li div[data-ext="gif"] i,
+.files .grid-mode li div[data-ext="pdf"] i {
+	display:none;
+}
 	
-/* .ngViewport { */
-/* 	height: auto !important; */
+.files .grid-mode li span {
+	width: 100px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: block;
+	overflow: hidden;
+	text-align: center;
+/* 	display: none; */
+}
+
+/* .files .grid-mode li:hover span { */
+/* 	overflow: visible; */
+/* 	background: white; */
+/* 	display: block; */
 /* } */
+
+.files .grid-mode li {
+	display: inline-block;
+	margin-right: 20px;
+}

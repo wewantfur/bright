@@ -71366,3 +71366,1077 @@ bright\core\model\vo\Template::__set_state(array(
     )),
   ),
 ))
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:10.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/php3oDFf0',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-10 12:02:18.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpmwJTb9',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 225924,
+    ),
+  ),
+)
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:10.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpqmElz4',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+array (
+  'folder' => '',
+)
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:13.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpaDCKSd',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+array (
+  'folder' => '',
+)
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-10 12:02:18.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/php7MYg9N',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 225924,
+    ),
+  ),
+)
+array (
+  'folder' => '',
+)
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-10 12:02:18.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/php9Fq0fT',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 225924,
+    ),
+  ),
+)
+array (
+  'folder' => '',
+)
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:10.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpQsXF51',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+array (
+  'folder' => '',
+)
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:10.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpEZIZ7Y',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:10.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpJKyMU7',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+NULL
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:10.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/php7oTzuf',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+array (
+  'args' => 
+  array (
+    0 => '/leeuwarden',
+  ),
+)
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-10 12:02:18.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/php7XrPKX',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 225924,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-10 12:02:18.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/php0WgkZR',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 225924,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+
+
+
+
+
+
+
+
+
+
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:13.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpN7s7KD',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+
+
+
+
+
+
+
+
+
+
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:10.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpMksLri',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+
+
+
+
+
+
+
+
+
+
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-10 12:02:18.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpf6X9aX',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 225924,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+
+
+
+
+
+
+
+
+
+
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:13.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpSN5lgl',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+Screenshot from 2013-10-14 13:35:13
+.png
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-14 13:35:10.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpIeQ6QF',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 260943,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+Screenshot from 2013-10-14 13:35:10
+png
+Screenshot-from-2013-10-14-13-35-10
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-10 12:02:18.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpWjT7cp',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 225924,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+Screenshot from 2013-10-10 12:02:18
+png
+NULL
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'Screenshot from 2013-10-10 12:02:18.png',
+    ),
+    'type' => 
+    array (
+      0 => 'image/png',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpirf0oo',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 225924,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+Screenshot from 2013-10-10 12:02:18
+png
+Screenshot-from-2013-10-10-12-02-18
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpAA8Pwu',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+skyline-liwadden
+jpg
+skyline-liwadden
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpyGzHRK',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//skyline-liwadden.jpg
+skyline-liwadden
+jpg
+skyline-liwadden
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpU44B3y',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-1.jpg
+skyline-liwadden
+jpg
+skyline-liwadden-1
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/php7sHlj2',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-2.jpg
+skyline-liwadden
+jpg
+skyline-liwadden-2
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden-1.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpAXAZ98',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-1-1.jpg
+skyline-liwadden-1
+jpg
+skyline-liwadden-1-1
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden-1.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpybmrtT',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-1-1.jpg
+skyline-liwadden-1
+jpg
+skyline-liwadden-1-1
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden-1.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpdNTKuw',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-1-1.jpg
+skyline-liwadden-1
+jpg
+skyline-liwadden-1-1
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpL1g4ZI',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-2.jpg
+skyline-liwadden
+jpg
+skyline-liwadden-2
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden-1.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpWYE4rd',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-1-1.jpg
+skyline-liwadden-1
+jpg
+skyline-liwadden-1-1
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden-1.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phphQKH5v',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-1-1.jpg
+skyline-liwadden-1
+jpg
+skyline-liwadden-1-1
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden-1.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpBmFGkz',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-1-1.jpg
+skyline-liwadden-1
+jpg
+skyline-liwadden-1-1
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/php7gOHOH',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-2.jpg
+skyline-liwadden
+jpg
+skyline-liwadden-2
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden-1.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phpv3VKrV',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-1-1.jpg
+skyline-liwadden-1
+jpg
+skyline-liwadden-1-1
+UPLOAD!
+array (
+  'files' => 
+  array (
+    'name' => 
+    array (
+      0 => 'skyline-liwadden-1.jpg',
+    ),
+    'type' => 
+    array (
+      0 => 'image/jpeg',
+    ),
+    'tmp_name' => 
+    array (
+      0 => '/tmp/phposRiSG',
+    ),
+    'error' => 
+    array (
+      0 => 0,
+    ),
+    'size' => 
+    array (
+      0 => 276309,
+    ),
+  ),
+)
+array (
+  'folder' => '/leeuwarden',
+)
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-1-1.jpg
+skyline-liwadden-1
+jpg
+skyline-liwadden-1-1
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-2.jpg
+skyline-liwadden-1
+jpg
+skyline-liwadden-2
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-3.jpg
+skyline-liwadden
+jpg
+skyline-liwadden-3
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-3.jpg
+skyline-liwadden-1
+jpg
+skyline-liwadden-3
+/opt/webroot/bright/bright/public_html/files//leeuwarden/skyline-liwadden-3.jpg
+skyline-liwadden-2
+jpg
+skyline-liwadden-3

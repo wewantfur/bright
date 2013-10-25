@@ -339,8 +339,8 @@
 .tpl-monitor{ background-position: -180px -1692px; width: 16px; height: 16px; } 
 .tpl-monitor_lightning{ background-position: -180px -1728px; width: 16px; height: 16px; } 
 .tpl-mouse{ background-position: -180px -1764px; width: 16px; height: 16px; }
-[data-filename$=mp3],
-[data-filename$=m3u],
+[data-ext=mp3] i,
+[data-ext=m3u] i,
 .ext-mp3, .ext-m3u, .ext-wav,
 .tpl-music{ background-position: -180px -1800px; width: 16px; height: 16px; } 
 .tpl-new{ background-position: -180px -1836px; width: 16px; height: 16px; } 
@@ -349,7 +349,7 @@
 .tpl-overlays{ background-position: -180px -1944px; width: 16px; height: 16px; } 
 .tpl-package{ background-position: -216px 0; width: 16px; height: 16px; } 
 .tpl-package_green{ background-position: -216px -36px; width: 16px; height: 16px; } 
-[data-filename],
+[data-ext] i,
 .tpl-page{ background-position: -216px -72px; width: 16px; height: 16px; } 
 .tpl-page_attach{ background-position: -216px -108px; width: 16px; height: 16px; } 
 .tpl-page_code{ background-position: -216px -144px; width: 16px; height: 16px; } 
@@ -366,7 +366,7 @@
 .tpl-page_refresh{ background-position: -216px -540px; width: 16px; height: 16px; } 
 .tpl-page_save{ background-position: -216px -576px; width: 16px; height: 16px; }
 
-[data-filename$="pdf"],
+[data-ext="pdf"] i,
 .ext-pdf,
 .tpl-page_white_acrobat{ background-position: -216px -648px; width: 16px; height: 16px; } 
 .tpl-page_white_actionscript{ background-position: -216px -684px; width: 16px; height: 16px; } 
@@ -376,10 +376,10 @@
 .tpl-page_white_code{ background-position: -216px -828px; width: 16px; height: 16px; } 
 .tpl-page_white_code_red{ background-position: -216px -864px; width: 16px; height: 16px; } 
 .tpl-page_white_coldfusion{ background-position: -216px -900px; width: 16px; height: 16px; }
-[data-filename$='zip'],
-[data-filename$='7z'],
-[data-filename$='rar'],
-[data-filename$='gz'],
+[data-ext='zip'] i,
+[data-ext='7z'] i,
+[data-ext='rar'] i,
+[data-ext='gz'] i,
 .ext-zip,
 .ext-7z,
 .ext-rar,
@@ -390,14 +390,14 @@
 .tpl-page_white_cup{ background-position: -216px -1080px; width: 16px; height: 16px; } 
 .tpl-page_white_database{ background-position: -216px -1116px; width: 16px; height: 16px; } 
 .tpl-page_white_dvd{ background-position: -216px -1152px; width: 16px; height: 16px; }
-[data-filename$="xls"],
-[data-filename$="xlsx"],
+[data-ext="xls"] i,
+[data-ext="xlsx"] i,
 .ext-xls,
 .ext-xlsx,
 .ext-csv,
 .tpl-page_white_excel{ background-position: -216px -1188px; width: 16px; height: 16px; } 
 .tpl-page_white_find{ background-position: -216px -1224px; width: 16px; height: 16px; }
-[data-filename$="swf"],
+[data-ext="swf"] i,
 .ext-swf
 .tpl-page_white_flash{ background-position: -216px -1260px; width: 16px; height: 16px; } 
 .tpl-page_white_freehand{ background-position: -216px -1296px; width: 16px; height: 16px; } 
@@ -415,8 +415,8 @@
 .tpl-page_white_paste{ background-position: -216px -1728px; width: 16px; height: 16px; } 
 .tpl-page_white_php{ background-position: -216px -1764px; width: 16px; height: 16px; } 
 .tpl-page_white_picture{ background-position: -216px -1800px; width: 16px; height: 16px; }
-[data-filename$="ppt"],
-[data-filename$="pptx"],
+[data-ext="ppt"] i,
+[data-ext="pptx"] i,
 .ext-ppt,
 .ext-pptx,
 .tpl-page_white_powerpoint{ background-position: -216px -1836px; width: 16px; height: 16px; } 
@@ -428,7 +428,7 @@
 .tpl-page_white_star{ background-position: -252px 0; width: 16px; height: 16px; } 
 .tpl-page_white_swoosh{ background-position: -252px -36px; width: 16px; height: 16px; }
 
-[data-filename$="txt"],
+[data-ext="txt"] i,
 .ext-txt,
 .tpl-page_white_text{ background-position: -252px -72px; width: 16px; height: 16px; } 
 .tpl-page_white_text_width{ background-position: -252px -108px; width: 16px; height: 16px; } 
@@ -437,8 +437,8 @@
 .tpl-page_white_visualstudio{ background-position: -252px -216px; width: 16px; height: 16px; } 
 .tpl-page_white_width{ background-position: -252px -252px; width: 16px; height: 16px; }
 
-[data-filename$="doc"],
-[data-filename$="docx"],
+[data-ext="doc"] i,
+[data-ext="docx"] i,
 .ext-doc,
 .ext-docx,
 .tpl-page_white_word{ background-position: -252px -288px; width: 16px; height: 16px; } 
@@ -456,11 +456,11 @@
 .tpl-phone{ background-position: -252px -720px; width: 16px; height: 16px; } 
 .tpl-phone_sound{ background-position: -252px -756px; width: 16px; height: 16px; }
 
-[data-filename$="jpg"],
-[data-filename$="jpeg"],
-[data-filename$="png"],
-[data-filename$="gif"],
-[data-filename$="tiff"],
+[data-ext="jpg"] i,
+[data-ext="jpeg"] i,
+[data-ext="png"] i,
+[data-ext="gif"] i,
+[data-ext="tiff"] i,
 .tpl-photo{ background-position: -252px -792px; width: 16px; height: 16px; } 
 .tpl-photos{ background-position: -252px -828px; width: 16px; height: 16px; } 
 .tpl-picture{ background-position: -252px -864px; width: 16px; height: 16px; } 

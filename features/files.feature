@@ -65,8 +65,12 @@ Scenario: Move a file
   """
   Then the result should be an array of 2 \bright\core\model\vo\File objects
   
-  
-Scenario: Upload a file
+Scenario: Get a file object
   Given I am logged in as Administrator
-  When I run "core\files\Files\setFile()"
-  Then the result should be an array of 5 \bright\core\model\vo\File objects
+  Then the file "file groningen/groningen.jpg" should exist
+  
+  
+#Scenario: Upload a file
+#  Given I am logged in as Administrator
+#  When I run "core\files\Files\setFile()"
+#  Then the result should be an array of 5 \bright\core\model\vo\File objects

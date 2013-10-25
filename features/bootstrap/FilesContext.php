@@ -3,6 +3,12 @@
 /**
  * Features context.
  */
+use bright\core\exceptions\FilesException;
+
+use bright\core\files\Files;
+
+use bright\core\model\vo\File;
+
 use Behat\Behat\Context\BehatContext;
 
 class FilesContext extends BehatContext
@@ -28,6 +34,41 @@ class FilesContext extends BehatContext
 		$this -> _rcopy(BASEPATH .'../test/files/', BASEPATH . 'files');
 		
 	}
+	
+	/**
+	 * @Transform /^file (.*)$/
+	 */
+	public function castPathToFile($string) {
+		$paths = explode('/', $string);
+		array_splice($paths, 0,0, array('/'));
+		$fname = array_pop($paths);
+		$p = '';
+		foreach($paths as $path) {
+			$p .= $path;
+			Files::getFolders($p);
+		}
+		$files = Files::getFiles($p);
+		foreach($files as $file) {
+			if($file -> label == $fname) {
+				return $file;
+			}
+		}
+		
+		throw new FilesException('', FilesException::FILE_NOT_FOUND);
+	}
+	
+	/** 
+	 * @Then /^the file "([^"]*)" should exist$/
+	 */
+	public function theFileShouldExist(File $file)
+	{
+		if(file_exists(BASEPATH . UPLOADFOLDER . $file -> path)) {
+			return true;
+		} else {
+			throw new FilesException($file -> path, FilesException::FILE_NOT_FOUND);
+		}
+	}
+	
 	
 	
 	private function _rrmdir($dir) {

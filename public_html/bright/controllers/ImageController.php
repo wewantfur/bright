@@ -23,7 +23,7 @@ if(!isset($_GET['mode']) || !isset($_GET['src'])) {
 	if(defined('IMAGE_MODES') && IMAGE_MODES != '')
 		$modes = json_decode(IMAGE_MODES);
 	
-	$modes['brightthumb'] = array('w' => 100, 'h' => 100, 'zc' => 1);
+	$modes['brightthumb'] = array('w' => 100, 'h' => 100, 'far' => 'C','f'=> 'png', 'bg'=>'FFFFFF');
 	$modes['brightlogo'] = array('w' => 170, 'h' => 170, 'far' => 'C','f'=> 'png', 'bg'=>'0000FF');
 	if(array_key_exists($mode, $modes)) {
 
@@ -42,7 +42,7 @@ if(!isset($_GET['mode']) || !isset($_GET['src'])) {
 			unset($_GET['allowedvars']);
 		}
 
-		include(BASEPATH . 'bright/externals/phpThumb/phpThumb.php');
+		include(BASEPATH . 'vendor/phpthumb/phpThumb.php');
 	} else {
 		header('HTTP/1.1 500 Internal Server Error');
 		header('Location: ' . ERROR_IMG);

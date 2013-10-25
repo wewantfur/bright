@@ -100,7 +100,8 @@
 		},
 		"FilesException": {
 			"4001": "Kan de opgegeven map niet vinden (%1)",
-			"4002": "Kan het opgegeven bestand niet vinden (%1)"
+			"4002": "Kan het opgegeven bestand niet vinden (%1)",
+			"4009": "Kan de map %1 niet aanmaken"
 		}
 	}
 }

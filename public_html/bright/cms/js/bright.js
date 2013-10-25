@@ -2,6 +2,7 @@ var bright = angular.module('bright',
 		// dependancies
 		['ui.compat', 
 		 'ui.bootstrap.dialog',
+		 'blueimp.fileupload',
 //		 'ui.tinymce',
          'l10n',
          'l10n-tools',

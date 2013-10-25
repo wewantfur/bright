@@ -27,8 +27,8 @@ class Files {
 	
 	public static function deleteFile($file, $parent) {
 		
-		$parent = self::_sanitizeFolder($parent);
-		$file = self::_sanitizeFile($file);
+		$parent = self::_validateFolder($parent);
+		$file = self::_validateFilename($file);
 		
 		$fp = self::_getFullPath($parent);
 		
@@ -49,8 +49,8 @@ class Files {
 	}
 	
 	public static function deleteFolder($folder, $parent) {
-		$parent = self::_sanitizeFolder($parent);
-		$folder = self::_sanitizeFolder($parent . $folder);
+		$parent = self::_validateFolder($parent);
+		$folder = self::_validateFolder($parent . $folder);
 		
 		$fp = self::_getFullPath($folder);
 		
@@ -74,10 +74,13 @@ class Files {
 	 * @throws Exception
 	 */
 	public static function getFiles($parent = null) {
-		$parent = self::_sanitizeFolder($parent);
+		$parent = self::_validateFolder($parent);
 		$path = self::_getFullPath($parent);
 	
 		$contents = scandir($path);
+		
+		if(!StringUtils::endsWith($parent, '/'))
+			$parent .= '/'; 
 			
 		$files = array();
 		foreach($contents as $item) {
@@ -97,7 +100,7 @@ class Files {
 	public static function getFolders($parent = null) {
 		
 		if($parent) {
-			$parent = self::_sanitizeFolder($parent);
+			$parent = self::_validateFolder($parent);
 		} else {
 			return self::_getBaseFolders();
 		}
@@ -121,10 +124,10 @@ class Files {
 	}
 	
 	public static function moveFile($file, $oldparent, $newparent) {
-		$file = self::_sanitizeFile($file);
+		$file = self::_validateFilename($file);
 		
-		$oldparent = self::_sanitizeFolder($oldparent);
-		$newparent = self::_sanitizeFolder($newparent);
+		$oldparent = self::_validateFolder($oldparent);
+		$newparent = self::_validateFolder($newparent);
 		
 		$oldfp = self::_getFullPath($oldparent);
 		$newfp = self::_getFullPath($newparent);
@@ -148,7 +151,7 @@ class Files {
 	
 	public static function setFolder($folder, $parent) {
 		$folder = filter_var($folder, FILTER_SANITIZE_STRING);
-		$parent = self::_sanitizeFolder($parent);
+		$parent = self::_validateFolder($parent);
 		
 		// Sanitize input
 		if(strpos($folder, '..') || preg_match('/[^A-z0-9_\-]/', $folder))
@@ -166,6 +169,19 @@ class Files {
 			throw new FilesException('', FilesException::CANNOT_CREATE_DIR);
 		
 		return self::getFolders($parent);
+	}
+	
+	public static function upload() {
+		// Are we allowed to upload?
+		if(!Authorization::inGroup(Authorization::GR_FILEMANAGER))
+			throw new AuthException(Authorization::GR_FILEMANAGER, AuthException::NOT_IN_GROUP);
+		
+		$folder = self::_validateFolder($_POST['folder']);
+		
+		$filename = self::_sanitizeFilename($_FILES['files']['name'][0], $folder);
+		
+		$result = @move_uploaded_file($_FILES['files']['tmp_name'][0], self::_getFullPath($folder) . $filename);
+		return $result;
 	}
 	
 	/**
@@ -216,13 +232,46 @@ class Files {
 	private static function _getFullPath($path) {
 		if($path == '/') {
 			$path = '';
-		} else if(!StringUtils::endsWith($path, '/'))
-			$path .= '/';
+		} else {
+		 	if(StringUtils::startsWith($path, '/'))
+				$path = substr($path, 1);
+		 	
+		 	if(!StringUtils::endsWith($path, '/'))
+				$path .= '/';
+		}
 		
 		return BASEPATH . UPLOADFOLDER . $path;
 	}
 	
-	private static function _sanitizeFile($file) {
+	private static function _sanitizeFilename($filename, $folder) {
+		$filename = strtolower(filter_var($filename, FILTER_SANITIZE_STRING));
+		$ext = substr($filename, strrpos($filename, '.')+1);
+		$name = substr($filename, 0, strrpos($filename, '.'));
+		$sanitized = preg_replace('/[^A-z0-9_\-\.]/i', '-', $name);
+		while(strpos($sanitized, '--') !== false) 
+			$sanitized = str_replace('--', '-', $sanitized);
+		
+		$count = -1;
+		
+		if(strpos($sanitized, '-')) {
+			$c = substr($sanitized, strrpos($sanitized, '-')+1);
+			if(is_numeric($c)) {
+				$count = $c * -1;
+				$sanitized = substr($sanitized, 0, strrpos($sanitized, '-'));
+			}
+		}
+		
+		if(file_exists(self::_getFullPath($folder) . $sanitized . ".$ext")) {
+			while(file_exists(self::_getFullPath($folder) . $sanitized . $count . ".$ext")) 
+				$count--;
+			
+			$sanitized = $sanitized . $count;
+		}
+		
+		return $sanitized . '.' . $ext;
+	}
+	
+	private static function _validateFilename($file) {
 		$file = filter_var($file, FILTER_SANITIZE_STRING);
 		
 		if($file === false || $file === null || trim($file) == '') 
@@ -243,7 +292,7 @@ class Files {
 	 * @throws AuthException
 	 * @return string The path
 	 */
-	private static function _sanitizeFolder($path) {
+	private static function _validateFolder($path) {
 		$path = filter_var($path, FILTER_SANITIZE_STRING);
 		if($path === false || $path == null || strpos($path, '..') !== false)
 			throw new FilesException('', FilesException::INVALID_FOLDER_NAME);
@@ -256,6 +305,12 @@ class Files {
 		$opath = $path;
 		if($path == '/')
 			$path = '';
+		
+		if(StringUtils::startsWith($path, '/'))
+			$path = substr($path, 1);
+		
+		if($path != '' && !StringUtils::endsWith($path, '/'))
+			$path .= '/';
 		
 		if(!is_dir(BASEPATH . UPLOADFOLDER . $path))
 			throw new FilesException($path, FilesException::FOLDER_NOT_FOUND);
