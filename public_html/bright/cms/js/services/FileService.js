@@ -8,6 +8,21 @@ bright.service('FileService', function($http, $q) {
 		},
 		
 		/**
+		 * Gets the all the folders
+		 * @param parent
+		 * @returns
+		 */
+		getAllFolders : function(parent) {
+			var deferred = $q.defer();
+			$http.get('/bright/json/core/files/Files/getAllFolders').success(function(data) {
+				if(data.status == 'OK') {
+					deferred.resolve(data.result);
+				}
+			});
+			return deferred.promise;
+		},
+		
+		/**
 		 * Gets the (root) folders
 		 * @param parent
 		 * @returns

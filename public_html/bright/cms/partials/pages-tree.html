@@ -2,7 +2,7 @@
 	<li ng-class="{'tree-opened': item.isopen}">
 		<div ng-click="pageSelect()" ng-class="{selected: item.pageId==selectedPage.pageId}">
 			<i ng-class="{'tree-opened': item.isopen, 'tree-closed': !item.isopen, hidden: !hasChildren(), 'tree-icon': true}" ng-click="pageOpenClose()"  stop-event='click'></i>
-			<i class="tpl-icon tpl-{{item.icon}}"></i> 
+			<i class="fa fa-{{item.icon}}"></i> 
 			{{item.label}}
 		</div>
 	</li>

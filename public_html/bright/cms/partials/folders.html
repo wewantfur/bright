@@ -1,0 +1,20 @@
+<div class="files">
+	<h1>Select folder</h1>
+	<input type="hidden" name="folder" value="{{selectedFolder.path}}" />
+	<div class="panel"> 
+		
+		<ul class="tree folders" ng-tree="folders" >
+			<li ng-class="{'tree-opened': item.isopen}">
+				<div ng-click="folderSelect()" ng-class="{selected: item.path==selectedFolder.path}">
+					<i ng-class="{'tree-opened': item.isopen, 'tree-closed': !item.isopen, hidden: !item.haschildren, 'tree-icon': true}" ng-click="folderOpenClose()" stop-event='click'></i>
+					<i ng-class="{'fa':true, 'fa-hdd-o': item.isroot, 'fa-folder': !item.isroot}"></i> 
+					{{item.label}}
+				</div>
+			</li>
+		</ul>
+	
+	</div>
+	<button ng-click="cancel()">Cancel</button>
+	<button ng-click="ok()">Select</button>
+	
+</div>

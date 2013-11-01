@@ -61,7 +61,10 @@
 		"felogin": "Inloggen verplicht",
 		
 		"groups": {
-			"edit": "Groep bewerken"
+			"name": "Groep naam",
+			"edit": "Groep bewerken",
+			"pagemountpoints": "Instap punt pagina boom",
+			"filemountpoints": "Instap punt media beheer"
 		}
 	},
 		

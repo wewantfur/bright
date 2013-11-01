@@ -3,7 +3,7 @@ bright.controller("pagesCtrl",
 	['$scope', '$http', '$state', 'PageService',
 	function($scope, $http, $state, PageService) {
 		
-		$scope.columns = [{value:'icon', label:' ', headerTemplate:$scope.hTemplate, width: '20px', template: '<i class="tpl-icon tpl-{{row.icon}}" />'},
+		$scope.columns = [{value:'icon', label:' ', headerTemplate:$scope.hTemplate, width: '20px', template: '<i class="fa fa-{{row.icon}}" />'},
 		                  {value:'pageId', label:'#', headerTemplate:$scope.hTemplate, width: '20px'},
 		                  {value:'label', label:'Label', headerTemplate:$scope.hTemplate, width: '20%'},
 		                  {value:'modificationdate', headerTemplate:$scope.hTemplate, label:'Last modified', width: '20%', template: '<span>{{row.modificationdate | date:\'short\'}}</span>'},

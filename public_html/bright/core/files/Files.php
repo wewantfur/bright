@@ -6,6 +6,8 @@ namespace bright\core\files;
  * @author Ids
  *
  */
+use bright\core\utils\iterators\BrightDirectoryIterator;
+
 use bright\core\exceptions\AuthException;
 
 use bright\core\auth\Authorization;
@@ -21,10 +23,18 @@ use bright\core\model\vo\File;
 use bright\core\model\vo\Folder;
 
 use bright\core\Utils;
+use bright\core\utils\iterators\SortedDirectoryIterator;
 
 
 class Files {
 	
+	/**
+	 * Deletes a file
+	 * @param String $file The name of file to delete
+	 * @param String $parent The (relative) path to the parent folder of the file
+	 * @throws FilesException
+	 * @return Array The files in $parent
+	 */
 	public static function deleteFile($file, $parent) {
 		
 		$parent = self::_validateFolder($parent);
@@ -48,6 +58,13 @@ class Files {
 		return self::getFiles($parent);
 	}
 	
+	/**
+	 * Deletes a folder
+	 * @param String $folder The name of the folder to delete
+	 * @param String $parent The (relative) path of the parent folder
+	 * @throws FilesException
+	 * @return Array The subfolders of $parent
+	 */
 	public static function deleteFolder($folder, $parent) {
 		$parent = self::_validateFolder($parent);
 		$folder = self::_validateFolder($parent . $folder);
@@ -65,6 +82,11 @@ class Files {
 			throw new FilesException($folder, FilesException::CANNOT_DELETE_FOLDER);
 		
 		return self::getFolders($parent);
+		
+	}
+	
+	public static function getAllFiles() {
+		
 		
 	}
 	
@@ -97,6 +119,26 @@ class Files {
 		return $files;
 	}
 	
+	public static function getAllFolders() {
+		if(!Authorization::inGroup(Authorization::GR_WEBMASTER))
+			throw new AuthException(Authorization::GR_WEBMASTER, AuthException::NOT_IN_GROUP);
+		
+		$brit = new SortedDirectoryIterator(new \RecursiveIteratorIterator(new BrightDirectoryIterator(BASEPATH . UPLOADFOLDER), \RecursiveIteratorIterator::CHILD_FIRST));
+		$f = new Folder();
+		$f -> label = substr(UPLOADFOLDER, 0, -1);
+		$f -> path = '';
+		$folders = array_merge(array($f), iterator_to_array($brit));
+		$tree = self::_buildDirectoryStructure($folders, '');
+		
+		$f -> children = $tree;
+		return array($f);
+	}
+	
+	/**
+	 * Returns the subfolders of the given parent
+	 * @param String $parent The path of the parent folder
+	 * @return Array An array of Folder VO's
+	 */
 	public static function getFolders($parent = null) {
 		
 		if($parent) {
@@ -123,6 +165,14 @@ class Files {
 		
 	}
 	
+	/**
+	 * Moves a file
+	 * @param String $file The name of the file
+	 * @param String $oldparent The path of the current folder
+	 * @param String $newparent The path of the new folder
+	 * @throws FilesException
+	 * @return Array The contents of the old folder
+	 */
 	public static function moveFile($file, $oldparent, $newparent) {
 		$file = self::_validateFilename($file);
 		
@@ -145,10 +195,23 @@ class Files {
 		return self::getFiles($oldparent);
 	}
 	
+	/**
+	 * Alters a file
+	 * @param unknown_type $file
+	 * @param unknown_type $parent
+	 * @throws Exception
+	 */
 	public static function setFile($file, $parent) {
 		throw new Exception(__METHOD__ , Exception::NOT_IMPLEMENTED);
 	}
 	
+	/**
+	 * Creates a new folder
+	 * @param String $folder The name of the new folder
+	 * @param String $parent The path of the parent folder
+	 * @throws FilesException
+	 * @return Array The subfolders of $parent
+	 */
 	public static function setFolder($folder, $parent) {
 		$folder = filter_var($folder, FILTER_SANITIZE_STRING);
 		$parent = self::_validateFolder($parent);
@@ -171,6 +234,10 @@ class Files {
 		return self::getFolders($parent);
 	}
 	
+	/**
+	 * Uploads a file
+	 * @throws AuthException
+	 */
 	public static function upload() {
 		// Are we allowed to upload?
 		if(!Authorization::inGroup(Authorization::GR_FILEMANAGER))
@@ -182,6 +249,27 @@ class Files {
 		
 		$result = @move_uploaded_file($_FILES['files']['tmp_name'][0], self::_getFullPath($folder) . $filename);
 		return $result;
+	}
+	
+	/**
+	 * 
+	 * @param unknown_type $elements
+	 * @param unknown_type $parent
+	 */
+	private static function _buildDirectoryStructure($elements, $parent = '') {
+		$branch = array();
+	
+		foreach ($elements as $element) {
+			if ($element -> path == $parent . $element -> label) {
+				$children = self::_buildDirectoryStructure($elements, $parent . $element -> label . '/');
+				if ($children) {
+					$element -> children = $children;
+				}
+				$branch[] = $element;
+			}
+		}
+	
+		return $branch;
 	}
 	
 	/**
@@ -229,6 +317,10 @@ class Files {
 		return false;
 	}
 	
+	/**
+	 * Gets the full path of a folder
+	 * @param String $path The relative path of the folder
+	 */
 	private static function _getFullPath($path) {
 		if($path == '/') {
 			$path = '';
@@ -243,6 +335,12 @@ class Files {
 		return BASEPATH . UPLOADFOLDER . $path;
 	}
 	
+	/**
+	 * Cleans a filename and generates a suffix if the filename exists
+	 * @param String $filename The name of the file
+	 * @param String $folder The path of the folder
+	 * @return String The sanitized filename
+	 */
 	private static function _sanitizeFilename($filename, $folder) {
 		$filename = strtolower(filter_var($filename, FILTER_SANITIZE_STRING));
 		$ext = substr($filename, strrpos($filename, '.')+1);
@@ -271,6 +369,12 @@ class Files {
 		return $sanitized . '.' . $ext;
 	}
 	
+	/**
+	 * Validates if the given string is a valid filename
+	 * @param String $file The name to check
+	 * @throws FilesException
+	 * @return The cleaned / checked filename
+	 */
 	private static function _validateFilename($file) {
 		$file = filter_var($file, FILTER_SANITIZE_STRING);
 		

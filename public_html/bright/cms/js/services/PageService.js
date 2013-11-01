@@ -44,13 +44,5 @@ bright.service('PageService', function($http, $q) {
 			return deferred.promise;
 		}
 
-		
-//		setFiles: function(data) {
-//			files = data;
-//		},
-//		
-//		getFiles: function() {
-//			return files;
-//		}
 	};
 })

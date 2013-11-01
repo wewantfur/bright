@@ -37,37 +37,5 @@ class Administrators {
 		}
 		return $result;
 	}
-	
-	public static function getGroup($GID) {
-		$query = "SELECT *, fm.path as fm, pm.pageId as pm FROM be_groups bg
-				LEFT JOIN file_mountpoints fm ON fm.GID=bg.GID
-				LEFT JOIN pages_mountpoints pm ON pm.GID=bg.GID
-				WHERE bg.GID=?";
-		$result = Model::getInstance() -> getRows($query, array($GID), '\bright\core\model\vo\BEGroup');
-		$group = null;
-		if($result) {
-			$group = Utils::stripVO($result[0]);
-			foreach($result as $row) {
-				if($row -> pm) {
-					$group -> page_mountpoints[] = (int)$row -> pm;
-				}
-				if($row -> fm) {
-					$group -> file_mountpoints[] = $row -> fm;
-				}
-			}
-		}
-		
-		return $group;
-		
-	}
 
-	/**
-	 * Gets all backend usergroups
-	 */
-	public static function getGroups() {
-		$query = "SELECT * FROM be_groups";
-		$result = Model::getInstance() -> getRows($query, array(), '\bright\core\model\vo\BEGroup');
-		return $result;
-		
-	}
 }

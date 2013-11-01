@@ -16,28 +16,22 @@ bright.controller("templatesCtrl",
 //								showSelectionCheckbox: true,
 //								multiSelect: true,
 //								plugins: [new ngGridFlexibleHeightPlugin()],
-		$scope.columns = [{value:'icon', headerTemplate:$scope.hTemplate, label:'', width: '30px', template:'<i class="tpl-icon tpl-{{row.icon}}"></i>'},
+		$scope.columns = [{value:'icon', headerTemplate:$scope.hTemplate, label:'', width: '30px', template:'<i class="fa fa-{{row.icon}}"></i>'},
 			              {value:'templateId', headerTemplate:$scope.hTemplate, label:'#', width: '50px'},
 			              {value:'label', headerTemplate:$scope.hTemplate, label:'Label', width: '20%'},
 			              {value:'displaylabel', headerTemplate:$scope.hTemplate, label:'Display label', width: '20%'},
-			              {value:'type', headerTemplate:$scope.hTemplate, label:'Type', width: '30px', template:'<i class="tpl-icon tpl-type-{{row.type}}"></i>'}];
+			              {value:'type', headerTemplate:$scope.hTemplate, label:'Type', width: '30px', template:'<i class="fa fa-{{getType(row.type)}}"></i>'}];
 		
 		$scope.getType = function(type) {
 			console.log('Getting type', type);
 			switch(type) {
-				case 1:	return 'page_white'; 		// page
-				case 2:	return 'page_white_stack'; 	// list
-				case 3:	return 'date'; 				// event
-				case 4:	return 'brick';				// element
-				case 5:	return 'map';				// marker
+				case 1:	return 'file-text'; 		// page
+				case 2:	return 'th-list';		 	// list
+				case 3:	return 'calendar'; 			// event
+				case 4:	return 'puzzle-piece';		// element
+				case 5:	return 'map-marker';		// marker
 				case 6:	return 'user';				// user
 				
 			}
 		};
-		/*
-	const TYPE_PAGE = 1;
-	const TYPE_LIST = 2;
-	const TYPE_EVENT = 3;
-	const TYPE_MARKER = 4;
-	const TYPE_USER = 5;*/
 	}]);

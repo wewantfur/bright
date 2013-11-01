@@ -8,7 +8,7 @@
 				<li ng-class="{'tree-opened': item.isopen}">
 					<div ng-click="folderSelect()" ng-class="{selected: item.path==selectedFolder.path}">
 						<i ng-class="{'tree-opened': item.isopen, 'tree-closed': !item.isopen, hidden: !item.haschildren, 'tree-icon': true}" ng-click="folderOpenClose()" stop-event='click'></i>
-						<i ng-class="{'tpl-icon':true, 'tpl-drive': item.isroot, 'tpl-folder': !item.isroot}"></i> 
+						<i ng-class="{'fa':true, 'fa-hdd-o': item.isroot, 'fa-folder': !item.isroot}"></i> 
 						{{item.label}}
 					</div>
 				</li>
@@ -33,7 +33,7 @@
 				<ul ng-class="{'files': true, 'list-mode': displayMode == 'list', 'grid-mode': displayMode == 'grid'}">
 				
 					<li ng-repeat="file in files" ng-click="setFile($event)" ng-class="{active: file.selected == true}" title="{{file.label}}">
-						<div data-filename="/images/brightthumb/files/{{file.path}}" data-ext="{{file.extension}}" data-display-mode="{{displayMode}}" file-renderer><i class="tpl-icon" ></i></div> 
+						<div data-filename="/images/brightthumb/files/{{file.path}}" data-ext="{{file.extension}}" data-display-mode="{{displayMode}}" file-renderer><i class="fa fa-file" ></i></div> 
 						<span>{{file.label}}</span>
 					</li>
 					

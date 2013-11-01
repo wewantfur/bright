@@ -41,7 +41,7 @@ bright.service('AdministratorService', ['$q', '$http', 'ExceptionService', funct
 		getBEGroup: function(GID) {
 			var def = $q.defer();
 			
-			$http.post('/bright/json/core/auth/Administrators/getGroup', {arguments: [GID]}).success(function(data) {
+			$http.post('/bright/json/core/auth/Groups/getGroup', {arguments: [GID]}).success(function(data) {
 				if(data.status == 'OK') {
 					def.resolve(data.result);
 				}
@@ -58,7 +58,7 @@ bright.service('AdministratorService', ['$q', '$http', 'ExceptionService', funct
 			
 			if(typeof(groups) == 'undefined') {
 				
-				$http.get('/bright/json/core/auth/Administrators/getGroups').success(function(data) {
+				$http.get('/bright/json/core/auth/Groups/getGroups').success(function(data) {
 					if(data.status == 'OK') {
 						groups = data.result;
 						def.resolve(groups);
@@ -72,7 +72,10 @@ bright.service('AdministratorService', ['$q', '$http', 'ExceptionService', funct
 			
 			return def.promise;
 		},
-				
+		
+		setBEGroup: function(group) {
+			
+		}
 	
 	
 	};

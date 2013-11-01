@@ -1,13 +1,18 @@
 <h1 l10n-text="content.groups.edit"></h1>
+
+<button l10n-text="general.cancel" ng-click="cancel()"></button>
+<button l10n-text="general.save" ng-click="save()"></button>
+
 <label for="groupname" l10n-text="content.groups.name"></label>
 <input type="text" name="name" ng-model="group.name" />
 
 <label for="pagemountpoints" l10n-text="content.groups.pagemountpoints"></label>
 <ul>
-	<li ng-repeat="mp in group.page_mountpoints">{{mp}}</li>
+	<li ng-repeat="mp in group.page_mountpoints"><i class="fa fa-{{mp.icon}}"></i> {{mp.label}}</li>
 </ul>
 
 <label for="filemountpoints" l10n-text="content.groups.filemountpoints"></label>
 <ul>
-	<li ng-repeat="mp in group.file_mountpoints">{{mp}}</li>
+	<li ng-repeat="mp in group.file_mountpoints"><i class="fa fa-hdd-o"></i> {{mp}}</li>
 </ul>
+<button l10n-text="group.add_file_mountpoint" ng-click="addFileMountpoint()">Add</button>
