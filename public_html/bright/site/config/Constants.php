@@ -16,7 +16,7 @@ class Constants extends \bright\core\config\Constants {
 	protected $DB_HOST = 'localhost';
 // 	protected $DB_PORT = '8889';
 	protected $DB_USER = 'root';
-	protected $DB_PASSWORD = 'Bl03m51ng3l';
+	protected $DB_PASSWORD = 'Bl03m51ng3l222';
 	protected $DB_DATABASE = 'bright';
 
 	protected $LIVESERVER = false;

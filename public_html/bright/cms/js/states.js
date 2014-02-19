@@ -22,6 +22,12 @@ angular.module('states', []).config(
 						controller : 'templatesCtrl'
 					})
 
+					.state('template', {
+						url : '/templates/{templateId}',
+						templateUrl : 'partials/template.html',
+						controller : 'templateCtrl'
+					})
+
 					.state('administrators', {
 						url : '/administrators',
 						templateUrl : 'partials/administrators.html',

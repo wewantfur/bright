@@ -2,8 +2,12 @@
 	use bright\core\auth\Authorization;
 
 	require_once(dirname(__FILE__) . '/../core/Bright.php');
-	
-	if(!Authorization::isBEAuth()) {
+        
+        if (isset($_GET['setup'])) {
+            \bright\core\config\Setup::SetupBright();
+        }
+
+        if(!Authorization::isBEAuth()) {
 		header("Location: login.php");
 		exit;
 	}
@@ -48,7 +52,7 @@
 			<li class="right"><span l10n-text="general.loggedinas:administrator.name">Logged in as {{administrator.name}}</span>
 				<ul>
 					<li l10n-text="general.myprofile">My profile</li>
-					<li l10n-text="general.logout">Logout</li>
+                                        <li><a href="logout.php" l10n-text="general.logout">Logout</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -65,7 +69,7 @@
 	</div>
 	<footer>&copy; 2013 Fur VOF</footer>
 	
-	<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
 	<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
 	<script src="../i18n/l10n-module.js.php"></script>

@@ -3,6 +3,8 @@
 /**
  * Features context.
  */
+use bright\core\files\Folders;
+
 use bright\core\exceptions\FilesException;
 
 use bright\core\files\Files;
@@ -45,7 +47,7 @@ class FilesContext extends BehatContext
 		$p = '';
 		foreach($paths as $path) {
 			$p .= $path;
-			Files::getFolders($p);
+			Folders::getFolders($p);
 		}
 		$files = Files::getFiles($p);
 		foreach($files as $file) {

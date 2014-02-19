@@ -48,6 +48,9 @@ class Pages extends Content {
 	 */
 	public static function getPages($astree = false) {
 		$result = Model::getInstance() -> getRow('SELECT lft, rgt FROM pages WHERE lft=1');
+		if(!$result)
+			return null;
+		
 		$sql = "SELECT p.*, c.*, t.icon, (SELECT count(pageId) FROM pages pc WHERE parentId=p.pageId) AS numchildren
 				FROM pages p
 				INNER JOIN content c ON c.contentId = p.contentId

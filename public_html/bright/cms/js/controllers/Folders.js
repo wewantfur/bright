@@ -2,10 +2,10 @@ bright = angular.module('bright');
 /**
  * @todo: Check if this thing works without a $modalInstance
  */
-bright.controller("foldersCtrl", [ '$scope', '$modalInstance', 'FileService',
-	function($scope, $modalInstance, FileService) {
+bright.controller("foldersCtrl", [ '$scope', '$modalInstance', 'FolderService',
+	function($scope, $modalInstance, FolderService) {
 		$scope.folders = [];
-		FileService.getAllFolders().then(function(folders) {
+		FolderService.getAllFolders().then(function(folders) {
 			$scope.folders = folders;
 			$scope.folderSelect($scope.folders[0]);
 		});

@@ -1,13 +1,13 @@
 bright = angular.module('bright');
 bright.controller("filesCtrl", 
-	['$scope', '$http', '$state', 'FileService',
-	function($scope, $http, $state, FileService) {
+	['$scope', '$http', '$state', 'FolderService',
+	function($scope, $http, $state, FolderService) {
 		$scope.uploadoptions = {url: '/bright/json/core/files/Files/upload', autoUpload: true};
 		$scope.displayMode = 'list';
 		
 //		$('.divider').divider({widths: [25,75]});
 		
-		FileService.getFolders().then(function(folders) {
+		FolderService.getFolders().then(function(folders) {
 			$scope.folders = folders;
 //			$scope.selectedFolder = folders[0];
 			$scope.folderSelect(folders[0]);
@@ -26,7 +26,7 @@ bright.controller("filesCtrl",
 				$http.post('/bright/json/core/files/Files/getFolders', {arguments:[item.path]}).success(function(data) {
 					if(data.status == 'OK') {
 						item.children = data.result;
-						FileService.setFolders($scope.folders);
+						FolderService.setFolders($scope.folders);
 					}
 				});
 			}

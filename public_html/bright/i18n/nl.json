@@ -101,6 +101,9 @@
 		"Exception": {
 			"1002": "This method is not implemented yet (%1)"
 		},
+                "AuthException": {
+                    "1009" : "Ongeldige gebruikersnaam of wachtwoord"
+                },
 		"FilesException": {
 			"4001": "Kan de opgegeven map niet vinden (%1)",
 			"4002": "Kan het opgegeven bestand niet vinden (%1)",

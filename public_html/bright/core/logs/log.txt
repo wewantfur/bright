@@ -72440,3 +72440,89 @@ skyline-liwadden-3
 skyline-liwadden-2
 jpg
 skyline-liwadden-3
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '1',
+       'index' => 0,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '1',
+       'index' => 1,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '1',
+       'index' => 2,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+  ),
+))
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '2',
+       'index' => 0,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '2',
+       'index' => 1,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '2',
+       'index' => 2,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+  ),
+))
