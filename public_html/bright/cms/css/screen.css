@@ -325,3 +325,46 @@ div.modal {
 	display: inline-block;
 	margin-right: 20px;
 }
+
+.tab-pane {
+	display:none;
+}
+
+.tab-pane.active {
+	border: 1px solid black;
+	display: block;
+}
+.nav-tabs {
+	margin: 0;
+}
+
+.nav-tabs li {
+	display: inline;
+	list-style-type: none;
+	padding: 5px;
+	margin: 0 2px;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+.nav-tabs li.active {
+	font-weight: bold;
+}
+
+.icon-select-list li {
+	display: block;
+	float: left;
+	width: 30px;
+	height: 30px;
+	list-style-type: none;
+	padding: 5px;
+	margin: 4px;
+	border: 1px solid gray;
+	text-align: center;
+	cursor: pointer;
+}
+
+.icon-select-list li.active,
+.icon-select-list li:hover{
+	background: silver;
+}

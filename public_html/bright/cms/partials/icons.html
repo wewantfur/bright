@@ -1,0 +1,13 @@
+<div class="icons">
+	<h1>Select icon</h1>
+	<div class="panel"> 
+				
+		<ul class="icon-select-list">
+			<li ng-repeat="icon in icons" ng-click="setSelectedIcon(icon)" ng-class="{'active':$parent.selectedIcon == icon}"><i class="fa fa-{{icon}}"></i></li>
+		</ul>
+	
+	</div>
+	<button ng-click="cancel()">Cancel</button>
+	<button ng-click="ok()">Select</button>
+	
+</div>

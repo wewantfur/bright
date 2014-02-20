@@ -1,0 +1,34 @@
+<h1 l10n-text="modules.templates">Template</h1>
+
+<div class="buttons">
+	<button l10n-text="general.cancel" ng-click="cancel()">Cancel</button>
+	<button l10n-text="general.saveas">Save as</button>
+	<button l10n-text="general.save" ng-click="save()">Save</button>
+</div>
+
+<div>
+	<tabs>
+		<pane title="Settings">
+			<label><span l10n-text="content.label">Label</span> <input type="text" required ng-model="template.label"/></label>
+			<label><span l10n-text="content.displaylabel">Displaylabel</span> <input type="text" required ng-model="template.displaylabel"/></label>
+			<label>
+				<span l10n-text="templates.templatetype">Type</span> 
+				<select required 
+					ng-model="template.templateType" 
+					ng-options="type.label for type in templateTypes"
+					ng-change="setType()" >
+				</select>
+			</label>
+			<label><span l10n-text="content.icon">Icon</span> 
+					<input type="hidden" ng-model="template.icon"/>
+					<i class="fa fa-{{template.icon}}"></i> <button l10n-text="general.edit" ng-click="selectIcon()"></button>
+			</label>
+		
+		</pane>
+		
+		<pane title="Fields">
+		
+		</pane>
+	</tabs>
+	
+</div>

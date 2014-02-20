@@ -8,6 +8,7 @@
 			"cancel":			"Annuleren",
 			"browse":			"Bladeren",
 			"loggedinas":		"Ingelogd als %1",
+			"edit":				"Bewerken",
 			"errors": 
 				{
 					"general": "Er is iets fout gegaan, probeer het opnieuw",
@@ -67,7 +68,18 @@
 			"filemountpoints": "Instap punt media beheer"
 		}
 	},
-		
+	
+	"templates": {
+		"templatetype": "Soort template",
+		"templatetype1": "Pagina",
+		"templatetype2": "Lijst item",
+		"templatetype3": "Evenement",
+		"templatetype4": "Element",
+		"templatetype5": "Locatie",
+		"templatetype6": "Gebruiker",
+		"templatetype7": "Mailing"
+	},
+			
 	"lists": {
 		"headers": 
 			{

@@ -67,10 +67,10 @@
 			  $stateParams = {{$stateParams}}
 		</pre>
 	</div>
-	<footer>&copy; 2013 Fur VOF</footer>
+	<footer>&copy; <?php echo date('Y')?> Fur VOF</footer>
 	
-	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
+	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
 	<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
 	<script src="../i18n/l10n-module.js.php"></script>
 
@@ -84,13 +84,14 @@
 		$folder = dirname(__FILE__) . '/js';
 		
 		$objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($folder,FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
+		$ts = time();
 		foreach($objects as $name => $object){
 			if(!$object -> isDir()) {
 				if(substr($name, -3, 3) === '.js') {
 					$n = substr($name, strlen($folder) -2);
 					$n = str_replace('\\', '/', $n);
 					if(!in_array($n, $preload))
-						echo "<script type='text/javascript' src='$n'></script>\r\n\t";
+						echo "<script type='text/javascript' src='$n?v=$ts'></script>\r\n\t";
 				}
 			}
 		}
