@@ -34,9 +34,18 @@ function($scope, $http, $state, TemplateService, l10n, $modal) {
 		});
 	});
 	
-	$scope.onFieldDrop = function(a,b,c,d,e) {
-		$scope.template.fields.move(a, b);
-		console.log($scope.template.fields);
+	$scope.onFieldDrop = function(oldIndex, newIndex) {
+		$scope.template.fields.move(oldIndex, newIndex);
+	};
+	
+	$scope.onAddFieldClick = function() {
+		$scope.template.fields.push({label:'',displaylabel:''});
+		console.log('addfield',$scope.template.fields);
+	};
+	
+	$scope.onRemoveFieldClick = function(field) {
+//		console.log(field, $scope, this);
+		$scope.template.fields.splice(this.$index, 1);
 	};
     
     $scope.selectIcon = function() {

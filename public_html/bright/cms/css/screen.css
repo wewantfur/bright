@@ -1,3 +1,18 @@
+
+@-moz-keyframes fadeOut {
+    from {opacity:1;}
+    to {opacity:0;}
+}
+
+@-webkit-keyframes fadeOut {
+    from {opacity:1;}
+    to {opacity:0;}
+}
+@keyframes fadeOut {
+    from {opacity:1;}
+    to {opacity:0;}
+}
+
 * {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -414,8 +429,15 @@ ul.no-bullets li {
 }
 
 [draggable],
-[draggable] label {
+[draggable] * {
 	cursor: move;
+}
+[draggable] a,
+[draggable] i,
+[draggable] textarea,
+[draggable] select,
+[draggable] input {
+	cursor: auto;
 }
 
 ul[droppable] > li[draggable].drag {
