@@ -58,5 +58,7 @@ class Setup {
     	$tables[] = "CREATE TABLE IF NOT EXISTS `pages_mountpoints` (`GID` int(11) NOT NULL,`pageId` int(11) NOT NULL,KEY `GID` (`GID`),KEY `pageId` (`pageId`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
     	$tables[] = "CREATE TABLE IF NOT EXISTS `pages` (`pageId` int(11) NOT NULL AUTO_INCREMENT,`contentId` int(11) DEFAULT NULL,`parentId` int(11) DEFAULT NULL,`label` varchar(255) DEFAULT NULL,`publicationdate` datetime NOT NULL,`expirationdate` datetime NOT NULL,`alwayspublished` tinyint(1) NOT NULL DEFAULT '1',`showinnavigation` int(11) NOT NULL DEFAULT '1',`index` int(11) NOT NULL DEFAULT '0',`felogin` tinyint(1) DEFAULT NULL,`lft` int(11) NOT NULL,`rgt` int(11) NOT NULL,PRIMARY KEY (`pageId`),UNIQUE KEY `pageId_UNIQUE` (`pageId`),UNIQUE KEY `contentId` (`contentId`),KEY `label` (`label`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
     	$tables[] = "CREATE TABLE IF NOT EXISTS `parsers` (`parserId` int(11) NOT NULL AUTO_INCREMENT, `label` varchar(20) NOT NULL, PRIMARY KEY (`parserId`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
+    	$tables[] = "CREATE TABLE IF NOT EXISTS `plugins` (`id` int(11) NOT NULL AUTO_INCREMENT, `label` varchar(20) NOT NULL, `displaylabel` varchar(100) NOT NULL, `core` tinyint(1) NOT NULL DEFAULT '0', `enabled` tinyint(1) NOT NULL DEFAULT '0', `version` varchar(100) NOT NULL, PRIMARY KEY (`id`), UNIQUE KEY `label` (`label`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
+    	
     }
 }

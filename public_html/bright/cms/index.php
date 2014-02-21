@@ -19,6 +19,7 @@
 	<meta name='copyright' content='copyright Fur' /> 
 	<meta name="author" content="www.wewantfur.com" />
 	<link href="http://cdn.wewantfur.com/basicfur/css/basicfur-v1-min.css" rel="stylesheet" />
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 <!-- 	<link href="css/screen.css" rel="stylesheet"  media="screen" /> -->
 <!-- 	<link href="css/template-icons.css" rel="stylesheet"  media="screen" /> -->
 <!-- 	<link href="css/jquery.divider.css" rel="stylesheet"  media="screen" /> -->
@@ -38,24 +39,27 @@
 	?>
 	<title>Bright</title>
 </head>
-<body ng-cloak ng-controller="brightCtrl">
-	<nav>
-		<ul>
-			<li ng-class="{ active: $state.includes('pages') }"><a href="#/pages" l10n-text="modules.pages">Pages</a></li>
-<!-- 			<li ng-class="{ active: $state.includes('events') }"><a href="#/events" l10n-text="modules.events">Events</a></li> -->
+<body class="bright" ng-cloak ng-controller="brightCtrl">
+	<nav class="main-nav">
+		<h1>Bright CMS</h1>
+<!--  			<li ng-class="{ active: $state.includes('events') }"><a href="#/events" l10n-text="modules.events">Events</a></li> -->
 <!-- 			<li ng-class="{ active: $state.includes('maps') }"><a href="#/maps" l10n-text="modules.maps">Maps</a></li> -->
 <!-- 			<li ng-class="{ active: $state.includes('users') }"><a href="#/users" l10n-text="modules.w">Users</a></li> -->
+<!-- 			<li ng-class="{ active: $state.includes('settings') }"><a href="#/settings" l10n-text="modules.settings">Settings</a></li> -->
+		<ul>
+			<li ng-class="{ active: $state.includes('pages') }"><a href="#/pages" l10n-text="modules.pages">Pages</a></li>
 			<li ng-class="{ active: $state.includes('files') }"><a href="#/files" l10n-text="modules.files">Files</a></li>
 			<li ng-class="{ active: $state.includes('templates') }"><a href="#/templates" l10n-text="modules.templates">Templates</a></li>
 			<li ng-class="{ active: $state.includes('administrators') }"><a href="#/administrators" l10n-text="modules.administrators">Administrators</a></li>
-<!-- 			<li ng-class="{ active: $state.includes('settings') }"><a href="#/settings" l10n-text="modules.settings">Settings</a></li> -->
-			<li class="right"><span l10n-text="general.loggedinas:administrator.name">Logged in as {{administrator.name}}</span>
+			<li class="right">
+				<span l10n-text="general.loggedinas:administrator.name">Logged in as {{administrator.name}}</span>
 				<ul>
 					<li l10n-text="general.myprofile">My profile</li>
-                                        <li><a href="logout.php" l10n-text="general.logout">Logout</a></li>
+					<li><a href="logout.php" l10n-text="general.logout">Logout</a></li>
 				</ul>
 			</li>
 		</ul>
+		<footer>&copy; <?php echo date('Y')?> Fur VOF</footer>
 	</nav>
 	<div id="wrapper">
 		<div ui-view>
@@ -67,7 +71,6 @@
 			  $stateParams = {{$stateParams}}
 		</pre>
 	</div>
-	<footer>&copy; <?php echo date('Y')?> Fur VOF</footer>
 	
 	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>

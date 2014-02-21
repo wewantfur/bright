@@ -8,6 +8,17 @@ bright.service('TemplateService', function($q, $http) {
 
 		},
 		
+		getFieldTypes: function() {
+			var def = $q.defer();
+			$http.post('/bright/json/core/content/Fields/getFieldTypes').success(function(data) {
+				if(data.status == 'OK') {
+					def.resolve(data.result);
+				}
+			});
+			return def.promise;
+			
+		},
+		
 		getTemplate: function(id) {
 			var def = $q.defer();
 			$http.post('/bright/json/core/content/Templates/getTemplate', {'arguments':[id]}).success(function(data) {

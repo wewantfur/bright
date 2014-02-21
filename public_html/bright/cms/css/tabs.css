@@ -1,0 +1,24 @@
+.tab-pane {
+	display:none;
+	padding-top: 30px;
+}
+
+.tab-pane.active {
+	display: block;
+}
+.nav-tabs {
+	margin: 0;
+}
+
+.nav-tabs li {
+	display: inline;
+	list-style-type: none;
+	padding: 5px;
+	margin: 0 2px;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+.nav-tabs li.active {
+	font-weight: bold;
+}

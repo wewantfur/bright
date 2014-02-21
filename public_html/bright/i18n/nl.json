@@ -77,7 +77,8 @@
 		"templatetype4": "Element",
 		"templatetype5": "Locatie",
 		"templatetype6": "Gebruiker",
-		"templatetype7": "Mailing"
+		"templatetype7": "Mailing",
+		"fieldtype": "Soort veld"
 	},
 			
 	"lists": {

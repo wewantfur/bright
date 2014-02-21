@@ -1,6 +1,7 @@
 <div class="pages">
 	<div class="divider">
-		<div class="panel"> 
+		<div class="panel dimmed-panel"> 
+			<h2>{{settings.sitename}}</h2>
 			<ul class="tree folders unselectable" ng-tree="pagetree" >
 				<li ng-class="{'tree-opened': item.isopen}">
 					<div ng-click="pageSelect()" ng-class="{selected: item.pageId==selectedPage.pageId}">

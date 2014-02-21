@@ -1,10 +1,12 @@
-<h1 l10n-text="modules.templates">Templates</h1>
-
-<div class="buttons">
-    <button ng-click="editTemplate()">New template</button>
-</div>
-
-<div class="list">
-	<grid dataprovider="templates" columns="columns" on-double-click="onGridDoubleClick(evt)"></grid>
+<div class="panel">
+	<h2 l10n-text="modules.templates">Templates</h2>
 	
+	<div class="buttons">
+	    <button ng-click="editTemplate()">New template</button>
+	</div>
+	
+	<div class="list">
+		<grid dataprovider="templates" columns="columns" on-double-click="onGridDoubleClick(evt)"></grid>
+		
+	</div>
 </div>
