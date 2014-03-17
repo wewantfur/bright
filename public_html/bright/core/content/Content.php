@@ -120,9 +120,9 @@ class Content {
 									$i = 0;
 									foreach($content -> content -> $label -> $lang as &$listitem) {
 										$listitem -> parentId = $content -> contentId;
-										$listitem -> index = $i++;
+										$listitem -> idx = $i++;
 										self::setContent($listitem);
-										Model::getInstance() -> updateRow("INSERT INTO plugin_list (contentId, parentId, index) VALUES (?,?,?)", array($listitem -> contentId, $listitem -> parentId, $listitem -> index));
+										Model::getInstance() -> updateRow("INSERT INTO plugin_list (contentId, parentId, idx) VALUES (?,?,?)", array($listitem -> contentId, $listitem -> parentId, $listitem -> idx));
 									}
 								default:
 									$item = $content -> content -> $label -> $lang;
@@ -145,7 +145,7 @@ class Content {
 		switch($type) {
 			case Templates::TYPE_PAGE:
 				$fields = array('pageId' => 'i', 'contentId' => 'i','parentId' => 'i','label' => 's','publicationdate' => 't','expirationdate' => 't',
-								'alwayspublished' => 'i','showinnavigation' => 'i','index' => 'i','locked' => 'i', 'group' => 'i','chmod' => 'i', 'felogin'=>'s');
+								'alwayspublished' => 'i','showinnavigation' => 'i','idx' => 'i','locked' => 'i', 'group' => 'i','chmod' => 'i', 'felogin'=>'s');
 				$table = 'pages';
 				$identifier = 'pageId';
 				break;

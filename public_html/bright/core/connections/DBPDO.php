@@ -1,6 +1,8 @@
 <?php
 namespace bright\core\connections;
 
+use bright\core\utils\Logger;
+
 use bright\core\exceptions\DatabaseException;
 
 use bright\core\exceptions\Exception;
@@ -26,6 +28,7 @@ class DBPDO implements IDB {
 			$this -> db -> setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			$this -> db -> setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 		} catch (\PDOException $e) {
+			Logger::log("Logging!", $e -> getMessage());
 			throw new DatabaseException($e->getMessage(), DatabaseException::DB_ERROR);
 		}
 		

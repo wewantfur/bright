@@ -19,8 +19,8 @@ class Pages extends Content {
 		$sql = "SELECT p.*, (SELECT count(pageId) FROM pages pc WHERE parentId=p.pageId) AS numchildren, t.icon 
 				FROM pages p 
 				LEFT JOIN templates t ON p.templateId = t.templateId
-				WHERE parentId=$parentId";
-		return Model::getInstance() -> getRows($sql, array($parentId), '\bright\core\model\vo\Page');//$this -> db -> getRows($sql);
+				WHERE parentId=?";
+		return Model::getInstance() -> getRows($sql, array($parentId), '\bright\core\model\vo\Page');
 	}
 	
 	public static function getHomepage() {
@@ -147,7 +147,7 @@ class Pages extends Content {
 		self::setContent($page); 
 		
 		$fields = array('pageId' => 'i','contentId' => 'i','parentId' => 'i','label' => 's','publicationdate' => 's','expirationdate' => 's', 
-						'alwayspublished' => 'i','showinnavigation' => 'i','index' => 'i', 'felogin'=>'s');
+						'alwayspublished' => 'i','showinnavigation' => 'i','idx' => 'i', 'felogin'=>'s');
 		$keys = array_keys($fields);
 		// Add backticks to prevent reserved-word errors
 		array_walk($keys, array('\bright\core\content\Content', '_addBackticks'));

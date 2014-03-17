@@ -54,25 +54,35 @@ class Templates {
 	 * Returns all the templates
 	 */
 	public static function getTemplates() {
-		$sql = "SELECT * FROM templates ORDER BY `displaylabel`";
+		$sql = "SELECT * FROM templates ORDER BY displaylabel";
 		return Model::getInstance() -> getRows($sql, null, '\bright\core\model\vo\Template');
 	}
 	
+	/**
+	 * Gets a template of the given contentitem
+	 * @param int $contentId The id of the contentitem
+	 * @return \bright\core\model\vo\Template
+	 */
 	public static function getTemplateByContentId($contentId) {
 		$sql = "SELECT t.*,
-				tf.label as `fieldlabel`,
-				tf.displaylabel as `fielddisplaylabel`,
-				tf.`index`,
+				tf.label as fieldlabel,
+				tf.displaylabel as fielddisplaylabel,
+				tf.idx,
 				tf.fieldtype,
 				tf.data
 				FROM templates t
 				LEFT JOIN templatefields tf ON t.templateId = tf.templateId
 				INNER JOIN content c ON c.templateId=t.templateId AND c.contentId=?
-				ORDER BY tf.`index`";
+				ORDER BY tf.idx";
 		$fields = Model::getInstance() -> getRows($sql, array($contentId), '\bright\core\model\vo\Template');
 		return self::_createTemplate($fields);
 	}
 	
+	/**
+	 * Gets a template by it's label
+	 * @param string $label The label of the template
+	 * @return \bright\core\model\vo\Template
+	 */
 	public static function getTemplateByLabel($label) {
 		return self::_getTemplate($label, 'label');
 	}
@@ -114,7 +124,7 @@ class Templates {
 				$i=0;
 				foreach($template -> fields as &$tfield) {
 					$tfield -> templateId = $id;
-					$tfield -> index = $i++;
+					$tfield -> idx = $i++;
 				}
 				Utils::log($template);
 				Model::getInstance() -> updateObject('templatefields', $template -> fields, 'fieldId');
@@ -133,8 +143,8 @@ class Templates {
 					$template -> fields[] = (object) array('label' => 'title', 'displaylabel' => 'Title', 'type' => 'string', 'data' => (object) array('required' => true));
 			}
 				
-			$tnames = array('templateId','label','displaylabel','icon','type','parser','enabled','maxchildren','allowedparents','allowedchildren','groups','index');
-			$fnames = array('fieldlabel', 'fielddisplaylabel','index','fieldtype','data');
+			$tnames = array('templateId','label','displaylabel','icon','type','parser','enabled','maxchildren','allowedparents','allowedchildren','groups','idx');
+			$fnames = array('fieldlabel', 'fielddisplaylabel','idx','fieldtype','data');
 				
 			foreach($fnames as $name)
 				unset($template -> $name);
@@ -187,7 +197,7 @@ class Templates {
 			FROM templates t
 			LEFT JOIN templatefields tf ON tf.templateId = t.templateId
 			WHERE t.$field=?
-			ORDER BY tf.`index` ASC";
+			ORDER BY tf.idx ASC";
 			$results =  Model::getInstance() -> getRows($sql, array($identifier), '\bright\core\model\vo\Template');
 			if($results) {
 				$tpl = Utils::stripVO($results[0]);

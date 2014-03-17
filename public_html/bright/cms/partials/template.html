@@ -34,19 +34,22 @@
 					<button l10n-text="templates.addfield" ng-click="onAddFieldClick()">Add field</button>
 				</div>
 				<img src="/bright/cms/img/510.jpg" width="100" id="dummy" />
-				<ul class="alternating no-bullets" droppable drop="onFieldDrop" id="template-fields-list">
-					<li ng-repeat="field in template.fields" draggable id="template-field-{{field.id}}" data-displaylabel="{field.displaylabel}">
+				<ul class="alternating no-bullets template-fields-list" droppable drop="onFieldDrop" id="template-fields-list">
+					<li ng-repeat="field in template.fields" draggable id="template-field-{{field.id}}" data-displaylabel="{field.displaylabel}" class="clearfix">
 						<i class="pull-right fa fa-times" ng-click="onRemoveFieldClick(field)"></i>
-						<label><span l10n-text="content.label">Label</span> <input type="text" required ng-model="field.label"/></label>
-						<label><span l10n-text="content.displaylabel">Displaylabel</span> <input type="text" required ng-model="field.displaylabel"/></label>
-						<label>
-							<span l10n-text="templates.fieldtype">Type</span>
-							<select required 
-								ng-model="field.field" 
-								ng-options="fieldtype.displaylabel for fieldtype in fieldtypes"
-								ng-change="setFieldType()" >
-							</select>
-						</label>
+						<div class="plugin-properties">
+							<label><span l10n-text="content.label">Label</span> <input type="text" required ng-model="field.label"/></label>
+							<label><span l10n-text="content.displaylabel">Displaylabel</span> <input type="text" required ng-model="field.displaylabel"/></label>
+							<label>
+								<span l10n-text="templates.fieldtype">Type</span>
+								<select required 
+									ng-model="field.field" 
+									ng-options="fieldtype.displaylabel for fieldtype in fieldtypes"
+									ng-change="setFieldType()" >
+								</select>
+							</label>
+						</div>
+						<div plugin-settings field="field" class="plugin-settings"></div>
 					</li>
 				</ul>
 				<div class="buttons pull-right">

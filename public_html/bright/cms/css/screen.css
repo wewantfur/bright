@@ -444,3 +444,20 @@ ul[droppable] > li[draggable].drag {
 	border: 1px dashed #333;
 
 }
+
+.plugin-properties {
+	width: 50%;
+	float: left;
+	margin: 20px;
+	padding: 20px;
+}
+
+
+.plugin-settings {
+	border: 1px solid #eee;
+	margin: 20px;
+	padding: 20px;
+	background: #fafafa;
+	float: right;
+	width: 35%;
+}

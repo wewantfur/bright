@@ -6,7 +6,7 @@ Feature: authenticate
   
 Scenario: Login as an existing user
 	Given I am not logged in
-	When I login with "vz@uitloper.nu" and "testpw"
+	When I login with "test@wewantfur.com" and "testpassword"
 	Then I should be logged in
 	
 Scenario: Login as an unexisting user

@@ -72526,3 +72526,474 @@ bright\core\model\vo\Template::__set_state(array(
     )),
   ),
 ))
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '2',
+       'index' => 0,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '2',
+       'index' => 1,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '2',
+       'index' => 2,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+  ),
+))
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '3',
+       'index' => 0,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '3',
+       'index' => 1,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '3',
+       'index' => 2,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+  ),
+))
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '4',
+       'index' => 0,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '4',
+       'index' => 1,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '4',
+       'index' => 2,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+  ),
+))
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '2',
+       'index' => 0,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '2',
+       'index' => 1,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '2',
+       'index' => 2,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+  ),
+))
+42S22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'index' in 'field list'
+INSERT INTO templatefields 
+				(`label`, `templateId`, `index`, `displaylabel`, `fieldtype`, `data`)
+				VALUES (?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?)
+				ON DUPLICATE KEY UPDATE `label` = VALUES(`label`),
+`templateId` = VALUES(`templateId`),
+`index` = VALUES(`index`),
+`displaylabel` = VALUES(`displaylabel`),
+`fieldtype` = VALUES(`fieldtype`),
+`data` = VALUES(`data`),
+`fieldId` = LAST_INSERT_ID(`fieldId`)
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '6',
+       'index' => 0,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '6',
+       'index' => 1,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '6',
+       'index' => 2,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+    )),
+  ),
+))
+42S22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'index' in 'field list'
+INSERT INTO templatefields 
+				(`label`, `templateId`, `index`, `displaylabel`, `fieldtype`, `data`)
+				VALUES (?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?)
+				ON DUPLICATE KEY UPDATE `label` = VALUES(`label`),
+`templateId` = VALUES(`templateId`),
+`index` = VALUES(`index`),
+`displaylabel` = VALUES(`displaylabel`),
+`fieldtype` = VALUES(`fieldtype`),
+`data` = VALUES(`data`),
+`fieldId` = LAST_INSERT_ID(`fieldId`)
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 0,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 1,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 2,
+    )),
+  ),
+))
+42S22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'index' in 'field list'
+INSERT INTO templatefields 
+				(`label`, `templateId`, `index`, `displaylabel`, `fieldtype`, `data`)
+				VALUES (?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?)
+				ON DUPLICATE KEY UPDATE `label` = VALUES(`label`),
+`templateId` = VALUES(`templateId`),
+`index` = VALUES(`index`),
+`displaylabel` = VALUES(`displaylabel`),
+`fieldtype` = VALUES(`fieldtype`),
+`data` = VALUES(`data`),
+`fieldId` = LAST_INSERT_ID(`fieldId`)
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 0,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 1,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 2,
+    )),
+  ),
+))
+42S22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'index' in 'field list'
+INSERT INTO templatefields 
+				(`label`, `templateId`, `index`, `displaylabel`, `fieldtype`, `data`)
+				VALUES (?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?)
+				ON DUPLICATE KEY UPDATE `label` = VALUES(`label`),
+`templateId` = VALUES(`templateId`),
+`index` = VALUES(`index`),
+`displaylabel` = VALUES(`displaylabel`),
+`fieldtype` = VALUES(`fieldtype`),
+`data` = VALUES(`data`),
+`fieldId` = LAST_INSERT_ID(`fieldId`)
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 0,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 1,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 2,
+    )),
+  ),
+))
+42S22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'index' in 'field list'
+INSERT INTO templatefields 
+				(`label`, `templateId`, `index`, `displaylabel`, `fieldtype`, `data`)
+				VALUES (?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?)
+				ON DUPLICATE KEY UPDATE `label` = VALUES(`label`),
+`templateId` = VALUES(`templateId`),
+`index` = VALUES(`index`),
+`displaylabel` = VALUES(`displaylabel`),
+`fieldtype` = VALUES(`fieldtype`),
+`data` = VALUES(`data`),
+`fieldId` = LAST_INSERT_ID(`fieldId`)
+bright\core\model\vo\Template::__set_state(array(
+   'templateId' => 0,
+   'icon' => 'page_white_text',
+   'type' => 1,
+   'parser' => 1,
+   'enabled' => true,
+   'maxchildren' => -1,
+   'allowedparents' => NULL,
+   'allowedchildren' => NULL,
+   'groups' => NULL,
+   'label' => 'page',
+   'displaylabel' => 'Page',
+   'fields' => 
+  array (
+    0 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'header',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Header',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 0,
+    )),
+    1 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'body',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Body',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 1,
+    )),
+    2 => 
+    bright\core\model\vo\TemplateField::__set_state(array(
+       'label' => 'footer',
+       'templateId' => '6',
+       'index' => NULL,
+       'displaylabel' => 'Footer',
+       'fieldtype' => 'string',
+       'data' => NULL,
+       'idx' => 2,
+    )),
+  ),
+))
+42S22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'index' in 'field list'
+INSERT INTO templatefields 
+				(`label`, `templateId`, `index`, `displaylabel`, `fieldtype`, `data`)
+				VALUES (?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?)
+				ON DUPLICATE KEY UPDATE `label` = VALUES(`label`),
+`templateId` = VALUES(`templateId`),
+`index` = VALUES(`index`),
+`displaylabel` = VALUES(`displaylabel`),
+`fieldtype` = VALUES(`fieldtype`),
+`data` = VALUES(`data`),
+`fieldId` = LAST_INSERT_ID(`fieldId`)

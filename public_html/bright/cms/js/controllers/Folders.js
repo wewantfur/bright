@@ -18,7 +18,6 @@ bright.controller("foldersCtrl", [ '$scope', '$modalInstance', 'FolderService',
 			}
 			
 		};
-		
 
 		$scope.folderOpenClose = function() {
 			var item = this.item;

@@ -5,19 +5,18 @@ bright.controller("filesCtrl",
 		$scope.uploadoptions = {url: '/bright/json/core/files/Files/upload', autoUpload: true};
 		$scope.displayMode = 'list';
 		
-//		$('.divider').divider({widths: [25,75]});
-		
+		/**
+		 * Gets the folders from the backend and selects the first folder
+		 */
 		FolderService.getFolders().then(function(folders) {
 			$scope.folders = folders;
-//			$scope.selectedFolder = folders[0];
 			$scope.folderSelect(folders[0]);
 		});
 		
 		$scope.$on('fileuploadstop', function(e, f) {
-			console.log('fileuploadstop', e, f);
 			// Trigger get files
 			$scope.folderSelect($scope.selectedFolder);
-		})
+		});
 		
 		$scope.folderOpenClose = function() {
 			var item = this.item;
@@ -48,7 +47,7 @@ bright.controller("filesCtrl",
 		$scope.setDisplayMode = function(val) {
 			console.log(val);
 			$scope.displayMode = val;
-		}
+		};
 		
 		setTimeout(function() {
 			$('.divider').divider({widths: [25,75]});

@@ -8,6 +8,7 @@ label > span {
 	width: 200px;
 }
 
+input[type="number"],
 input[type="text"],
 input[type="email"] {
 	min-width: 300px;

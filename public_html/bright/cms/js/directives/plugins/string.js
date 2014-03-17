@@ -56,4 +56,13 @@ bright.directive('string',  function() {
 			}
 		}
 	};
+}).directive('stringSettings', function() {
+	return { 
+		templateUrl: 'partials/plugins/string-settings.html',
+		restrict: 'A',
+		link: function($scope, elem, attr, ctrl) {
+			
+		}
+	};
+	
 });

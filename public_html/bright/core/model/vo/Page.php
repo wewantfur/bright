@@ -7,7 +7,7 @@ class Page extends Content {
 		parent::__construct();
 		
 		$this -> pageId = (int) $this -> pageId;
-		$this -> index = (int) $this -> index;
+		$this -> idx = (int) $this -> idx;
 		$this -> parentId = (int) $this -> parentId;
 		$this -> lft = (int) $this -> lft;
 		$this -> rgt = (int) $this -> rgt;
@@ -20,7 +20,7 @@ class Page extends Content {
 	public $alwayspublished;
 
 	public $showinnavigation;
-	public $index;
+	public $idx;
 
 	public $parent;
 	public $parentId;

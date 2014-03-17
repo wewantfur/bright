@@ -1,11 +1,11 @@
 /**
- * Template overview controller
+ * Template edit controller. 
+ * 
  */
 bright = angular.module('bright');
 bright.controller("templateCtrl",
 ['$scope', '$http', '$state', 'TemplateService', 'l10n', '$modal',
 function($scope, $http, $state, TemplateService, l10n, $modal) {
-
 	
 	$scope.templateTypes = [{id: 1, label: l10n.get('templates.templatetype1')},
 	                        {id: 2, label: l10n.get('templates.templatetype2')},
@@ -29,25 +29,36 @@ function($scope, $http, $state, TemplateService, l10n, $modal) {
 					}
 				});
 			});
-			
-			console.log($scope.template);
 		});
 	});
 	
+	/**
+	 * Rearranges the fields
+	 * @param int oldIndex
+	 * @param int newIndex
+	 */
 	$scope.onFieldDrop = function(oldIndex, newIndex) {
 		$scope.template.fields.move(oldIndex, newIndex);
 	};
-	
+
+	/**
+	 * Adds a new field to the template
+	 */
 	$scope.onAddFieldClick = function() {
 		$scope.template.fields.push({label:'',displaylabel:''});
 		console.log('addfield',$scope.template.fields);
 	};
 	
-	$scope.onRemoveFieldClick = function(field) {
-//		console.log(field, $scope, this);
+	/**
+	 * Removes the selected field
+	 */
+	$scope.onRemoveFieldClick = function() {
 		$scope.template.fields.splice(this.$index, 1);
 	};
     
+	/**
+	 * Changes the icon to the selected value
+	 */
     $scope.selectIcon = function() {
     	var modalInstance = $modal.open({
 			templateUrl : 'partials/icons.html',

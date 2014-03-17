@@ -11,6 +11,9 @@ bright.controller("pageTreeCtrl", [ '$scope', '$state', 'PageService',
 			console.log($scope.pagetree);
 		});
 		
+		/**
+		 * Toggle for opening and closing a leaf
+		 */
 		$scope.pageOpenClose = function() {
 			var item = this.item;
 			item.isopen = !item.isopen;
