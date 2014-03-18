@@ -6,6 +6,8 @@ namespace bright\core\content;
  * @author Ids
  *
  */
+use bright\core\utils\Logger;
+
 use bright\core\utils\StringUtils;
 
 use bright\core\model\vo\Template;
@@ -116,6 +118,7 @@ class Templates {
 		try {
 			$id = Model::getInstance() -> updateObject('templates', $template, 'templateId');
 		} catch(Exception $e) {
+				Logger::log("E: " . $e -> getTraceAsString());
 			throw new TemplateException('TemplateException::CANNOT_SAVE_TEMPLATE', TemplateException::CANNOT_SAVE_TEMPLATE);
 		}
 		
@@ -126,7 +129,7 @@ class Templates {
 					$tfield -> templateId = $id;
 					$tfield -> idx = $i++;
 				}
-				Utils::log($template);
+				Logger::log($template);
 				Model::getInstance() -> updateObject('templatefields', $template -> fields, 'fieldId');
 			}
 		}

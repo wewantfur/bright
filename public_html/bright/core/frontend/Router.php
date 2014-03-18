@@ -13,6 +13,7 @@ use bright\core\model\Model;
  * You should do that in your constants file, since that
  * is initialized before this class
  * @author Ids
+ * @todo Move to frontcontroller
  *
  */
 class Router {

@@ -32,8 +32,6 @@ class DBPDO implements IDB {
 			throw new DatabaseException($e->getMessage(), DatabaseException::DB_ERROR);
 		}
 		
-// 		set_exception_handler('\bright\core\exceptions\Exception::ehandler');
-
 	}
 	
 	public function close() {

@@ -20,4 +20,8 @@ class Template {
 		$this -> templateId = (int)$this -> templateId;
 		$this -> maxchildren = (int)$this -> maxchildren;
 	}
+	
+	function __toString() {
+		return $this -> label;
+	}
 }

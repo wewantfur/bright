@@ -27,4 +27,8 @@ class Content extends VO{
 	public $content;
 	
 	public $selected = false;
+	
+	function __toString() {
+		return $this -> label;
+	}
 }

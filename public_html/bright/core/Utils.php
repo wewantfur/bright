@@ -10,21 +10,6 @@ namespace bright\core;
 use bright\core\utils\StringUtils;
 
 class Utils {
-
-	/**
-	 * Add something to the log file
-	 */
-	public static function log() {
-		$statements = func_get_args();
-		$handle = fopen(dirname(__FILE__) . '/logs/log.txt', 'a');
-		foreach($statements as $statement) {
-			if(!is_scalar($statement))
-				$statement = var_export($statement, true);
-		
-			fwrite($handle, $statement . "\n");
-		}
-		fclose($handle);
-	}
 	
 	/**
 	 * Mysql statement / call_user_func_array bug,
@@ -48,25 +33,6 @@ class Utils {
 	}
 	
 	
-	/**
-	 * Check if haystack starts with needle
-	 * @param String $haystack
-	 * @param String $needle
-	 */
-	public static function startsWith($haystack, $needle) {
-		trigger_error('This method is deprecated, use StringUtils::startsWith', E_USER_DEPRECATED);
-		return StringUtils::startsWith($haystack, $needle);
-	}
-	
-	/**
-	 * Check if haystack ends with needle
-	 * @param String $haystack
-	 * @param String $needle
-	 */
-	public static function endsWith($haystack, $needle) {
-		trigger_error('This method is deprecated, use StringUtils::endsWith', E_USER_DEPRECATED);
-		return StringUtils::endsWith($haystack, $needle);
-	}
 	
 	public static function createTree(&$pages) {
 		$root = array_shift($pages);

@@ -1,6 +1,8 @@
 <?php
 namespace bright\core\model;
 
+use bright\core\utils\Logger;
+
 use bright\core\Utils;
 use bright\core\connections\DBPDO;
 
@@ -125,7 +127,7 @@ class Model {
 		try {
 			$id = Model::getInstance() -> updateRow($sql, $varr);
 		} catch(\Exception $e) {
-			Utils::log($e-> getCode(), $e -> getMessage(), $sql);
+			Logger::log($e-> getCode(), $e -> getMessage(), $sql);
 			throw new \bright\core\exceptions\Exception('Exception::DB_ERROR', \bright\core\exceptions\Exception::DB_ERROR);
 		}
 		
