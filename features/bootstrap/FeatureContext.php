@@ -146,6 +146,15 @@ class FeatureContext extends BehatContext
     	error_log(var_export($res, true));
     }
     
+    /**
+     * @Then /^the result should be "([^"]*)"$/
+     */
+    public function theResultShouldBe($arg1)
+    {
+    	assertEquals($arg1, $this -> result);
+    }
+    
+    
     
     /**
      * @When /^I run "([^"]*)"$/

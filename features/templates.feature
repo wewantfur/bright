@@ -13,7 +13,7 @@ Scenario: List 2 templates
   | 2  | text     |
   And I have a template named "homepage"
   And I have a template named "text"
-  When I run "core\content\Templates\getTemplates()"
+  When I run "core\factories\TemplateFactory\getTemplates()"
   Then the result should be an array of 2 \bright\core\model\vo\Template objects
   
 Scenario: Create a template
@@ -23,16 +23,20 @@ Scenario: Create a template
   | 1  | homepage |
   | 2  | text     |
   And I create a template named "page"
-  When I run "core\content\Templates\getTemplates()"
+  When I run "core\factories\TemplateFactory\getTemplates()"
   Then the result should be an array of 3 \bright\core\model\vo\Template objects
   
 Scenario: Delete a template
   Given I am logged in as Administrator
-  And there is a template called "homepage"
-  And I run "core\content\Templates\deleteTemplate()" with 
+  And the following templates exist:
+  | id | label    |
+  | 1  | homepage |
+  | 2  | text     |
+  | 3  | page     |
+  And I run "core\factories\TemplateFactory\deleteTemplateByLabel()" with 
   """
-  1
   page  
   """
-  When I run "core\content\Templates\getTemplates()"
+  Then the result should be "1"
+  When I run "core\factories\TemplateFactory\getTemplates()"
   Then the result should be an array of 2 \bright\core\model\vo\Template objects

@@ -36,8 +36,6 @@ class Model {
 				break;
 			case 'MYSQLI':
 				break;
-			case 'MYSQL':
-				break;
 		}
 		
 	}
@@ -76,6 +74,13 @@ class Model {
 	 */
 	public function updateRow() {		
 		return call_user_func_array(array($this -> db, 'updateRow'), func_get_args());
+	}
+	
+	/**
+	 * Insert, update or delete a row
+	 */
+	public function deleteRow() {		
+		return call_user_func_array(array($this -> db, 'deleteRow'), func_get_args());
 	}
 	
 	/**

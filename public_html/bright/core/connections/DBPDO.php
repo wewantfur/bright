@@ -54,6 +54,18 @@ class DBPDO implements IDB {
 		return $this -> fetch($query, $args, $type, self::MODE_ROW_ALL);
 	}
 	
+	public function deleteRow($query, $args = null) {
+		if(!$args) {
+			$stmt = $this -> db -> query($query);
+		} else {
+			$stmt = $this -> db -> prepare($query);
+			if(!is_array($args))
+				$args = array($args);
+			$stmt -> execute($args);
+		}
+		return $stmt -> rowCount();
+	}
+	
 	public function updateRow() {
 // 		throw new Exception("UPDATE ROW NOT IMPLEMENTED");
 		$na = func_num_args();
@@ -96,32 +108,9 @@ class DBPDO implements IDB {
 			$stmt -> execute($args);
 		}
 		
-// 		$na = count($args);
-// 		if($na <= 2) {
-// 			// Simple query
-// 			$a = array($args[0], \PDO::FETCH_OBJ);
-// 			if($na == 2) {
-// 				$a[1] = \PDO::FETCH_CLASS;
-// 				$a[2] = $args[1];
-// 			}
-			
-// 			$stmt = call_user_func_array(array($this -> db, 'query'), $a);
-// 			print_r($a);
-			
-// 			$result = $stmt -> fetchAll();
-// 			$stmt -> closeCursor();
-// 			return $result;
-// 		}
-// 		$stmt = $this -> db -> prepare($args[0]);
 		switch($mode) {
 			case self::MODE_ROW_ALL:
 			case self::MODE_ROW:
-// 				if($na == 4) {
-// 					$stmt -> setFetchMode (\PDO::FETCH_CLASS , $args[3]);
-// 				}
-// 				if(!is_array($args[2]))
-// 					$args[2] = array($args[2]);
-// 				$stmt -> execute($args[2]);
 				if($mode == self::MODE_ROW_ALL) {
 					$result = $stmt -> fetchAll();
 				} else {
@@ -145,9 +134,5 @@ class DBPDO implements IDB {
 				
 		$stmt -> closeCursor();
 		return $result;
-	}
-	
-	private function _fetchQuery($stmt) {
-		
 	}
 }

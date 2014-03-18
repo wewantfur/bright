@@ -1,7 +1,7 @@
 <?php
 namespace bright\core\model\vo;
 
-class Content extends VO{
+abstract class Content extends VO{
 	
 	function __construct() {
 		$this -> contentId = (int) $this -> contentId;
@@ -27,8 +27,4 @@ class Content extends VO{
 	public $content;
 	
 	public $selected = false;
-	
-	function __toString() {
-		return $this -> label;
-	}
 }

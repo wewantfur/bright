@@ -1,9 +1,10 @@
 <?php
 
+use bright\core\factories\TemplateFactory;
+
 use bright\core\model\vo\TemplateField;
 
 use bright\core\model\vo\Template;
-use bright\core\content\Templates;
 
 use bright\core\exceptions\AuthException;
 
@@ -47,8 +48,7 @@ class TemplateContext extends BehatContext
      */
     public function iHaveATemplateNamed($arg1)
     {
-    	$tpl = new Templates();
-    	return $tpl -> getTemplateByLabel($arg1);
+    	return TemplateFactory::getTemplateByLabel($arg1);
     }
     
 	/**
@@ -73,7 +73,7 @@ class TemplateContext extends BehatContext
      */
     public function thereIsATemplateCalled($arg1)
     {
-    	Templates::getTemplateByLabel($arg1);
+    	TemplateFactory::getTemplateByLabel($arg1);
     }
     
     
@@ -87,7 +87,7 @@ class TemplateContext extends BehatContext
     	$t -> displaylabel = ucfirst($arg1);
     	$t -> icon = 'page_white_text';
     	$t -> enabled = true;
-    	$t -> type = Templates::TYPE_PAGE;
+    	$t -> type = TemplateFactory::TYPE_PAGE;
     	
     	$tf = new TemplateField();
     	$tf -> label = 'header';
@@ -107,7 +107,7 @@ class TemplateContext extends BehatContext
     	$tf -> fieldtype = 'string';
     	$t -> fields[] = $tf;
     	
-    	Templates::setTemplate($t);
+    	TemplateFactory::setTemplate($t);
     }
     
     
