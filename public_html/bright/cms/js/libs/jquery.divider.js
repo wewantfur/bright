@@ -1,6 +1,6 @@
 /**
  * jQuery Divider plugin
- * Copyright (c) 2013 Fur
+ * Copyright (c) 2014 Fur
  * http://www.wewantfur.com
  * Licensed under the Apache License
  * @author ids - Fur
@@ -11,6 +11,8 @@
 		for(var di = 0; di < this.length; di++) {
 			setup($(this[di]));
 		}
+		
+		
 		
 		function setup(divider) {
 			var resizeTimeout, curWidth, oldWidth;
@@ -39,11 +41,19 @@
 				var itemWidth = Math.floor((width - ((divider.children('div').length - 1)* handleWidth)) / divider.children('div').length);  
 				divider.children('div').wrap('<div class="fur-divider-item"></div>');
 				var pos = 0;
+
+				var widthWithoutHandlers = width - ((nc-1)* handleWidth);
+				
+				var useSettings =  settings.widths.length == nc;
+				var divide = settings.widths[0] < 1 ? 1 : 100;
+				var divIndex = 0;
 				divider.children('div, span').each(function(index, el){
 					var w = handleWidth;
 					if($(el).hasClass('fur-divider-item')) {
-						$(el).width(itemWidth).css('left', pos+'px');
-						w = itemWidth;
+						var itemW = useSettings ? widthWithoutHandlers * (settings.widths[divIndex] / divide) : itemWidth;
+						$(el).width(itemW).css('left', pos+'px');
+						w = itemW;
+						divIndex++;
 					} else {
 						$(el).css('left',pos+'px');
 					}
@@ -95,6 +105,22 @@
 				divider.on('mouseup.divider'+di, function(ue) {
 					divider.removeClass('unselectable');
 					divider.off('mousemove.divider'+di);
+					
+					var widths = [];
+					var total = 0;
+					divider.children('.fur-divider-item').each(function(i, el) {
+						var r = $(this).width();
+						total += r;
+						widths.push(r);
+					});
+					
+					// Percentage widths
+					var pWidths = [];
+					for(var i = 0; i < widths.length; i++) {
+						pWidths.push(widths[i] / total);
+					}
+					
+					divider.trigger('dividerChange', {panelWidths:pWidths});
 				});
 				
 				// The only way to check for resize events :'(
@@ -109,10 +135,14 @@
 		}
 		
 		function resizeDivider(divider, oldWidth, curWidth, handleWidth) {
+			if(oldWidth == 0 || curWidth == 0)
+				return;
+			
 			divider.children('.fur-divider-handle').each(function() {
 				$(this).css('left', ($(this).position().left / oldWidth) * curWidth );
 			});
 			positionItems(divider,handleWidth);
+			
 		};
 		
 		function positionItems(divider, handleWidth) {

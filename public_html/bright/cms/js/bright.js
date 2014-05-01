@@ -12,6 +12,7 @@ var bright = angular.module('bright',
          'my-l10n-nl',
 		 'Plugin',
 		 'ngfur.grid',
+		 'ngfur.divider',
 		 'angularTree',
 		 'directives',
 		 'states']).

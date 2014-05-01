@@ -56,9 +56,11 @@ class Authorization {
 
         // First select the hashed password from the db
         $hash = Model::getInstance()->getField("SELECT bu.password FROM be_users bu WHERE bu.email = ?", array($email));
+        
         if (!$hash) {
             throw new AuthException('WRONG_CREDENTIALS', AuthException::UNKNOWN_USER);
         }
+        
         if (!PasswordUtils::validate_password($pass, $hash)) {
             throw new AuthException('WRONG_CREDENTIALS', AuthException::INVALID_PASSWORD);
         }
@@ -80,34 +82,12 @@ class Authorization {
         }
 
         $beuser = Utils::stripVO($result[0]);
-
-        Model::getInstance()->updateRow("UPDATE be_users SET lastlogin=NOW() WHERE UID=?", array($beuser->UID));
+    	Model::getInstance()->updateRow("UPDATE be_users SET lastlogin=NOW() WHERE UID=?", array($beuser->UID));
         $beuser->lastlogin = date(\DateTime::W3C);
-
-        foreach ($result as $row) {
-            if ($row->settings != null) {
-                $beuser->settings = json_decode($row->settings);
-            }
-            if ($row->GID != null) {
-                $g = new BEGroup();
-                $g->GID = (int) $row->GID;
-                $g->name = $row->groupname;
-                $beuser->groups[] = $g;
-
-                if ($row->GID == Authorization::GR_SU) {
-                    $beuser->page_mountpoints[] = Pages::getBERoot();
-                }
-            }
-            if ($row->file_mountpoint != null) {
-                $beuser->file_mountpoints[] = $row->file_mountpoint;
-            }
-            if ($row->page_mountpoint != null) {
-                $beuser->page_mountpoints[] = (int) $row->page_mountpoint;
-            }
-        }
-
+        
         $_SESSION['bright']['be_user'] = serialize($beuser);
-
+		self::updateBEUser();
+		        
         return $beuser;
     }
 
@@ -166,6 +146,53 @@ class Authorization {
                 return true;
         }
         return false;
+    }
+    
+    /**
+     * Updates the user in the session with the data from the database
+     * @return \bright\core\model\vo\BEUser
+     */
+    public static function updateBEUser() {
+    	$usr = self::getBEUser();
+    	
+    	$query = "SELECT bu.*, bg.GID, bg.name as groupname, pm.pageId as page_mountpoint, fm.path as file_mountpoint
+    	FROM be_users bu
+    	LEFT JOIN be_usergroups bug ON bu.UID = bug.UID
+    	LEFT JOIN be_groups bg ON bug.GID = bg.GID
+    	LEFT JOIN file_mountpoints fm ON fm.GID = bg.GID
+    	LEFT JOIN pages_mountpoints pm ON pm.GID = bg.GID
+    	WHERE bu.UID = ?";
+    	
+    	
+    	$result = Model::getInstance()->getRows($query, array($usr -> UID), '\bright\core\model\vo\BEUser');
+    	
+    	$beuser = Utils::stripVO($result[0]);
+    	
+    	foreach ($result as $row) {
+    		if ($row->preferences != null) {
+    			$beuser->preferences = json_decode($row->preferences);
+    		}
+    		if ($row->GID != null) {
+    			$g = new BEGroup();
+    			$g->GID = (int) $row->GID;
+    			$g->name = $row->groupname;
+    			$beuser->groups[] = $g;
+    	
+    			if ($row->GID == Authorization::GR_SU) {
+    				$beuser->page_mountpoints[] = Pages::getBERoot();
+    			}
+    		}
+    		if ($row->file_mountpoint != null) {
+    			$beuser->file_mountpoints[] = $row->file_mountpoint;
+    		}
+    		if ($row->page_mountpoint != null) {
+    			$beuser->page_mountpoints[] = (int) $row->page_mountpoint;
+    		}
+    	}
+    	
+    	$_SESSION['bright']['be_user'] = serialize($beuser);
+    	
+    	return $beuser;
     }
 
     /**

@@ -9,7 +9,7 @@ class BEUser {
 	public $name;
 	
 	public $lastlogin;
-	public $settings;
+	public $preferences;
 	
 	public $default_GID;
 	public $pages_GID;

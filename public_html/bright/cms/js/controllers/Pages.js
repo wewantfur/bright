@@ -79,6 +79,7 @@ bright.controller("pagesCtrl",
                 $scope.newPage = function() {
                     alert('boink');
                 };
+                
             }])
 
 //.controller("TreeCtrl", 

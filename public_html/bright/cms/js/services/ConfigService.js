@@ -21,6 +21,20 @@ bright.service('ConfigService', function($q, $http) {
 			return def.promise;
 		},
 		
+		/**
+		 * Updates the new settings
+		 * @param data
+		 * @returns
+		 */
+		setPreferences: function(preferences) {
+			var deferred = $q.defer();
+			$http.post('/bright/json/core/config/Config/setPreferences', {arguments: [preferences]}).success(function(data) {
+				deferred.resolve(data);
+			});
+			
+			return deferred.promise;
+		},
+		
 		getLanguageName: function(lang) {
 			switch(lang) {
 				case 'nl':

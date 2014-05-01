@@ -8,4 +8,16 @@ bright.controller("brightCtrl", [ '$scope', 'ConfigService',
 		$scope.getDate = function(date) {
 			return 'Datum!';
 		};
+		
+		$scope.updatePreferences = function() {
+			console.log('updateSettings');
+			
+			ConfigService.setPreferences($scope.administrator.preferences).then(function(data) {
+				
+				console.log('New Settings');
+				$scope.administrator.preferences = data;
+				
+			});
+		};
+		
 	} ]);

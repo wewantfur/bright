@@ -209,6 +209,10 @@ ul.tree, .tree ul {
 	display: block;
 }
 
+.tree .tree-label:hover {
+	text-decoration: underline;
+}
+
 .tree-icon.tree-closed {
 	background: url(../img/folder-closed.gif) no-repeat 0 0;
 	width: 14px;
