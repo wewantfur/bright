@@ -12,7 +12,7 @@ bright.service('PageService', function($http, $q) {
 		 */
 		setPage: function(data) {
 			var deferred = $q.defer();
-			$http.post('/bright/json/core/content/Pages/setPage', {arguments: [data]}).success(function(data) {
+			$http.post('/bright/json/core/factories/PageFactory/setContent', {arguments: [data]}).success(function(data) {
 				deferred.resolve(data);
 			});
 			

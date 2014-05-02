@@ -2,5 +2,9 @@
 namespace bright\core\interfaces;
 
 interface IContentFactory {
-	public static function setContent(IContent $content);
+	/**
+	 * Stores content into the database
+	 * @param IContent $content
+	 */
+	public static function setContent($content);
 }

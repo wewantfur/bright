@@ -1,6 +1,6 @@
 <?php
-namespace \bright\core\interfaces;
+namespace bright\core\interfaces;
 
-class IContent {
+interface IContent {
 	public function __toString();
 }

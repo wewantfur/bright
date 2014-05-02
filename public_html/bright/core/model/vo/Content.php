@@ -1,7 +1,9 @@
 <?php
 namespace bright\core\model\vo;
 
-abstract class Content extends VO{
+use bright\core\interfaces\IContent;
+
+abstract class Content extends VO implements IContent{
 	
 	function __construct() {
 		$this -> contentId = (int) $this -> contentId;

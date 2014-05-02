@@ -205,43 +205,44 @@ class TemplateFactory {
 				throw new TypeException($msg, $code, $previous, 'templateId or label', $field);
 
 		}
-		if($identifier !== false && $field !== false) {
-			$sql = "SELECT t.*,
-			tf.fieldId as `field.fieldId`,
-			tf.label as `field.label`,
-			tf.displaylabel as `field.displaylabel`,
-			tf.fieldtype as `field.fieldtype`,
-			tf.data as `field.data`
-			FROM templates t
-			LEFT JOIN templatefields tf ON tf.templateId = t.templateId
-			WHERE t.$field=?
-			ORDER BY tf.idx ASC";
-			$results =  Model::getInstance() -> getRows($sql, array($identifier), '\bright\core\model\vo\Template');
-			if($results) {
-				$tpl = Utils::stripVO($results[0]);
-				$tpl -> fields = array();
+		if($identifier == false || $field == false)
+			throw new TemplateException('TemplateException::TEMPLATE_NOT_FOUND', TemplateException::TEMPLATE_NOT_FOUND);
+			
+		$sql = "SELECT t.*,
+				tf.fieldId as `field.fieldId`,
+				tf.label as `field.label`,
+				tf.displaylabel as `field.displaylabel`,
+				tf.fieldtype as `field.fieldtype`,
+				tf.data as `field.data`
+				FROM templates t
+				LEFT JOIN templatefields tf ON tf.templateId = t.templateId
+				WHERE t.$field=?
+				ORDER BY tf.idx ASC";
+		
+		$results =  Model::getInstance() -> getRows($sql, array($identifier), '\bright\core\model\vo\Template');
+		if($results) {
+			$tpl = Utils::stripVO($results[0]);
+			$tpl -> fields = array();
 
-				switch($tpl -> type) {
-					case self::TYPE_PAGE:
-					case self::TYPE_MARKER:
-					case self::TYPE_EVENT:
-						// Add default title field
-						$tpl -> fields[] = new TemplateField('title', 'Title', 'string');
-						break;
-				}
-
-				foreach($results as $result) {
-					$field = new TemplateField(	$result -> {'field.label'},
-					$result -> {'field.displaylabel'},
-					$result -> {'field.fieldtype'});
-					if($result -> {'field.data'} != null) {
-						$field -> data = json_decode($result -> {'field.data'});
-					}
-					$tpl -> fields[] = $field;
-				}
-				return $tpl;
+			switch($tpl -> type) {
+				case self::TYPE_PAGE:
+				case self::TYPE_MARKER:
+				case self::TYPE_EVENT:
+					// Add default title field
+					$tpl -> fields[] = new TemplateField('title', 'Title', 'string');
+					break;
 			}
+
+			foreach($results as $result) {
+				$field = new TemplateField(	$result -> {'field.label'},
+				$result -> {'field.displaylabel'},
+				$result -> {'field.fieldtype'});
+				if($result -> {'field.data'} != null) {
+					$field -> data = json_decode($result -> {'field.data'});
+				}
+				$tpl -> fields[] = $field;
+			}
+			return $tpl;
 		}
-		throw new TemplateException('TemplateException::TEMPLATE_NOT_FOUND', TemplateException::TEMPLATE_NOT_FOUND);
 	}
 }

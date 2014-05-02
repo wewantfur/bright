@@ -82,7 +82,6 @@ bright.controller('contentCtrl',
 		
 		
 		$scope.$watch('content.template', function(tpl) {
-			console.log('template changed', tpl);
 			if(tpl)
 				$scope.content.templateId = tpl.templateId;
 		});
@@ -105,8 +104,6 @@ bright.controller('contentCtrl',
 //			var settingsChanged = value.settings != null && old.settings == null;
 //			var contentChanged = value.content != old.content;
 			var templatesChanged = value.templates != null && old.templates == null;
-			
-			console.log(templatesChanged);
 			
 			if(!old.content || (old.content && (value.content.pageId != old.content.pageId || value.content.templateId != old.content.templateId)) || templatesChanged) {
 				
