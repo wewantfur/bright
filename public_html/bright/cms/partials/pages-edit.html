@@ -1,31 +1,39 @@
-<h1 l10n-text="pages.editpage:content.label"></h1>
+<h1 l10n-text="pages.editpage:content.label">boink</h1>
 
-<div class="button-bar pull-right">
+<div class="button-bar pull-right cf clearfix">
 	<button l10n-text="general.cancel" ng-click="cancel()">Cancel</button>
 	<button l10n-text="general.saveas">Save as</button>
 	<button l10n-text="general.save" ng-click="save()">Save</button>
 </div>
 
 <tabset>
-    <tab ng-repeat="lang in settings.languages">
+    <tab ng-repeat="lang in settings.languages" disabled="!hasTemplate">
     	<tab-heading><i class="flags flag-{{lang}}"></i> {{getLanguage(lang)}}</tab-heading>
     	<ul class="plugins">
-			<li ng-repeat="field in template.fields"><div plugin="field.fieldtype" data-field="field" data-lang="lang" data-content=content.content></div></li>
+			<li ng-repeat="field in template.fields">
+				<div plugin="field.fieldtype" data-field="field" data-lang="lang" data-content=content.content></div>
+			</li>
 		</ul>
    	</tab>
    	
-    <tab>
+    <tab active="isNew">
     	<tab-heading><i class="fa fa-cog"></i> <span l10n-text="content.settings"></span></tab-heading>
     	<div class="settings">
 			<label for="templateId" l10n-text="content.template">Template</label>
 			<select required 
 				ng-model="content.template" 
-				ng-options="template.displaylabel for template in templates" id="templateId"></select>
+				ng-options="template.displaylabel for template in templates" 
+				id="templateId"></select>
 			
 			<label><span l10n-text="content.label">Label</span>
 			<input type="text" required ng-model="content.label"/></label>
 			
-			<label><span l10n-text="content.publicationdate">Publicationdate</span> <input type="text" required ng-model="content.publicationdate"/></label>
+			<label>
+				<span l10n-text="content.publicationdate">Publicationdate</span> 
+<!-- 				<datepicker></datepicker> -->
+				<input type="text" ng-model="content.publicationdate" />
+				
+			</label>
 			<label><span l10n-text="content.expirationdate">Expirationdate</span> <input type="text" required ng-model="content.expirationdate"/></label>
 			<label><span l10n-text="content.alwayspublished">Always published</span> <input type="checkbox" ng-model="content.alwayspublished"/></label>
 			<label><span l10n-text="content.enabled">Enabled</span> <input type="checkbox" ng-model="content.enabled"/></label>

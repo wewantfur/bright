@@ -8,10 +8,13 @@ bright.controller('contentCtrl',
 	['$scope', '$http', '$state', 'ConfigService', 'ContentService', 'TemplateService', 'PageService',
 	 function($scope, $http, $state, ConfigService, ContentService, TemplateService, PageService) {
 		
+//		$scope.isNew = true;
+		$scope.hasTemplate = false;
+		$scope.today = new Date();
+		
 		$scope.content = null;
 		$scope.templates = null;
-//		$scope.settings = null;
-
+		
 		// Fetch data
 		TemplateService.getTemplates().then(function(data) {	$scope.templates = data; });
 		
@@ -20,9 +23,15 @@ bright.controller('contentCtrl',
 				/**
 				 * @todo Move this to a service to allow switching between views and keeping data 
 				 */ 
+				if($state.params.pageId == '') {
+					$scope.content = {};
+					break;
+				}
+				
 				$http.post('/bright/json/core/content/Pages/getPage', {arguments:[$state.params.pageId]}).success(function(data) {
 					if(data.status == 'OK') {
 						$scope.content = data.result;
+						$scope.hasTemplate = true;
 					} else {
 						console.log(":'(",data);
 						
@@ -42,7 +51,6 @@ bright.controller('contentCtrl',
 		};
 		
 		$scope.save = function() {
-			console.log($scope.content);
 			switch($state.params.type) {
 				case 'page':
 					PageService.setPage($scope.content).then(function(d) {
@@ -62,8 +70,10 @@ bright.controller('contentCtrl',
 		$scope.setSelectedTemplate = function() {
 			
 			if($scope.content && $scope.templates) {
+				console.log('Gonna search for template');
 				angular.forEach($scope.templates, function(template) {
 					if(template.templateId == $scope.content.templateId) {
+						console.log('Found the template!', template);
 						$scope.content.template = template;
 					}
 				});
@@ -71,7 +81,13 @@ bright.controller('contentCtrl',
 		};
 		
 		
-		$scope.$watch(function combinedWatch() {
+		$scope.$watch('content.template', function(tpl) {
+			console.log('template changed', tpl);
+			if(tpl)
+				$scope.content.templateId = tpl.templateId;
+		});
+		
+			$scope.$watch(function combinedWatch() {
 			// Add data which is needed before initialization
 			return {
 					content: $scope.content,
@@ -79,20 +95,23 @@ bright.controller('contentCtrl',
 					templates: $scope.templates};
 		}, function(value, old) {
 
+			
 			if( value.templates == null ||  value.settings == null || value.content == null || typeof(value.content) == 'undefined' || 
 				typeof(value.templates) == 'undefined' || typeof(value.settings) == 'undefined') {
 					// Not all data ready
 					return;
 			}
-//			console.log(old, value);
-//			if(old.content) {
-//				console.log(old.content.pageId, value.content.pageId);
-//				console.log(old.content.templateId, value.content.templateId);
-//			}
-			if(!old.content || (old.content && (value.content.pageId != old.content.pageId || value.content.templateId != old.content.templateId))) {
-				console.log('page or template changed');
-				$scope.setSelectedTemplate();
+			
+//			var settingsChanged = value.settings != null && old.settings == null;
+//			var contentChanged = value.content != old.content;
+			var templatesChanged = value.templates != null && old.templates == null;
+			
+			console.log(templatesChanged);
+			
+			if(!old.content || (old.content && (value.content.pageId != old.content.pageId || value.content.templateId != old.content.templateId)) || templatesChanged) {
 				
+				$scope.setSelectedTemplate();
+				$scope.hasTemplate = true;
 				if(Number($scope.content.templateId) > 0) {
 					// Get the full template
 					TemplateService.getTemplate($scope.content.templateId).then(function(data) {

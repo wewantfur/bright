@@ -6,19 +6,13 @@ bright.controller("pagesCtrl",
                 $scope.columns = [{value: 'icon', label: ' ', headerTemplate: $scope.hTemplate, width: '20px', template: '<i class="fa fa-{{row.icon}}" />'},
                     {value: 'pageId', label: '#', headerTemplate: $scope.hTemplate, width: '20px'},
                     {value: 'label', label: 'Label', headerTemplate: $scope.hTemplate, width: '20%'},
-                    {value: 'modificationdate', headerTemplate: $scope.hTemplate, label: 'Last modified', width: '20%', template: '<span>{{row.modificationdate | date:\'short\'}}</span>'},
+                    {value: 'modificationdate', headerTemplate: $scope.hTemplate, label: 'Last modified', width: '20%', template: "<span>{{row.modificationdate|fromMysqlDate:'shortDate'}}</span>"},
                     {value: 'modifiedby', headerTemplate: $scope.hTemplate, label: 'Modified by', width: '20%', template: '<span>{{row.modifiedby|adminname}}</span>'}
                 ];
 
                 PageService.getPages().then(function(pages) {
                     $scope.pages = pages.list;
                 });
-                $scope.gridOptions = {data: 'pages', height: '100%',
-                    columnDefs: [{field: 'icon', displayName: '', width: '30px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><i class="tpl-icon tpl-{{row.getProperty(col.field)}}"></i></div>'},
-                        {field: 'pageId', displayName: '#', width: '50px'},
-                        {field: 'label', displayName: 'Label', width: '20%'},
-                        {field: 'modificationdate', displayName: 'Last modified', width: '20%'},
-                        {field: 'modifiedby', displayName: 'Modified by', width: '20%'}]};
 
                 $scope.hasSelection = false;
 
@@ -31,10 +25,6 @@ bright.controller("pagesCtrl",
 
                 $scope.editPage = function(pageId) {
                     $state.transitionTo('pages.edit', {pageId: pageId, type: 'page'});
-                };
-
-                $scope.getDate = function(date) {
-                    return 'Datum!';
                 };
 
                 $scope.getLabel = function() {
@@ -77,7 +67,7 @@ bright.controller("pagesCtrl",
                 };
 
                 $scope.newPage = function() {
-                    alert('boink');
+                    $state.transitionTo('pages.edit', {pageId: null, type: 'page'});
                 };
                 
             }])

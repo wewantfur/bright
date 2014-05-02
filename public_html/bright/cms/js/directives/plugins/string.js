@@ -17,6 +17,7 @@ bright.directive('string',  function() {
 			
 		},
 		controller: function($scope, $element, $attrs) {
+			
 			$scope.getTemplateUrl = function() {
 				switch($scope.type) {
 					case 'string':
@@ -48,11 +49,17 @@ bright.directive('string',  function() {
 		},
 		link: function($scope, elem, attr, ctrl) {
 			$scope.type = 'string';
+			
 			var ts = (new Date()).getTime();
 			$scope.rteid = 'rte_' + Math.round(Math.random() * 1000) + ts;
 			$scope.previewmode = true;
 			if($scope.field.data != null) {
 				$scope.type = $scope.field.data.type;
+			}
+			
+			if(!$scope.content) {
+				$scope.content = {};
+				$scope.content[$scope.type] = '';
 			}
 		}
 	};

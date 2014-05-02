@@ -1,5 +1,5 @@
 angular.module("ngLocale", [], ["$provide", function($provide) {
-var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
+var PLURAL_CATEGORY = {ZERO: "nul", ONE: "één", TWO: "twee", FEW: "sommige", MANY: "veel", OTHER: "andere"};
 $provide.value("$locale", {
   "DATETIME_FORMATS": {
     "AMPMS": {

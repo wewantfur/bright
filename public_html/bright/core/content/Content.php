@@ -87,7 +87,7 @@ class Content {
 		// @todo sanitize
 		
 		$beuser = Authorization::getBEUser();
-		$template = Templates::getTemplate($content -> templateId);
+		$template = TemplateFactory::getTemplate($content -> templateId);
 		$id = Model::getInstance() -> updateRow("INSERT INTO `content` (contentId, templateId, creationdate, modificationdate, createdby, modifiedby, UID, GID) VALUES
 											(?, ?, NOW(), NULL, ?, NULL, ?, ?) 
 											ON DUPLICATE KEY UPDATE templateId=VALUES(templateId), 
@@ -145,13 +145,13 @@ class Content {
 	
 	protected static function setItem($item, $type) {
 		switch($type) {
-			case Templates::TYPE_PAGE:
+			case TemplateFactory::TYPE_PAGE:
 				$fields = array('pageId' => 'i', 'contentId' => 'i','parentId' => 'i','label' => 's','publicationdate' => 't','expirationdate' => 't',
 								'alwayspublished' => 'i','showinnavigation' => 'i','idx' => 'i','locked' => 'i', 'group' => 'i','chmod' => 'i', 'felogin'=>'s');
 				$table = 'pages';
 				$identifier = 'pageId';
 				break;
-			case Templates::TYPE_MARKER:
+			case TemplateFactory::TYPE_MARKER:
 				$table = 'markers';
 				$identifier = 'markerId';
 				break;

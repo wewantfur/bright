@@ -1,0 +1,13 @@
+<div>
+	<label>
+		<span>Type</span>
+		<select ng-model="settings.type">
+			<option value="string">Single line</option>
+			<option value="textarea">Multiline</option>
+			<option value="html">Rich text</option>
+		</select> 
+	</label>
+	<label><span>Max. chars</span> <input type="number" name="maxChars" ng-model="settings.maxChars" /></label>
+	<label><span>Restrict</span> <input type="text" name="restrict" ng-model="settings.restrict" /></label>
+	<label><span>Required</span> <input type="checkbox" name="required" ng-model="settings.required" /></label>
+</div>
