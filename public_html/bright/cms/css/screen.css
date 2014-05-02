@@ -43,6 +43,7 @@ img { /* Prevent Browser scaling of images */
 	float: right;
 }
 
+
 .hidden {
 	display: none !important;
 }

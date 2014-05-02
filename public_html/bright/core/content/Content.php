@@ -1,6 +1,8 @@
 <?php
 namespace bright\core\content;
 
+use bright\core\factories\TemplateFactory;
+
 use bright\core\auth\Authorization;
 
 use bright\core\Utils;
@@ -14,10 +16,10 @@ class Content {
 	 */
 	public final static function getContent($contentId) {
 		
-		$template = Templates::getTemplateByContentId($contentId);
+		$template = TemplateFactory::getTemplateByContentId($contentId);
 		$ctype = '\bright\core\model\vo\Page';
 		switch($template -> type) {
-			case Templates::TYPE_PAGE:
+			case TemplateFactory::TYPE_PAGE:
 				$joins[] = "INNER JOIN pages ttype ON ttype.contentId = c.contentId";
 				break;
 		}

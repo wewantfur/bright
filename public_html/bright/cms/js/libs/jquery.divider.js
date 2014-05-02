@@ -103,8 +103,6 @@
 				});
 		
 				divider.on('mouseup.divider'+di, function(ue) {
-					divider.removeClass('unselectable');
-					divider.off('mousemove.divider'+di);
 					
 					var widths = [];
 					var total = 0;
@@ -119,8 +117,12 @@
 					for(var i = 0; i < widths.length; i++) {
 						pWidths.push(widths[i] / total);
 					}
+					divider.off('mousemove.divider'+di);
 					
-					divider.trigger('dividerChange', {panelWidths:pWidths});
+					if(divider.hasClass('unselectable')) {
+						divider.removeClass('unselectable');
+						divider.trigger('dividerChange', {panelWidths:pWidths});
+					}
 				});
 				
 				// The only way to check for resize events :'(

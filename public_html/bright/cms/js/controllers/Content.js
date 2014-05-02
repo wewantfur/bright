@@ -5,12 +5,12 @@
  */
 var bright = angular.module('bright');
 bright.controller('contentCtrl', 
-	['$scope', '$http', '$state', 'ContentService', 'TemplateService', 'PageService',
-	 function($scope, $http, $state, ContentService, TemplateService, PageService) {
+	['$scope', '$http', '$state', 'ConfigService', 'ContentService', 'TemplateService', 'PageService',
+	 function($scope, $http, $state, ConfigService, ContentService, TemplateService, PageService) {
 		
 		$scope.content = null;
 		$scope.templates = null;
-		$scope.settings = null;
+//		$scope.settings = null;
 
 		// Fetch data
 		TemplateService.getTemplates().then(function(data) {	$scope.templates = data; });

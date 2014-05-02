@@ -2,7 +2,7 @@
  * Angular Divider directive
  * 
  * @author Ids Klijnsma - Fur
- * @version 0.3 Copyright (C) 2013 Fur
+ * @version 0.3 Copyright (C) 2014 Fur
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,11 +36,13 @@
 				link : function($scope, elem, attrs) {
 					
 					var w = [];
-					for(var i = 0; i < $scope.widths.length; i++) {
-						if(typeof $scope.widths[i] != "number")
-							continue;
-						
-						w.push($scope.widths[i]);
+					if($scope.widths) {
+						for(var i = 0; i < $scope.widths.length; i++) {
+							if(typeof $scope.widths[i] != "number")
+								continue;
+							
+							w.push($scope.widths[i]);
+						}
 					}
 					$(elem).divider({widths:w});
 					$(elem).on('dividerChange', function(e,data) {

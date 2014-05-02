@@ -17,7 +17,7 @@ class Config {
 	
 	public final function getPreferences() {
 		$beuser = Authorization::getBEUser();
-		return json_decode($beuser -> preferences);
+		return $beuser -> preferences;
 		
 	}
 	

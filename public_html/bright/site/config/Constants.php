@@ -36,7 +36,7 @@ class Constants extends \bright\core\config\Constants {
 
 
 	protected $SITENAME = 'Bright CMS';
-	protected $AVAILABLELANG = 'nl,en';//,fy';
+	protected $AVAILABLELANG = 'nl,en,fy';
 
 	protected $LOGINPAGE = 'login/';
 	protected $USEPREFIX = true;

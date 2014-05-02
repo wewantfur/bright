@@ -32,6 +32,10 @@
 		"settings": "Instellingen"
 	},	
 	
+	"pages": {
+		"editpage": "Pagina “%1” bewerken"
+	},
+	
 	"content": {
 		"UID": "UID",
 		"GID": "GID",

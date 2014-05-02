@@ -21,7 +21,7 @@ bright.service('TemplateService', function($q, $http) {
 		
 		getTemplate: function(id) {
 			var def = $q.defer();
-			$http.post('/bright/json/core/content/Templates/getTemplate', {'arguments':[id]}).success(function(data) {
+			$http.post('/bright/json/core/factories/TemplateFactory/getTemplate', {'arguments':[id]}).success(function(data) {
 				if(data.status == 'OK') {
 					def.resolve(data.result);
 				}
@@ -38,7 +38,7 @@ bright.service('TemplateService', function($q, $http) {
 			if(typeof(templates) == 'undefined') {
 				if(!isLoading) {
 					isLoading = true;
-					$http.get('/bright/json/core/content/Templates/getTemplates').success(function(data) {
+					$http.get('/bright/json/core/factories/TemplateFactory/getTemplates').success(function(data) {
 						if(data.status == 'OK') {
 							templates = data.result;
 							def.resolve(templates);

@@ -10,7 +10,6 @@ bright.controller("pageTreeCtrl", [ '$scope', '$state', 'PageService', 'ConfigSe
 			}
 		});
 
-		console.log($scope.administrator);
 		
 		/**
 		 * Toggle for opening and closing a leaf

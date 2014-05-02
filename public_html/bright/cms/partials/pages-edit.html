@@ -1,64 +1,66 @@
-<h1>{{content.label}}</h1>
+<h1 l10n-text="pages.editpage:content.label"></h1>
 
-<button l10n-text="general.cancel" ng-click="cancel()">Cancel</button>
-<button l10n-text="general.saveas">Save as</button>
-<button l10n-text="general.save" ng-click="save()">Save</button>
-
-<div class="langs">
-	<ul>
-		<li ng-repeat="lang in settings.languages"><i class="flags flag-{{lang}}"></i> {{getLanguage(lang)}}</li>
-	</ul>
+<div class="button-bar pull-right">
+	<button l10n-text="general.cancel" ng-click="cancel()">Cancel</button>
+	<button l10n-text="general.saveas">Save as</button>
+	<button l10n-text="general.save" ng-click="save()">Save</button>
 </div>
-<div class="template">
-	<div ng-repeat="lang in settings.languages">
-		<ul class="plugins">
+
+<tabset>
+    <tab ng-repeat="lang in settings.languages">
+    	<tab-heading><i class="flags flag-{{lang}}"></i> {{getLanguage(lang)}}</tab-heading>
+    	<ul class="plugins">
 			<li ng-repeat="field in template.fields"><div plugin="field.fieldtype" data-field="field" data-lang="lang" data-content=content.content></div></li>
 		</ul>
-	</div>
-</div>
-<div class="settings">
-	<label for="templateId" l10n-text="content.template">Template</label>
-	<select required 
-		ng-model="content.template" 
-		ng-options="template.displaylabel for template in templates" id="templateId"></select>
-		ng-change="setTemplate()" 
-	
-	<label><span l10n-text="content.label">Label</span>
-	<input type="text" required ng-model="content.label"/></label>
-	
-	<label><span l10n-text="content.publicationdate">Publicationdate</span> <input type="text" required ng-model="content.publicationdate"/></label>
-	<label><span l10n-text="content.expirationdate">Expirationdate</span> <input type="text" required ng-model="content.expirationdate"/></label>
-	<label><span l10n-text="content.alwayspublished">Always published</span> <input type="checkbox" ng-model="content.alwayspublished"/></label>
-	<label><span l10n-text="content.enabled">Enabled</span> <input type="checkbox" ng-model="content.enabled"/></label>
-	<fieldset>
-		<legend l10n-text="content.advancedsettings">Advanced</legend>
-		<label><span l10n-text="content.owner">Owner</span> <input type="text" ng-model="content.user"/></label>
-		<label><span l10n-text="content.group">Group</span> <input type="text" ng-model="content.group"/></label>
-		<table>
-			<thead>
-				<tr><th></th><th>View</th><th>Edit</th><th>Move</th></tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th l10n-text="content.owner">Owner</th>
-					<td><input type="checkbox" name="v[0]" value="4" /></td>
-					<td><input type="checkbox" name="e[0]" value="2" /></td>
-					<td><input type="checkbox" name="m[0]" value="1" /></td>
-				</tr>
-				<tr>
-					<th l10n-text="content.group">Group</th>
-					<td><input type="checkbox" name="v[1]" value="4" /></td>
-					<td><input type="checkbox" name="e[1]" value="2" /></td>
-					<td><input type="checkbox" name="m[1]" value="1" /></td>
-				</tr>
-				<tr>
-					<th l10n-text="content.public">Public</th>
-					<td><input type="checkbox" name="v[2]" value="4" /></td>
-					<td><input type="checkbox" name="e[2]" value="2" /></td>
-					<td><input type="checkbox" name="m[2]" value="1" /></td>
-				</tr>
-			</tbody>
-		</table>
-		<label><span l10n-text="content.felogin">Login required</span> <input type="text" ng-model="content.felogin"/></label>
-	</fieldset>
-</div>
+   	</tab>
+   	
+    <tab>
+    	<tab-heading><i class="fa fa-cog"></i> <span l10n-text="content.settings"></span></tab-heading>
+    	<div class="settings">
+			<label for="templateId" l10n-text="content.template">Template</label>
+			<select required 
+				ng-model="content.template" 
+				ng-options="template.displaylabel for template in templates" id="templateId"></select>
+			
+			<label><span l10n-text="content.label">Label</span>
+			<input type="text" required ng-model="content.label"/></label>
+			
+			<label><span l10n-text="content.publicationdate">Publicationdate</span> <input type="text" required ng-model="content.publicationdate"/></label>
+			<label><span l10n-text="content.expirationdate">Expirationdate</span> <input type="text" required ng-model="content.expirationdate"/></label>
+			<label><span l10n-text="content.alwayspublished">Always published</span> <input type="checkbox" ng-model="content.alwayspublished"/></label>
+			<label><span l10n-text="content.enabled">Enabled</span> <input type="checkbox" ng-model="content.enabled"/></label>
+			<fieldset>
+				<legend l10n-text="content.advancedsettings">Advanced</legend>
+				<label><span l10n-text="content.owner">Owner</span> <input type="text" ng-model="content.user"/></label>
+				<label><span l10n-text="content.group">Group</span> <input type="text" ng-model="content.group"/></label>
+				<table>
+					<thead>
+						<tr><th></th><th>View</th><th>Edit</th><th>Move</th></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th l10n-text="content.owner">Owner</th>
+							<td><input type="checkbox" name="v[0]" value="4" /></td>
+							<td><input type="checkbox" name="e[0]" value="2" /></td>
+							<td><input type="checkbox" name="m[0]" value="1" /></td>
+						</tr>
+						<tr>
+							<th l10n-text="content.group">Group</th>
+							<td><input type="checkbox" name="v[1]" value="4" /></td>
+							<td><input type="checkbox" name="e[1]" value="2" /></td>
+							<td><input type="checkbox" name="m[1]" value="1" /></td>
+						</tr>
+						<tr>
+							<th l10n-text="content.public">Public</th>
+							<td><input type="checkbox" name="v[2]" value="4" /></td>
+							<td><input type="checkbox" name="e[2]" value="2" /></td>
+							<td><input type="checkbox" name="m[2]" value="1" /></td>
+						</tr>
+					</tbody>
+				</table>
+				<label><span l10n-text="content.felogin">Login required</span> <input type="text" ng-model="content.felogin"/></label>
+			</fieldset>
+		</div>
+   	</tab>
+    
+</tabset>
