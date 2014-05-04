@@ -1,6 +1,8 @@
 <?php
 namespace bright\core\factories;
 
+use bright\core\utils\Logger;
+
 use bright\core\model\Model;
 
 use bright\core\model\vo\Page;
@@ -23,6 +25,10 @@ class PageFactory extends ContentFactory {
 		foreach($pagecolumns as $prop) {
 			$data[] = $content -> $prop; 
 		}
+		
+		if($content -> parentId == 0)
+			$content -> parentId = null;
+		
 		
 		$sql = "INSERT INTO pages ($sqlcolumns) VALUES
 									(?,?,?,?,?,?,?,?,?,?,?,?)

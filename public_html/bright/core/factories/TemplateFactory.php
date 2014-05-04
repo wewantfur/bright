@@ -127,8 +127,8 @@ class TemplateFactory {
 
 		try {
 			$id = Model::getInstance() -> updateObject('templates', $template, 'templateId');
+		
 		} catch(Exception $e) {
-			Logger::log("E: " . $e -> getTraceAsString());
 			throw new TemplateException('TemplateException::CANNOT_SAVE_TEMPLATE', TemplateException::CANNOT_SAVE_TEMPLATE);
 		}
 

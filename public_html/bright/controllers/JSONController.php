@@ -3,7 +3,7 @@ namespace bright\controllers;
 
 use bright\core\utils\StringUtils;
 
-require_once(dirname(__FILE__) . '/../core/Bright.php');
+require_once(dirname(__FILE__) . '/../core/Bootstrap.php');
 
 class JSONController {
 	function __construct() {

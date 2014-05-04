@@ -1,6 +1,8 @@
 <?php
 namespace bright\core\factories;
 
+use bright\core\utils\Logger;
+
 use bright\core\auth\Authorization;
 
 use bright\core\interfaces\IContent;
@@ -88,6 +90,7 @@ abstract class ContentFactory implements IContentFactory {
 		// First, mark everything as deleted.
 		Model::getInstance() -> updateRow("UPDATE fields SET deleted=1 WHERE contentId=?", array($content -> contentId));
 		
+		Logger::log($template);
 			
 		foreach($template -> fields as $field) {
 			// Check if field is set
@@ -96,6 +99,8 @@ abstract class ContentFactory implements IContentFactory {
 		
 			self::_insertLocalizedFields($content, $field);
 		}
+		
+		Model::getInstance() -> updateRow("DELETE FROM fields WHERE contentId=? AND deleted=1", array($content -> contentId));
 		
 	}
 	
@@ -122,23 +127,24 @@ abstract class ContentFactory implements IContentFactory {
 				default:
 					$item = $content -> content -> $label -> $lang;
 					
-					if(is_scalar($item)) {
-						// 	$item = mysqli_real_escape_string($item);
-						$fieldsql = "INSERT INTO fields (contentId, lang, field, deleted) 
-											VALUES (?,?,?, 0) 
-											ON DUPLICATE KEY UPDATE deleted=0, 
-											id=LAST_INSERT_ID(id)";
-						
-						$id = Model::getInstance() -> updateRow($fieldsql, array($content -> contentId, $lang, $label));
-						
-						$pluginsql = "INSERT INTO plugin_{$field -> fieldtype} (fieldId, `{$field -> fieldtype}`) 
-										VALUES (?,?) 
-										ON DUPLICATE KEY UPDATE 
-										`{$field -> fieldtype}`=VALUES(`{$field -> fieldtype}`)";
-						
-						Model::getInstance() -> updateRow($pluginsql, array($id, $item));
-					}
-	
+					if(!\Bright::GetPluginLocator() -> has($field -> fieldtype))
+						throw new ContentException("ContentException::INVALID_PLUGIN_NAME", ContentException::INVALID_PLUGIN_NAME);
+					
+					$plugin = \Bright::GetPluginLocator() -> get($field -> fieldtype);
+
+					// Check if the data is valid
+					if(!$plugin -> isValid($item, $field))
+						continue;
+					
+					// Insert into the fields table,
+					$fieldsql = "INSERT INTO fields (contentId, lang, field, deleted) 
+										VALUES (?,?,?, 0) 
+										ON DUPLICATE KEY UPDATE deleted=0, 
+										id=LAST_INSERT_ID(id)";
+					
+					$id = Model::getInstance() -> updateRow($fieldsql, array($content -> contentId, $lang, $label));
+					
+					$plugin -> store($id, $item);
 			}
 		}
 		

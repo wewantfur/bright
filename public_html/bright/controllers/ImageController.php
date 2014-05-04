@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . '/../core/Bright.php');
+require_once(dirname(__FILE__) . '/../core/Bootstrap.php');
 
 if(!isset($_GET['mode']) || !isset($_GET['src'])) {
 	// redirect to default image

@@ -71,6 +71,7 @@ class DBPDO implements IDB {
 		$na = func_num_args();
 		$args = func_get_args();
 		// Normal update query
+		
 		if($na == 1) {
 			$this -> db -> query($args[0]);
 		} else {
