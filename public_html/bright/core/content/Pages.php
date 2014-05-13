@@ -146,13 +146,13 @@ class Pages extends Content {
 	private function _createTree() {
 
 		$return = array_shift(self::_tree);
-
+        $rgt = -1;
 		if ($return && $return -> lft + 1 != $return -> rgt) {
 			foreach (self::_tree as $key => $result) {
 				// 				$rgt = 0;
 				if ($result -> lft > $return -> rgt) //not a child
 					break;
-				if (@$rgt > $result -> lft) //not a top-level child
+				if ($rgt > $result -> lft) //not a top-level child
 					continue;
 				
 				$return -> children[] = self::_createTree();
