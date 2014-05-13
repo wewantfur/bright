@@ -138,7 +138,6 @@ class Pages extends Content {
 		}
 		
 		$page = Model::GetInstance() -> updateRow($sql, $param_arr);
-		//call_user_func_array(array($this -> db, 'insertPrepared' ), $param_arr);
 		
 		return self::getPages();
 	}
