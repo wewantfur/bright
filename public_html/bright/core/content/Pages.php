@@ -143,8 +143,7 @@ class Pages extends Content {
 		return self::getPages();
 	}
 
-	private function _createTree() {
-
+	private static function _createTree() {
 		$return = array_shift(self::_tree);
         $rgt = -1;
 		if ($return && $return -> lft + 1 != $return -> rgt) {
