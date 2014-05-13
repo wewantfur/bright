@@ -21,7 +21,7 @@ use Behat\Gherkin\Node\PyStringNode,
 //
 // Require 3rd-party libraries here:
 //
-require_once 'public_html/bright/core/Bright.php';
+require_once 'public_html/bright/core/Bootstrap.php';
 require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
@@ -47,6 +47,7 @@ class FeatureContext extends BehatContext
         $this -> result = null;
         $this->useContext('templatecontext', new TemplateContext($parameters));
         $this->useContext('filescontext', new FilesContext($parameters));
+        $this->useContext('pagecontext', new PageContext($parameters));
     }
     
     
@@ -64,7 +65,7 @@ class FeatureContext extends BehatContext
     public function iAmNotLoggedIn()
     {
         $auth = new Authorization();
-        if(!$auth -> isBEAuth())
+        if(!$auth -> IsBEAuth())
         	return true;
         
         throw new AuthException("");
@@ -76,7 +77,7 @@ class FeatureContext extends BehatContext
     public function iLoginWithAnd($arg1, $arg2) {
     	$auth = new Authorization();
     	try {
-    		$auth -> authBE($arg1, $arg2);
+    		$auth -> AuthBE($arg1, $arg2);
     	} catch(AuthException $ex) {
     		// Ignore auth exception
     	}
@@ -87,7 +88,7 @@ class FeatureContext extends BehatContext
      */
     public function iShouldBeLoggedIn()
     {    	
-    	if(!Authorization::isBEAuth())
+    	if(!Authorization::IsBEAuth())
     		throw new AuthException("no user logged in", AuthException::NO_USER);
     }
     
@@ -96,7 +97,7 @@ class FeatureContext extends BehatContext
      */
     public function iShouldNotBeLoggedIn()
     {
-    	if(Authorization::isBEAuth())
+    	if(Authorization::IsBEAuth())
     		throw new \Exception("no user should be logged in");
     }
     
@@ -115,7 +116,7 @@ class FeatureContext extends BehatContext
 //     			new Step\When('I press "Login"'),
 //     	);
     	$auth = new Authorization();
-    	$auth -> authBE('ids@wewantfur.com', '7011845');
+    	$auth -> AuthBE('ids@wewantfur.com', '7011845');
         //throw new PendingException();
     }
 
@@ -153,9 +154,18 @@ class FeatureContext extends BehatContext
     {
     	assertEquals($arg1, $this -> result);
     }
-    
-    
-    
+
+    /**
+     * @Then /^the result should be a "([^"]*)"$/
+     */
+    public function theResultShouldBeA($arg1)
+    {
+        assertInstanceOf($arg1, $this -> result);
+    }
+
+
+
+
     /**
      * @When /^I run "([^"]*)"$/
      */

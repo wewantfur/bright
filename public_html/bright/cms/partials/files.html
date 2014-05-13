@@ -1,21 +1,22 @@
 <div class="files">
 	<form id="fileupload" action="/bright/controllers/JSONController/core/files/Upload" method="POST" enctype="multipart/form-data" data-file-upload="uploadoptions" data-ng-class="{'fileupload-processing': processing() || loadingFiles}">
-	<input type="hidden" name="folder" value="{{selectedFolder.path}}" />
-	<div class="divider">
-		<div class="panel"> 
-			
-			<ul class="tree folders" ng-tree="folders" >
-				<li ng-class="{'tree-opened': item.isopen}">
-					<div ng-click="folderSelect()" ng-class="{selected: item.path==selectedFolder.path}">
-						<i ng-class="{'tree-opened': item.isopen, 'tree-closed': !item.isopen, hidden: !item.haschildren, 'tree-icon': true}" ng-click="folderOpenClose()" stop-event='click'></i>
-						<i ng-class="{'fa':true, 'fa-hdd-o': item.isroot, 'fa-folder': !item.isroot}"></i> 
-						{{item.label}}
-					</div>
-				</li>
-			</ul>
+		<input type="hidden" name="folder" value="{{selectedFolder.path}}" />
 		
-		</div>
-		<div class="panel">
+		<divider onwidthchange="updateWidths(widths)" widths="administrator.preferences.files.dividers">
+			<div class="panel dimmed-panel"> 
+				<h2 l10n-text="modules.files"></h2>
+				<ul class="tree folders" ng-tree="folders" >
+					<li ng-class="{'tree-opened': item.isopen}">
+						<div ng-click="folderSelect()" ng-class="{selected: item.path==selectedFolder.path}">
+							<i ng-class="{'tree-opened': item.isopen, 'tree-closed': !item.isopen, hidden: !item.haschildren, 'tree-icon': true}" ng-click="folderOpenClose()" stop-event='click'></i>
+							<i ng-class="{'fa':true, 'fa-hdd-o': item.isroot, 'fa-folder': !item.isroot}"></i> 
+							{{item.label}}
+						</div>
+					</li>
+				</ul>
+			</div>
+		
+			<div class="panel">
 				<div class="panel-top">
 					<button>Upload from url</button>
 					<button ng-class="{disabled: disabled}">
@@ -46,6 +47,7 @@
 					</li>
 					
 				</ul>
-		</div>
+			</div>
+		</divider>
 	</form>
 </div>

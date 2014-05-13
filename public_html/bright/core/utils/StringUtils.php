@@ -7,8 +7,9 @@ class StringUtils {
 	 * Check if haystack starts with needle
 	 * @param String $haystack
 	 * @param String $needle
-	 */
-	public static function startsWith($haystack, $needle) {
+     * @return \SplBool
+     */
+	public static function StartsWith($haystack, $needle) {
 		return !strncmp($haystack, $needle, strlen($needle));
 	}
 	
@@ -16,8 +17,9 @@ class StringUtils {
 	 * Check if haystack ends with needle
 	 * @param String $haystack
 	 * @param String $needle
+     * @return \SplBool
 	 */
-	public static function endsWith($haystack, $needle) {
+	public static function EndsWith($haystack, $needle) {
 		$length = strlen($needle);
 		if ($length == 0) {
 			return true;
@@ -26,7 +28,7 @@ class StringUtils {
 		return (substr($haystack, -$length) === $needle);
 	}
 	
-	public static function sanitizeLabel($label) {
+	public static function SanitizeLabel($label) {
 		$label = strip_tags($label);
 		// Preserve escaped octets.
 		$label = preg_replace('|%([a-fA-F0-9][a-fA-F0-9])|', '---$1---', $label);
@@ -35,12 +37,12 @@ class StringUtils {
 		// Restore octets.
 		$label = preg_replace('|---([a-fA-F0-9][a-fA-F0-9])---|', '%$1', $label);
 		
-		$label = self::_remove_accents($label);
-		if (self::_seems_utf8($label)) {
+		$label = self::_RemoveAccents($label);
+		if (self::_SeemsUtf8($label)) {
 			if (function_exists('mb_strtolower')) {
 				$label = mb_strtolower($label, 'UTF-8');
 			}
-			$label = self::_utf8_uri_encode($label, 200);
+			$label = self::_Utf8UriEncode($label, 200);
 		}
 		
 		$label = strtolower($label);
@@ -67,7 +69,7 @@ class StringUtils {
 	 * @param int $length Max length of the string
 	 * @return string String with Unicode encoded for URI.
 	 */
-	private static function _utf8_uri_encode( $utf8_string, $length = 0 ) {
+	private static function _Utf8UriEncode( $utf8_string, $length = 0 ) {
 		$unicode = '';
 		$values = array();
 		$num_octets = 1;
@@ -116,11 +118,11 @@ class StringUtils {
 	 * @param string $string Text that might have accent characters
 	 * @return string Filtered string with replaced "nice" characters.
 	 */
-	private static function _remove_accents($string) {
+	private static function _RemoveAccents($string) {
 		if ( !preg_match('/[\x80-\xff]/', $string) )
 			return $string;
 	
-		if ($this -> seems_utf8($string)) {
+		if (self::_SeemsUtf8($string)) {
 			$chars = array(
 					// Decompositions for Latin-1 Supplement
 					chr(195).chr(128) => 'A', chr(195).chr(129) => 'A',
@@ -254,7 +256,7 @@ class StringUtils {
 	 * @param string $Str The string to be checked
 	 * @return bool True if $Str fits a UTF-8 model, false otherwise.
 	 */
-	private static function _seems_utf8($Str) { # by bmorel at ssi dot fr
+	private static function _SeemsUtf8($Str) { # by bmorel at ssi dot fr
 		$length = strlen($Str);
 		for ($i=0; $i < $length; $i++) {
 			if (ord($Str[$i]) < 0x80) continue; # 0bbbbbbb

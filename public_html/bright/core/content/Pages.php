@@ -20,7 +20,7 @@ class Pages extends Content {
 				FROM pages p 
 				LEFT JOIN templates t ON p.templateId = t.templateId
 				WHERE parentId=?";
-		return Model::getInstance() -> getRows($sql, array($parentId), '\bright\core\model\vo\Page');
+		return Model::GetInstance() -> getRows($sql, array($parentId), '\bright\core\model\vo\Page');
 	}
 	
 	public static function getHomepage() {
@@ -28,7 +28,7 @@ class Pages extends Content {
 				INNER JOIN content c ON p.contentId = c.contentId 
 				LEFT JOIN templates t ON c.templateId = t.templateId
 				WHERE parentId = 0";
-		$page = Model::getInstance() -> getRow($sql, null, '\bright\core\model\vo\Page');
+		$page = Model::GetInstance() -> getRow($sql, null, '\bright\core\model\vo\Page');
 		if($page) { 
 			$page = self::getContent($page -> contentId);
 		}
@@ -37,17 +37,18 @@ class Pages extends Content {
 	
 	/**
 	 * Gets the root ID for the entire tree (most of the time '1')
+     * @todo Should return lft & rgt values
 	 * @return int
 	 */
 	public static function getBERoot() {
-		return Model::getInstance() -> getField("SELECT p.pageId FROM pages p WHERE lft=1");
+		return 1;//Model::GetInstance() -> getField("SELECT p.pageId FROM pages p WHERE lft=1");
 	}
 	
 	/**
 	 * Returns all the pages
 	 */
 	public static function getPages($astree = false) {
-		$result = Model::getInstance() -> getRow('SELECT lft, rgt FROM pages WHERE lft=1');
+		$result = Model::GetInstance() -> getRow('SELECT lft, rgt FROM pages WHERE lft=1');
 		if(!$result)
 			return null;
 		
@@ -58,10 +59,10 @@ class Pages extends Content {
 				WHERE lft BETWEEN ? AND ?
 				ORDER BY lft ASC";
 		
-		$pages = Model::getInstance() -> getRows($sql, array($result->lft, $result->rgt), '\bright\core\model\vo\Page');
+		$pages = Model::GetInstance() -> getRows($sql, array($result->lft, $result->rgt), '\bright\core\model\vo\Page');
 		if($astree) {
 			$ap = array_values($pages);
-			$tree = Utils::createTree($ap);
+			$tree = Utils::CreateTree($ap);
 // 			$tree= null;
 			foreach($pages as &$page) {
 				$page -> parent = null;
@@ -71,47 +72,7 @@ class Pages extends Content {
 		return $pages;
 	}
 	
-	public static function getPagesForBE() {
-		$bu = Authorization::getBEUser();
-
-		if(count($bu -> page_mountpoints) == 0)
-			throw new PageException('NO_MOUNTPOINTS', PageException::NO_MOUNTPOINTS);
-		
-		$pids = implode(',', $bu -> page_mountpoints);
-		$mountpoints = Model::getInstance() -> getRows("SELECT lft, rgt FROM pages WHERE pageId IN ($pids)");
-		
-		$params = array();
-		$wheres = array();
-		foreach($mountpoints as $mountpoint) {
-			$wheres[] = '(lft BETWEEN ? and ?)';
-			$params[] = $mountpoint -> lft;
-			$params[] = $mountpoint -> rgt;
-		}
-		
-		$where = implode(' OR ', $wheres);
-		
-		$sql = "SELECT p.*, 
-					c.*, 
-					t.icon, 
-					(SELECT count(pageId) 
-				FROM pages pc WHERE parentId=p.pageId) AS numchildren
-				FROM pages p
-				INNER JOIN content c ON c.contentId = p.contentId
-				LEFT JOIN templates t ON c.templateId = t.templateId
-				WHERE $where
-				ORDER BY lft ASC";
-		
-		$pages = Model::getInstance() -> getRows($sql, $params, '\bright\core\model\vo\Page');
-		
-		$ap = array_values($pages);
-		$tree = Utils::createTree($ap);
-		// 			$tree= null;
-		foreach($pages as &$page) {
-			$page -> parent = null;
-		}
-		return (object) array('tree' => $tree, 'list' => $pages);
-		
-	}
+	
 	
 	public static function getPage($id) {
 		$sql = "SELECT p.*, c.*, t.icon, (SELECT count(pageId) FROM pages pc WHERE parentId=p.pageId) AS numchildren
@@ -119,7 +80,7 @@ class Pages extends Content {
 				INNER JOIN content c ON p.contentId = c.contentId
 				LEFT JOIN templates t ON c.templateId = t.templateId
 				WHERE p.pageId=?";
-		$page = Model::getInstance() -> getRow($sql, array($id), '\bright\core\model\vo\Page');
+		$page = Model::GetInstance() -> getRow($sql, array($id), '\bright\core\model\vo\Page');
 		$cclass = new Content();
 		$content = $cclass -> getContent($page -> contentId);
 		return $content;
@@ -176,7 +137,7 @@ class Pages extends Content {
 			$param_arr[] = $page -> $key;
 		}
 		
-		$page = Model::getInstance() -> updateRow($sql, $param_arr);
+		$page = Model::GetInstance() -> updateRow($sql, $param_arr);
 		//call_user_func_array(array($this -> db, 'insertPrepared' ), $param_arr);
 		
 		return self::getPages();

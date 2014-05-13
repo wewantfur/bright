@@ -2,7 +2,7 @@
 namespace bright\core\model\vo;
 
 class Marker extends Content {
-	public $contentId;
+
 	public $markerId;
 	
 	public $lat;
@@ -14,8 +14,7 @@ class Marker extends Content {
 	public $layerId;
 	public $color;
 	public $inheritcolor = false;
-	
-	public $icon;
+
 	public $iconsize;
 	
 	public $street;

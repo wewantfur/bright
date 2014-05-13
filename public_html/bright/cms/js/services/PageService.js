@@ -12,7 +12,7 @@ bright.service('PageService', function($http, $q) {
 		 */
 		setPage: function(data) {
 			var deferred = $q.defer();
-			$http.post('/bright/json/core/factories/PageFactory/setContent', {arguments: [data]}).success(function(data) {
+			$http.post('/bright/json/core/factories/PageFactory/SetContent', {arguments: [data]}).success(function(data) {
 				deferred.resolve(data);
 			});
 			
@@ -32,7 +32,7 @@ bright.service('PageService', function($http, $q) {
 		getPages : function() {
 			var deferred = $q.defer();
 			if(typeof(pages) == 'undefined') {
-				$http.get('/bright/json/core/content/Pages/getPagesForBE').success(function(data) {
+				$http.get('/bright/json/core/factories/PageFactory/GetPagesForBE').success(function(data) {
 					if(data.status == 'OK') {
 						pages = data.result;
 						deferred.resolve(data.result);

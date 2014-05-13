@@ -5,6 +5,7 @@ use bright\core\exceptions\TemplateException;
 
 use bright\core\exceptions\Exception;
 
+use bright\core\exceptions\TypeException;
 use bright\core\utils\Logger;
 
 use bright\core\auth\Authorization;
@@ -31,24 +32,24 @@ class TemplateFactory {
 	 * @throws TemplateException Throws a TemplateException when the template is still in use
 	 * @return The number of deleted templates
 	 */
-	public static function deleteTemplate($templateId) {
+	public static function DeleteTemplate($templateId) {
 		$templateId = filter_var($templateId, FILTER_VALIDATE_INT);
 		if(!$templateId)
 			throw new Exception('Exception::INCORRECT_PARAM_INT', Exception::INCORRECT_PARAM_INT);
 		
-		if(ContentFactory::contentOfTemplateExists($templateId)) 
+		if(AbstractContentFactory::contentOfTemplateExists($templateId))
 			throw new TemplateException('TemplateException::TEMPLATE_IN_USE', TemplateException::TEMPLATE_IN_USE);
 		
-		return Model::getInstance() -> deleteRow("DELETE FROM templates WHERE templateId=?", $templateId);
+		return Model::GetInstance() -> deleteRow("DELETE FROM templates WHERE templateId=?", $templateId);
 	}
 	
 	/**
 	 * Deletes a template by label
 	 * @param unknown_type $label
 	 */
-	public static function deleteTemplateByLabel($label) {
-		$tpl = self::_getTemplate($label, 'label');
-		return self::deleteTemplate($tpl -> templateId);
+	public static function DeleteTemplateByLabel($label) {
+		$tpl = self::_GetTemplate($label, 'label');
+		return self::DeleteTemplate($tpl -> templateId);
 	}
 
 	/**
@@ -56,16 +57,16 @@ class TemplateFactory {
 	 * @param int $templateId
 	 * @return \bright\core\model\vo\Template The template
 	 */
-	public static function getTemplate($templateId) {
-		return self::_getTemplate($templateId, 'templateId');
+	public static function GetTemplate($templateId) {
+		return self::_GetTemplate($templateId, 'templateId');
 	}
 
 	/**
 	 * Returns all the templates
 	 */
-	public static function getTemplates() {
+	public static function GetTemplates() {
 		$sql = "SELECT * FROM templates ORDER BY displaylabel";
-		return Model::getInstance() -> getRows($sql, null, '\bright\core\model\vo\Template');
+		return Model::GetInstance() -> getRows($sql, null, '\bright\core\model\vo\Template');
 	}
 
 	/**
@@ -73,7 +74,7 @@ class TemplateFactory {
 	 * @param int $contentId The id of the contentitem
 	 * @return \bright\core\model\vo\Template
 	 */
-	public static function getTemplateByContentId($contentId) {
+	public static function GetTemplateByContentId($contentId) {
 		$sql = "SELECT t.*,
 		tf.label as fieldlabel,
 		tf.displaylabel as fielddisplaylabel,
@@ -85,9 +86,9 @@ class TemplateFactory {
 		INNER JOIN content c ON c.templateId=t.templateId AND c.contentId=?
 		ORDER BY tf.idx";
 		
-		$fields = Model::getInstance() -> getRows($sql, array($contentId), '\bright\core\model\vo\Template');
+		$fields = Model::GetInstance() -> getRows($sql, array($contentId), '\bright\core\model\vo\Template');
 		
-		return self::_createTemplate($fields);
+		return self::_CreateTemplate($fields);
 	}
 
 	/**
@@ -95,12 +96,12 @@ class TemplateFactory {
 	 * @param string $label The label of the template
 	 * @return \bright\core\model\vo\Template
 	 */
-	public static function getTemplateByLabel($label) {
-		return self::_getTemplate($label, 'label');
+	public static function GetTemplateByLabel($label) {
+		return self::_GetTemplate($label, 'label');
 	}
 
-	public static function setTemplate(Template $template) {
-		$au = Authorization::getBEUser();
+	public static function SetTemplate(Template $template) {
+		$au = Authorization::GetBEUser();
 
 		// 		$tprops = get_class_vars('\bright\core\model\vo\Template');
 		// 		$template -> label = StringUtils::sanitizeLabel($template -> label);
@@ -120,13 +121,13 @@ class TemplateFactory {
 		// 		$sql .= 'templateId = LAST_INSERT_ID(templateId)';
 
 		// 		try {
-		// 			$id = Model::getInstance() -> updateRow($sql, $varr);
+		// 			$id = Model::GetInstance() -> updateRow($sql, $varr);
 		// 		} catch(\Exception $e) {
 		// 			Utils::log($e-> getCode(), $e -> getMessage());//$e -> getTraceAsString());
 		// 		}
 
 		try {
-			$id = Model::getInstance() -> updateObject('templates', $template, 'templateId');
+			$id = Model::GetInstance() -> updateObject('templates', $template, 'templateId');
 		
 		} catch(Exception $e) {
 			throw new TemplateException('TemplateException::CANNOT_SAVE_TEMPLATE', TemplateException::CANNOT_SAVE_TEMPLATE);
@@ -139,12 +140,12 @@ class TemplateFactory {
 					$tfield -> templateId = $id;
 					$tfield -> idx = $i++;
 				}
-				Model::getInstance() -> updateObject('templatefields', $template -> fields, 'fieldId');
+				Model::GetInstance() -> updateObject('templatefields', $template -> fields, 'fieldId');
 			}
 		}
 	}
 
-	private static function _createTemplate($fields) {
+	private static function _CreateTemplate($fields) {
 		if($fields) {
 			$template = clone $fields[0];
 
@@ -192,7 +193,7 @@ class TemplateFactory {
 	 * @throws TemplateException
 	 * @return \bright\core\model\VO\Template
 	 */
-	private static function _getTemplate($identifier, $field) {
+	private static function _GetTemplate($identifier, $field) {
 		$field = filter_var($field, FILTER_SANITIZE_STRING);
 		switch($field) {
 			case 'templateId':
@@ -202,7 +203,7 @@ class TemplateFactory {
 				$identifier = filter_var($identifier, FILTER_SANITIZE_STRING);
 				break;
 			default:
-				throw new TypeException($msg, $code, $previous, 'templateId or label', $field);
+				throw new TypeException(TypeException::INCORRECT_PARAM_INT, TypeException::INCORRECT_PARAM_INT, null, 'templateId or label', $field);
 
 		}
 		if($identifier == false || $field == false)
@@ -219,9 +220,9 @@ class TemplateFactory {
 				WHERE t.$field=?
 				ORDER BY tf.idx ASC";
 		
-		$results =  Model::getInstance() -> getRows($sql, array($identifier), '\bright\core\model\vo\Template');
+		$results =  Model::GetInstance() -> getRows($sql, array($identifier), '\bright\core\model\vo\Template');
 		if($results) {
-			$tpl = Utils::stripVO($results[0]);
+			$tpl = Utils::StripVO($results[0]);
 			$tpl -> fields = array();
 
 			switch($tpl -> type) {

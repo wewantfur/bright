@@ -33,7 +33,7 @@ class PasswordUtils {
 				));
 	}
 
-	public static function validate_password($password, $correct_hash) {
+	public static function Validate_password($password, $correct_hash) {
 		$params = explode(":", $correct_hash);
 		if(count($params) < PasswordUtils::HASH_SECTIONS)
 			return false;

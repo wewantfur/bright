@@ -12,7 +12,7 @@ use bright\core\model\Model;
 class Setup {
 	
     public static function SetupBright() {
-        $ng = Model::getInstance() -> getField("SELECT count('GID') FROM be_groups");
+        $ng = Model::GetInstance() -> getField("SELECT count('GID') FROM be_groups");
         if($ng == 0) {
             // Groups not initialized
             /*	
@@ -41,7 +41,7 @@ class Setup {
                 $sqla[] = "($key, '$name', 1)";
             }
             $sql .= implode(",\r\n", $sqla);
-            Model::getInstance() -> updateRow($sql);
+            Model::GetInstance() -> updateRow($sql);
         }
     }
     

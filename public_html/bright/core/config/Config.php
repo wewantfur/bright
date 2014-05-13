@@ -16,7 +16,7 @@ class Config {
 	}
 	
 	public final function getPreferences() {
-		$beuser = Authorization::getBEUser();
+		$beuser = Authorization::GetBEUser();
 		return $beuser -> preferences;
 		
 	}
@@ -27,10 +27,10 @@ class Config {
 	 * @return object The new preferences
 	 */
 	public final function setPreferences($data) {
-		$beuser = Authorization::getBEUser();
+		$beuser = Authorization::GetBEUser();
 		Logger::log($data);
-		Model::getInstance() -> updateRow("UPDATE be_users SET preferences=? WHERE UID=?", [json_encode($data),$beuser -> UID]);
-		Authorization::updateBEUser();
+		Model::GetInstance() -> updateRow("UPDATE be_users SET preferences=? WHERE UID=?", [json_encode($data),$beuser -> UID]);
+		Authorization::UpdateBEUser();
 		
 		return self::getPreferences();
 		

@@ -22,23 +22,20 @@ bright.controller('contentCtrl',
 			case 'page':
 				/**
 				 * @todo Move this to a service to allow switching between views and keeping data 
-				 */ 
-				if($state.params.pageId == '') {
-					$scope.content = {};
-					break;
-				}
-				
-				$http.post('/bright/json/core/content/Pages/getPage', {arguments:[$state.params.pageId]}).success(function(data) {
-					if(data.status == 'OK') {
-						$scope.content = data.result;
-						$scope.hasTemplate = true;
-					} else {
-						console.log(":'(",data);
-						
-					}
-				}).error(function(data) {
-					console.log(":'(",data);
-				});
+				 */
+					
+                $http.post('/bright/json/core/factories/PageFactory/getContentByPageId', {arguments:[$state.params.pageId]}).success(function(data) {
+                    if(data.status == 'OK') {
+                        $scope.content = data.result;
+                        $scope.hasTemplate = true;
+                        console.log($scope.content);
+                    } else {
+                        console.log(":'(",data);
+
+                    }
+                }).error(function(data) {
+                    console.log(":'(",data);
+                });
 				break;
 		}
 		

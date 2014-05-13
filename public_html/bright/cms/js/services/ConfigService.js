@@ -1,5 +1,5 @@
 bright = angular.module('bright');
-bright.service('ConfigService', function($q, $http) {
+bright.service('ConfigService', ['$q', '$http', 'ExceptionService', function($q, $http,ExceptionService) {
 	var settings;
 	var loading = false;
 	return {
@@ -29,7 +29,13 @@ bright.service('ConfigService', function($q, $http) {
 		setPreferences: function(preferences) {
 			var deferred = $q.defer();
 			$http.post('/bright/json/core/config/Config/setPreferences', {arguments: [preferences]}).success(function(data) {
-				deferred.resolve(data);
+				if(data.status == 'OK') {
+					
+					deferred.resolve(data.result);
+				} else {
+					deferred.reject(ExceptionService.errorHandler(data));
+				}
+				isLoading = false;
 			});
 			
 			return deferred.promise;
@@ -45,4 +51,4 @@ bright.service('ConfigService', function($q, $http) {
 			return '[language]';
 		}
 	};
-});
+}]);

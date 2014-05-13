@@ -7,7 +7,7 @@ if(isset($_POST['login'])) {
 	$auth = new Authorization();
 	
 	try {
-		$auth -> authBE($_POST['email'],$_POST['password']);
+		$auth -> AuthBE($_POST['email'],$_POST['password']);
 		header("Location: /bright/cms/");
 		exit;
 	}catch(AuthException $ex) {

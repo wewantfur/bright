@@ -52,11 +52,11 @@ class Content {
 						$sfields, f.lang as `field.lang`, f.field as `field.field` FROM content c
 				LEFT JOIN fields f ON c.contentId = f.contentId $jfields
 				WHERE c.contentId=?";
-		$result = Model::getInstance() -> getRows($sql, $contentId, $ctype);
+		$result = Model::GetInstance() -> getRows($sql, $contentId, $ctype);
 		if(!$result)
 			return null;
 		
-		$content = Utils::stripVO($result[0]);
+		$content = Utils::StripVO($result[0]);
 		$content -> template = $template -> label;
 		foreach($result[0] as $key => $value) {
 			if(strpos($key, 'content') !== 0 && strpos($key, 'field') !== 0) {
@@ -86,9 +86,9 @@ class Content {
 	public static function setContent(&$content) {
 		// @todo sanitize
 		
-		$beuser = Authorization::getBEUser();
+		$beuser = Authorization::GetBEUser();
 		$template = TemplateFactory::getTemplate($content -> templateId);
-		$id = Model::getInstance() -> updateRow("INSERT INTO `content` (contentId, templateId, creationdate, modificationdate, createdby, modifiedby, UID, GID) VALUES
+		$id = Model::GetInstance() -> updateRow("INSERT INTO `content` (contentId, templateId, creationdate, modificationdate, createdby, modifiedby, UID, GID) VALUES
 											(?, ?, NOW(), NULL, ?, NULL, ?, ?) 
 											ON DUPLICATE KEY UPDATE templateId=VALUES(templateId), 
 											modificationdate=NOW(), 
@@ -106,7 +106,7 @@ class Content {
 			$fields = array();
 			$langs = explode(',', AVAILABLELANG);
 			
-			Model::getInstance() -> updateRow("UPDATE fields SET deleted=1 WHERE contentId=?", array($content -> contentId));
+			Model::GetInstance() -> updateRow("UPDATE fields SET deleted=1 WHERE contentId=?", array($content -> contentId));
 			
 			
 			foreach($template -> fields as $field) {
@@ -124,15 +124,15 @@ class Content {
 										$listitem -> parentId = $content -> contentId;
 										$listitem -> idx = $i++;
 										self::setContent($listitem);
-										Model::getInstance() -> updateRow("INSERT INTO plugin_list (contentId, parentId, idx) VALUES (?,?,?)", array($listitem -> contentId, $listitem -> parentId, $listitem -> idx));
+										Model::GetInstance() -> updateRow("INSERT INTO plugin_list (contentId, parentId, idx) VALUES (?,?,?)", array($listitem -> contentId, $listitem -> parentId, $listitem -> idx));
 									}
 								default:
 									$item = $content -> content -> $label -> $lang;
 									if(is_scalar($item)) {
 // 										$item = mysqli_real_escape_string($item);
 										$fieldsql = "INSERT INTO fields (contentId, lang, field, deleted) VALUES (?,?,?, 0) ON DUPLICATE KEY UPDATE deleted=0, id=LAST_INSERT_ID(id)";
-										$id = Model::getInstance() -> updateRow($fieldsql, array($content -> contentId, $lang, $label));
-										Model::getInstance() -> updateRow("INSERT INTO plugin_{$field -> fieldtype} (fieldId, `{$field -> fieldtype}`) VALUES (?,?) ON DUPLICATE KEY UPDATE `{$field -> fieldtype}`=VALUES(`{$field -> fieldtype}`)", array($id, $item));
+										$id = Model::GetInstance() -> updateRow($fieldsql, array($content -> contentId, $lang, $label));
+										Model::GetInstance() -> updateRow("INSERT INTO plugin_{$field -> fieldtype} (fieldId, `{$field -> fieldtype}`) VALUES (?,?) ON DUPLICATE KEY UPDATE `{$field -> fieldtype}`=VALUES(`{$field -> fieldtype}`)", array($id, $item));
 									}
 							}
 						}
@@ -193,7 +193,7 @@ class Content {
 			$param_arr[] = $page -> $key;
 		}
 		
-		return Model::getInstance() -> updateRow($sql, implode('',$fields), $param_arr);
+		return Model::GetInstance() -> updateRow($sql, implode('',$fields), $param_arr);
 		
 	}
 	

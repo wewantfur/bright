@@ -378,6 +378,10 @@ div.modal {
 .files .grid-mode li div[data-ext="pdf"] i {
 	display:none;
 }
+
+.files .grid-mode li.active div {
+    border: 1px solid #3676ee;
+}
 	
 .files .grid-mode li span {
 	width: 100px;

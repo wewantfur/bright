@@ -64,6 +64,7 @@ class Constants extends \bright\core\config\Constants {
 		parent::__construct();
 		
 		$this -> ROUTES = array('/homepage' => 'homepageView');
+// 		Bright::$_pluginLocator -> add('downloadcenter', '\ga\plugins\Plugin_downloadcenter');
 	}
 }
 new Constants();

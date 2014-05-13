@@ -17,9 +17,9 @@ class Page extends Content {
 	
 	public $publicationdate;
 	public $expirationdate;
-	public $alwayspublished;
+	public $alwayspublished = true;
 
-	public $showinnavigation;
+	public $showinnavigation = true;
 	public $idx;
 
 	public $parent;
@@ -27,7 +27,7 @@ class Page extends Content {
 	public $lft;
 	public $rgt;
 	
-	public $isopen=false;
+	public $isopen = false;
 	
 	public $locked = false;
 	

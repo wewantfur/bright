@@ -4,12 +4,12 @@ Feature: files
   
 Scenario: List all folders
   Given I am logged in as Administrator
-  When I run "core\files\Folders\getFolders()"
+  When I run "core\factories\FolderFactory\GetFolders()"
   Then the result should be an array of 1 \bright\core\model\vo\Folder objects	
   
 Scenario: List all files
   Given I am logged in as Administrator
-  When I run "core\files\Files\getFiles()" with
+  When I run "core\factories\FileFactory\GetFiles()" with
   """
   /
   """
@@ -17,7 +17,7 @@ Scenario: List all files
   
 Scenario: Delete a file 
   Given I am logged in as Administrator
-  When I run "core\files\Files\deleteFile()" with
+  When I run "core\factories\FileFactory\Delete()" with
   """
   1280.jpg
   /
@@ -26,7 +26,7 @@ Scenario: Delete a file
   
 Scenario: Create a folder 
   Given I am logged in as Administrator
-  When I run "core\files\Folders\setFolder()" with
+  When I run "core\factories\FolderFactory\Set()" with
   """
   amsterdam
   /
@@ -36,13 +36,13 @@ Scenario: Create a folder
   
 Scenario: Delete a folder 
   Given I am logged in as Administrator
-  When I run "core\files\Folders\setFolder()" with
+  When I run "core\factories\FolderFactory\Set()" with
   """
   amsterdam
   /
   """
   Then the result should be an array of 3 \bright\core\model\vo\Folder objects
-  When I run "core\files\Folders\deleteFolder()" with
+  When I run "core\factories\FolderFactory\Delete()" with
   """
   amsterdam
   /
@@ -52,14 +52,14 @@ Scenario: Delete a folder
   
 Scenario: Move a file 
   Given I am logged in as Administrator
-  When I run "core\files\Files\moveFile()" with
+  When I run "core\factories\FileFactory\Move()" with
   """
   1280.jpg 
   /
   groningen
   """
   Then the result should be an array of 3 \bright\core\model\vo\File objects
-  When I run "core\files\Files\getFiles()" with
+  When I run "core\factories\FileFactory\GetFiles()" with
   """
   groningen
   """
@@ -72,5 +72,5 @@ Scenario: Get a file object
   
 #Scenario: Upload a file
 #  Given I am logged in as Administrator
-#  When I run "core\files\Files\setFile()"
+#  When I run "core\factories\FileFactory\setFile()"
 #  Then the result should be an array of 5 \bright\core\model\vo\File objects

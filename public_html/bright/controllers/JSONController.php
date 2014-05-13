@@ -8,7 +8,7 @@ require_once(dirname(__FILE__) . '/../core/Bootstrap.php');
 class JSONController {
 	function __construct() {
 		$v = filter_input(INPUT_GET, 'v', FILTER_SANITIZE_STRING);
-		if(StringUtils::endsWith($v, '/'))
+		if(StringUtils::EndsWith($v, '/'))
 			$v = substr($v, 0, -1);
 		$va = explode('/', $v);
 		$va[0] = 'bright';

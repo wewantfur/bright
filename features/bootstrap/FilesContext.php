@@ -28,6 +28,7 @@ class FilesContext extends BehatContext
 	{
 		// Initialize your context here
 		unset($_SESSION['bright']);
+
 		$this -> result = null;
 		/**
 		 * Copy temp files structure for testing
@@ -47,9 +48,9 @@ class FilesContext extends BehatContext
 		$p = '';
 		foreach($paths as $path) {
 			$p .= $path;
-			Folders::getFolders($p);
+			\bright\core\factories\FolderFactory::GetFolders($p);
 		}
-		$files = Files::getFiles($p);
+		$files = \bright\core\factories\FileFactory::GetFiles($p);
 		foreach($files as $file) {
 			if($file -> label == $fname) {
 				return $file;

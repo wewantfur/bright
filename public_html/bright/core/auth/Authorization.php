@@ -4,6 +4,7 @@ namespace bright\core\auth;
 
 use bright\core\exceptions\Exception;
 use bright\core\content\Pages;
+use bright\core\utils\Logger;
 use bright\core\utils\PasswordUtils;
 use bright\core\model\vo\BEUser;
 use bright\core\model\vo\BEGroup;
@@ -29,18 +30,41 @@ class Authorization {
 
     private static $_beuser = null;
 
+    public static function AddMountPoint($lft) {
+        $beUser = self::GetBEUser();
+        $GID = $beUser -> default_GID;
+        $mountPoints = Model::GetInstance() -> getRowsAsArray("SELECT lft, GID FROM pages_mountpoints WHERE GID=?", $GID);
+
+        if(!$mountPoints)
+            $mountPoints = [[1, (int)$GID]];
+
+        $mountPoints[] = ['?', (int)$GID];
+
+        array_walk($mountPoints, function(&$item) {
+            $item = "({$item[0]}, {$item[1]})";
+        });
+
+        $sql = "INSERT IGNORE INTO pages_mountpoints (lft, GID)
+                VALUES " . implode(",\r\n", $mountPoints);
+Logger::log($sql);
+        Model::GetInstance() -> updateRow($sql, [$lft]);
+
+        self::UpdateBEUser();
+    }
+
     /**
      * Authenticates a backend user
      * @param string $email
      * @param string $pass
      * @throws AuthException
      */
-    public static function authBE($email, $pass) {
+    public static function AuthBE($email, $pass) {
         try {
             // Log out current user
-            self::getBEUser();
-            self::logoutBE();
+            /*self::GetBEUser();*/
+            self::LogoutBE();
         } catch (AuthException $e) {/* Swallow it */
+            Logger::log(__FUNCTION__ ,$e -> getMessage());
         }
 
         $email = filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -55,18 +79,18 @@ class Authorization {
         }
 
         // First select the hashed password from the db
-        $hash = Model::getInstance()->getField("SELECT bu.password FROM be_users bu WHERE bu.email = ?", array($email));
+        $hash = Model::GetInstance()->getField("SELECT bu.password FROM be_users bu WHERE bu.email = ?", array($email));
         
         if (!$hash) {
             throw new AuthException('WRONG_CREDENTIALS', AuthException::UNKNOWN_USER);
         }
         
-        if (!PasswordUtils::validate_password($pass, $hash)) {
+        if (!PasswordUtils::Validate_password($pass, $hash)) {
             throw new AuthException('WRONG_CREDENTIALS', AuthException::INVALID_PASSWORD);
         }
 
 
-        $query = "SELECT bu.*, bg.GID, bg.name as groupname, pm.pageId as page_mountpoint, fm.path as file_mountpoint
+        $query = "SELECT bu.*, bg.GID, bg.name as groupname, pm.lft as page_mountpoint, fm.path as file_mountpoint
 		FROM be_users bu
 		LEFT JOIN be_usergroups bug ON bu.UID = bug.UID
 		LEFT JOIN be_groups bg ON bug.GID = bg.GID
@@ -75,26 +99,29 @@ class Authorization {
 		WHERE bu.email = ?";
 
 
-        $result = Model::getInstance()->getRows($query, array($email), '\bright\core\model\vo\BEUser');
+        $result = Model::GetInstance()->getRows($query, array($email), '\bright\core\model\vo\BEUser');
 
         if (!$result) {
             throw new AuthException('WRONG_CREDENTIALS', AuthException::WRONG_CREDENTIALS);
         }
 
-        $beuser = Utils::stripVO($result[0]);
-    	Model::getInstance()->updateRow("UPDATE be_users SET lastlogin=NOW() WHERE UID=?", array($beuser->UID));
-        $beuser->lastlogin = date(\DateTime::W3C);
+        $beUser = self::_BuildUserFromResult($result);
+        Logger::clear();
+        Logger::log($beUser);
+
+        Model::GetInstance()->updateRow("UPDATE be_users SET lastlogin=NOW() WHERE UID=?", array($beUser->UID));
+        $beUser->lastlogin = date(\DateTime::W3C);
         
-        $_SESSION['bright']['be_user'] = serialize($beuser);
-		self::updateBEUser();
+        $_SESSION['bright']['be_user'] = serialize($beUser);
+		self::UpdateBEUser();
 		        
-        return $beuser;
+        return $beUser;
     }
 
     /**
      * Logs out the currently logged in backend user
      */
-    public static function logoutBE() {
+    public static function LogoutBE() {
         self::$_beuser = null;
         unset($_SESSION['bright']['be_user']);
     }
@@ -103,20 +130,16 @@ class Authorization {
      * @todo Implement
      * @param \bright\core\model\vo\BEUser $user
      */
-    public static function setBEUser(BEUser $user) {
+    public static function SetBEUser(BEUser $user) {
         $hash = PasswordUtils::create_hash($user->password);
     }
-
-    /////////////////////////////////////////////////
-    ///////////		STATIC METHODS		/////////////
-    /////////////////////////////////////////////////
 
     /**
      * Gets the currently logged in backend user
      * @throws AuthException
      * @return \bright\core\model\vo\BEUser
      */
-    public static function getBEUser() {
+    public static function GetBEUser() {
         if (!isset($_SESSION['bright']['be_user'])) {
             throw new AuthException('NO BE USER AUTH', AuthException::NO_USER);
         }
@@ -132,12 +155,12 @@ class Authorization {
      * @throws Exception
      * @return boolean
      */
-    public static function inGroup($group) {
+    public static function UserIsInGroup($group) {
         $group = filter_var($group, FILTER_VALIDATE_INT);
         if ($group === false || $group === null)
             throw new Exception('', Exception::INCORRECT_PARAM_INT);
 
-        $bu = self::getBEUser();
+        $bu = self::GetBEUser();
 
         foreach ($bu->groups as $bugroup) {
             if ($bugroup->GID == Authorization::GR_SU)
@@ -152,10 +175,10 @@ class Authorization {
      * Updates the user in the session with the data from the database
      * @return \bright\core\model\vo\BEUser
      */
-    public static function updateBEUser() {
-    	$usr = self::getBEUser();
+    public static function UpdateBEUser() {
+    	$usr = self::GetBEUser();
     	
-    	$query = "SELECT bu.*, bg.GID, bg.name as groupname, pm.pageId as page_mountpoint, fm.path as file_mountpoint
+    	$query = "SELECT bu.*, bg.GID, bg.name as groupname, pm.lft as page_mountpoint, fm.path as file_mountpoint
     	FROM be_users bu
     	LEFT JOIN be_usergroups bug ON bu.UID = bug.UID
     	LEFT JOIN be_groups bg ON bug.GID = bg.GID
@@ -164,43 +187,56 @@ class Authorization {
     	WHERE bu.UID = ?";
     	
     	
-    	$result = Model::getInstance()->getRows($query, array($usr -> UID), '\bright\core\model\vo\BEUser');
+    	$result = Model::GetInstance()->getRows($query, array($usr -> UID), '\bright\core\model\vo\BEUser');
     	
-    	$beuser = Utils::stripVO($result[0]);
+    	$beUser = Utils::StripVO($result[0]);
     	
     	foreach ($result as $row) {
     		if ($row->preferences != null) {
-    			$beuser->preferences = json_decode($row->preferences);
+    			$beUser->preferences = json_decode($row->preferences);
     		}
     		if ($row->GID != null) {
     			$g = new BEGroup();
     			$g->GID = (int) $row->GID;
     			$g->name = $row->groupname;
-    			$beuser->groups[] = $g;
+    			$beUser->groups[] = $g;
     	
     			if ($row->GID == Authorization::GR_SU) {
-    				$beuser->page_mountpoints[] = Pages::getBERoot();
+    				$beUser->page_mountpoints[] = Pages::getBERoot();
     			}
     		}
     		if ($row->file_mountpoint != null) {
-    			$beuser->file_mountpoints[] = $row->file_mountpoint;
+    			$beUser->file_mountpoints[] = $row->file_mountpoint;
     		}
     		if ($row->page_mountpoint != null) {
-    			$beuser->page_mountpoints[] = (int) $row->page_mountpoint;
+    			$beUser->page_mountpoints[] = (int) $row->page_mountpoint;
     		}
     	}
     	
-    	$_SESSION['bright']['be_user'] = serialize($beuser);
-    	
-    	return $beuser;
+    	$_SESSION['bright']['be_user'] = serialize($beUser);
+
+    	return $beUser;
     }
 
     /**
      * Checks if there is a backend user authenticated
      * @return boolean
      */
-    public static function isBEAuth() {
+    public static function IsBEAuth() {
         return isset($_SESSION['bright']['be_user']);
     }
 
+    /**
+     * @param array $result
+     * @return BEUser
+     */
+    private static function _BuildUserFromResult($result) {
+        $beUser = Utils::StripVO($result[0]);
+        array_walk($result, function($item) use (&$beUser) {
+            if($item -> GID != null) {
+                $beUser -> groups[] = Groups::GetGroup($item -> GID);
+            }
+        });
+        return $beUser;
+    }
 }

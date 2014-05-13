@@ -28,7 +28,7 @@ class Router {
 	 * @param mixed $data Optional data to pass to the view
 	 */
 	public function addRoute($path, $view, $data = null) {
-		Model::getInstance() -> routes[$path] = array($view, $data);
+		Model::GetInstance() -> routes[$path] = array($view, $data);
 	}
 	
 	/**
@@ -45,11 +45,11 @@ class Router {
 		if(Utils::startsWith($path, '/'))
 			$path = substr($path, 1);
 		$view = null;
-		if(is_array(Model::getInstance() -> routes)) {
-			if(array_key_exists($path, Model::getInstance() -> routes)) {
-				$viewname = PACKAGE . Model::getInstance() -> routes[$path][0];
+		if(is_array(Model::GetInstance() -> routes)) {
+			if(array_key_exists($path, Model::GetInstance() -> routes)) {
+				$viewname = PACKAGE . Model::GetInstance() -> routes[$path][0];
 				try {
-					$view = new $viewname(Model::getInstance() -> routes[$path][1]);
+					$view = new $viewname(Model::GetInstance() -> routes[$path][1]);
 				} catch(Exception $e) {
 					/*Swallow it*/
 				}

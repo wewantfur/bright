@@ -27,6 +27,11 @@
 			
 			<label><span l10n-text="content.label">Label</span>
 			<input type="text" required ng-model="content.label"/></label>
+
+            <label><span l10n-text="content.status">Status</span>
+            <select required
+                    ng-model="content.status"
+                    ng-options="status.label for status in statusses"></select>
 			
 			<label>
 				<span l10n-text="content.publicationdate">Publicationdate</span> 
@@ -34,9 +39,10 @@
 				<input type="text" ng-model="content.publicationdate" />
 				
 			</label>
+
 			<label><span l10n-text="content.expirationdate">Expirationdate</span> <input type="text" required ng-model="content.expirationdate"/></label>
 			<label><span l10n-text="content.alwayspublished">Always published</span> <input type="checkbox" ng-model="content.alwayspublished"/></label>
-			<label><span l10n-text="content.enabled">Enabled</span> <input type="checkbox" ng-model="content.enabled"/></label>
+
 			<fieldset>
 				<legend l10n-text="content.advancedsettings">Advanced</legend>
 				<label><span l10n-text="content.owner">Owner</span> <input type="text" ng-model="content.user"/></label>

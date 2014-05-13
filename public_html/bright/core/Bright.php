@@ -27,11 +27,21 @@ final class Bright {
 		self::_SetupErrorHandlers();
 		
 		self::$_pluginLocator = new PluginLocator();
-		self::$_pluginLocator -> add('string', '\bright\core\plugins\Plugin_string');
+		
+		self::_RegisterCorePlugins();
+	}
+
+    /**
+     * @return PluginLocator
+     */
+    public static function GetPluginLocator() {
+		return self::$_pluginLocator;
 	}
 	
-	public static function GetPluginLocator() {
-		return self::$_pluginLocator;
+	private static function _RegisterCorePlugins() {
+		self::$_pluginLocator -> add('string', '\bright\core\plugins\Plugin_string');
+		self::$_pluginLocator -> add('image', '\bright\core\plugins\Plugin_image');
+		
 	}
 	
 	/**

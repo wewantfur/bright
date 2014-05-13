@@ -24,21 +24,16 @@ bright.controller("pageTreeCtrl", [ '$scope', '$state', 'PageService', 'ConfigSe
 		};
 		
 		$scope.pageSelect = function() {
+			this.item.selected = true;
+//			$state.transitionTo('pages.edit', {pageId:this.item.pageId, type:'page'});
+		};
+		
+		$scope.pageEdit = function() {
 			$state.transitionTo('pages.edit', {pageId:this.item.pageId, type:'page'});
 		};
 
-		$scope.updateWidths = function(widths,a,b,c,d,e) {
-			console.log('Width change!', widths,$scope.administrator);
-			if($scope.administrator.preferences == null) {
-				$scope.administrator.preferences = {};
-			}
-			
-			if(!$scope.administrator.preferences.hasOwnProperty('pages')) {
-				$scope.administrator.preferences.pages = {};
-			}
-			
-			$scope.administrator.preferences.pages.dividers = widths;
-			$scope.updatePreferences();
+		$scope.updateWidths = function(widths) {
+			$scope.updatePreferences('pages.dividers', widths);
 		};
 		
 	} ]);

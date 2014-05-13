@@ -1,5 +1,5 @@
 /**
- * Directive for the string plugin
+ * Directive for the image plugin
  * Attributes:
  * - label String
  * - displaylabel String

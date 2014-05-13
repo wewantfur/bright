@@ -2,7 +2,10 @@
 namespace bright\core\interfaces;
 
 interface IPlugin {
-	public function store($id, $data);
+	function store($id, $data);
+
+    function get();
+
 	function normalize($data);
 	
 	function isValid($data, $fieldData);

@@ -7,7 +7,7 @@
             \bright\core\config\Setup::SetupBright();
         }
 
-        if(!Authorization::isBEAuth()) {
+        if(!Authorization::IsBEAuth()) {
 		header("Location: login.php");
 		exit;
 	}

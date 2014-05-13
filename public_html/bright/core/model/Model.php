@@ -43,9 +43,9 @@ class Model {
 	/**
 	 * Gets a single instance of the connection class
 	 * @static
-	 * @return StdClass An instance of the connction class
+	 * @return Model An instance of the connection class
 	 */
-	public static function getInstance(){
+	public static function GetInstance(){
 		if(!isset(self::$instance)){
 			$object= __CLASS__;
 			self::$instance = new $object;
@@ -64,7 +64,11 @@ class Model {
 	public function getRows($query, $args = null, $type = '\StdClass') {
 		return $this -> db -> getRows($query, $args, $type);
 	}
-	
+
+    public function getRowsAsArray($query, $args = null) {
+        return $this -> db -> getRows($query, $args, 'array');
+    }
+
 	public function getRow($query, $args = null, $type = '\StdClass') {
 		return $this -> db -> getRow($query, $args, $type);
 	}
@@ -82,20 +86,22 @@ class Model {
 	public function deleteRow() {		
 		return call_user_func_array(array($this -> db, 'deleteRow'), func_get_args());
 	}
-	
-	/**
-	 * Inserts or updates an object
-	 * @param string $table The table to insert to
-	 * @param mixed $object The object to insert
-	 * @param string $identifier The identifier of the object
-	 */
+
+    /**
+     * Inserts or updates an object
+     * @param string $table The table to insert to
+     * @param mixed $object The object to insert
+     * @throws \bright\core\exceptions\Exception
+     * @internal param string $identifier The identifier of the object
+     * @return int
+     */
 	public function updateObject($table, $object) {
 		// Whitelist of tables
-		$allowedtables = array('templates' => 'templateId', 'templatefields' => 'fieldId');
-		if(!array_key_exists($table, $allowedtables))
+		$allowedTables = array('templates' => 'templateId', 'templatefields' => 'fieldId');
+		if(!array_key_exists($table, $allowedTables))
 			throw new \bright\core\exceptions\Exception('Exception::DB_INVALID_TABLE', \bright\core\exceptions\Exception::DB_INVALID_TABLE);
 		
-		$identifier = $allowedtables[$table];
+		$identifier = $allowedTables[$table];
 		
 		$objects = null;
 		if(is_array($object)) {
@@ -130,7 +136,7 @@ class Model {
 		
 		$id = 0;
 		try {
-			$id = Model::getInstance() -> updateRow($sql, $varr);
+			$id = Model::GetInstance() -> updateRow($sql, $varr);
 		} catch(\Exception $e) {
 			Logger::log($e-> getCode(), $e -> getMessage(), $sql);
 			throw new \bright\core\exceptions\Exception('Exception::DB_ERROR', \bright\core\exceptions\Exception::DB_ERROR);

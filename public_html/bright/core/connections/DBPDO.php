@@ -95,14 +95,23 @@ class DBPDO implements IDB {
 		
 		} catch (\PDOException $e) {
 			throw new DatabaseException($e->getMessage(), DatabaseException::DB_ERROR);
-		}
-		
-		if($type == '\StdClass') {
-			$stmt -> setFetchMode(\PDO::FETCH_OBJ);
-		} else if($mode == self::MODE_ROW || $mode == self::MODE_ROW_ALL) {
-			$stmt -> setFetchMode(\PDO::FETCH_CLASS, $type);
-		}
-		
+		} catch (\Exception $e) {
+            throw new DatabaseException($e->getMessage(), DatabaseException::DB_ERROR);
+        }
+
+		switch($type) {
+            case '\StdClass':
+                $stmt -> setFetchMode(\PDO::FETCH_OBJ);
+                break;
+            case 'array':
+                $stmt -> setFetchMode(\PDO::FETCH_NUM);
+                break;
+            default:
+                if($mode == self::MODE_ROW || $mode == self::MODE_ROW_ALL) {
+                    $stmt -> setFetchMode(\PDO::FETCH_CLASS, $type);
+                }
+        }
+
 		if($args) {
 			if(!is_array($args))
 				$args = array($args);

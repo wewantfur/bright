@@ -4,10 +4,10 @@
 			<h2>{{settings.sitename}}</h2>
 			<ul class="tree folders unselectable" ng-tree="pagetree" >
 				<li ng-class="{'tree-opened': item.isopen}">
-					<div ng-click="pageSelect()" ng-class="{selected: item.pageId==selectedPage.pageId}">
+					<div ng-click="pageSelect()" ng-class="{selected: item.selected}">
 						<i ng-class="{'tree-opened': item.isopen, 'tree-closed': !item.isopen, hidden: !hasChildren(), 'tree-icon': true}" ng-click="pageOpenClose()"  stop-event='click'></i>
 						<i class="fa fa-{{item.icon}}"></i>
-						<span class="tree-label" ng-click="pageOpen()">{{item.label}}</span>
+						<span class="tree-label" ng-click="pageEdit()">{{item.label}}</span>
 					</div>
 				</li>
 			</ul>

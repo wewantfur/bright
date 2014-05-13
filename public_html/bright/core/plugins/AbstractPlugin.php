@@ -16,25 +16,30 @@ abstract class AbstractPlugin {
 		$pluginName = $this -> _checkPluginName($this -> getPluginName());
 		
 		$fieldSql = implode('`, `', $fieldNames);
-		// Add correct number of questionmarks. Add 1 extra for the fieldId
+		// Add correct number of question marks. Add 1 extra for the fieldId
 		$qMarks = str_repeat('?,', count($fieldNames)) . '?';
 		
 		// Create the update SQL part
 		$updateSql = array_map(function($item) {
 			return "`$item` = VALUES(`$item`)";
 		}, $fieldNames);
-		$sql = "INSERT INTO plugin_{$pluginName} (fieldId, `{$fieldSql}`) 
+
+        $sql = "INSERT INTO plugin_{$pluginName} (fieldId, `{$fieldSql}`)
 										VALUES ({$qMarks}) 
 										ON DUPLICATE KEY UPDATE" . implode(",\r\n", $updateSql);
-		
-		$sqldata = [$id];
+
+        $sqlData = [$id];
 		foreach($fieldNames as $fieldName) {
-			$sqldata[] = $data -> $fieldName;
+			$sqlData[] = $data -> $fieldName;
 		}
-		Logger::log($sql);
-		$result = Model::getInstance() -> updateRow($sql, $sqldata);
+
+		$result = Model::GetInstance() -> updateRow($sql, $sqlData);
 		return $result;
 	}
+
+    public final function get() {
+        return $this -> _checkFieldNames($this -> getFieldNames());
+    }
 	
 	/**
 	 * Gets the name of the plugin
