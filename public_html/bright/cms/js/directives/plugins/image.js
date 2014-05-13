@@ -13,7 +13,7 @@ bright.directive('image', ['$dialog', function($dialog) {
 		restrict: 'A',
 		scope: {
 			content: '=',
-			field: '=',
+			field: '='
 		},
 		link: function($scope, element, attr, ctrl) {
 			$scope.browse = function() {
